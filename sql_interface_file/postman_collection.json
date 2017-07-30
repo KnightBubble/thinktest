@@ -1,0 +1,525 @@
+{
+	"id": "ade58494-b229-f2cd-6712-91e14adb2207",
+	"name": "jiedaibao",
+	"description": "jdb api test",
+	"order": [
+		"abd2e7b3-927d-694f-e47c-ea402e2994eb",
+		"2feb7e1b-59f3-0e9f-838e-c7f254a60352",
+		"c4487ea2-6ee0-13c0-df33-bcf659f147be",
+		"3df50c2b-685b-284a-993c-41f3d1f3e533",
+		"14ab4cf1-a5df-9cf7-5cc7-b38f1139933f",
+		"e595806b-42fc-1521-b692-e47725da0bb3",
+		"9561270a-c788-3af4-3cca-cd32860a43ec",
+		"c6ab4100-0985-eafa-a5e8-b6d65311f43f",
+		"fdb54080-3198-23d6-3576-29986a05490b"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1499913776738,
+	"owner": "2391157",
+	"public": false,
+	"requests": [
+		{
+			"id": "14ab4cf1-a5df-9cf7-5cc7-b38f1139933f",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://think.baidu.com:8360/admin/index/activity_off",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "id",
+					"value": "13",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1501426704433,
+			"name": "http://think.baidu.com:8360/admin/index/activity_off",
+			"description": "下线活动",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"responses": []
+		},
+		{
+			"id": "2feb7e1b-59f3-0e9f-838e-c7f254a60352",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://100.66.152.57:8360/home/index/join",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "openId",
+					"value": "111",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "parendId",
+					"value": "111",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "activityId",
+					"value": "111",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1501422631536,
+			"name": "http://100.66.152.57/home/index/join",
+			"description": "参与活动",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"responses": []
+		},
+		{
+			"id": "3df50c2b-685b-284a-993c-41f3d1f3e533",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://think.baidu.com:8360/admin/index/activity_on",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"data": [
+				{
+					"key": "id",
+					"value": "2",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "http://think.baidu.com:8360/admin/index/activity_on",
+			"description": "上线上线",
+			"descriptionFormat": "html",
+			"time": 1501424141275,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "9561270a-c788-3af4-3cca-cd32860a43ec",
+			"headers": "",
+			"headerData": [],
+			"url": "http://think.baidu.com:8360/admin/index/activity_add",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "title",
+					"value": "活动标题4",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "descption",
+					"value": "活动内容活动内容。。。。。。",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "picUrl",
+					"value": "活动图片",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "startTime",
+					"value": "1501425974757",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "endTime",
+					"value": "1501545600000",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1501426706768,
+			"name": "http://think.baidu.com:8360/admin/index/activity_list",
+			"description": "添加活动",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"responses": []
+		},
+		{
+			"id": "abd2e7b3-927d-694f-e47c-ea402e2994eb",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:8360/admin/index/add",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "title",
+					"value": "title",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "descption",
+					"value": "descption",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "picUrl",
+					"value": "picUrl",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "shareTitle",
+					"value": "shareTitle",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "shareIcon",
+					"value": "shareIcon",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "endTime",
+					"value": "150139629377",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "startTime",
+					"value": "1501396293779",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1501426715047,
+			"name": "http://127.0.0.1:8360/admin/index/add",
+			"description": "新建一个活动",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"responses": []
+		},
+		{
+			"id": "c4487ea2-6ee0-13c0-df33-bcf659f147be",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://think.baidu.com:8360/home/index/user_support",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"data": [
+				{
+					"key": "openId",
+					"value": "aa1501395236744",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "activityId",
+					"value": "111",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "parentId",
+					"value": "aa1501395236744",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "http://think.baidu.com:8360/home/index/user_support",
+			"description": "用户支持者列表，用户&参与者2表查询",
+			"descriptionFormat": "html",
+			"time": 1501422628209,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "c6ab4100-0985-eafa-a5e8-b6d65311f43f",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:8360/admin/index/add",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"data": [
+				{
+					"key": "title",
+					"value": "title",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "descption",
+					"value": "descption",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "picUrl",
+					"value": "picUrl",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "shareTitle",
+					"value": "shareTitle",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "shareIcon",
+					"value": "shareIcon",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "endTime",
+					"value": "150139629377",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "startTime",
+					"value": "1501396293779",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "http://127.0.0.1:8360/admin/index/add",
+			"description": "添加活动",
+			"descriptionFormat": "html",
+			"time": 1501426666146,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "e595806b-42fc-1521-b692-e47725da0bb3",
+			"headers": "",
+			"headerData": [],
+			"url": "http://think.baidu.com:8360/admin/index/activity_list",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "title",
+					"value": "活动标题",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "descption",
+					"value": "活动内容活动内容。。。。。。",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "picUrl",
+					"value": "活动图片",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "startTime",
+					"value": "1501425974757",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "endTime",
+					"value": "1501545600000",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1501426710444,
+			"name": "http://think.baidu.com:8360/admin/index/activity_list",
+			"description": "活动列表&分页",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"responses": []
+		},
+		{
+			"id": "fdb54080-3198-23d6-3576-29986a05490b",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://100.66.152.57:8360/home/index/join",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"data": [
+				{
+					"key": "openId",
+					"value": "111",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "parendId",
+					"value": "111",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "activityId",
+					"value": "111",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "http://100.66.152.57/home/index/join",
+			"description": "加入活动",
+			"descriptionFormat": "html",
+			"time": 1501426684128,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}
