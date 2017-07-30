@@ -63,6 +63,9 @@ export default class extends Base {
         }
     }
 
+    /**
+     * 获取用户助力者名单
+     */
     async userSupportAction() {
         let data = this.post();
         let parentId = data.openId;
