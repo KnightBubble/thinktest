@@ -13,4 +13,18 @@ export default class extends think.model.base {
         });
         return insertId;
     }
+
+
+    async userSupportors(parendId, activityId,openId) {
+        return await this.join({
+            table: 'user',
+            join: 'inner', //join 方式，有 left, right, inner 3 种方式
+            as: 'userinfo', // 表别名
+            on: ['userId', 'userId'] //ON 条件
+        }).where({
+            'userinfo.userId': ['=', openId],
+            parendId: ['=', parendId]
+        }).field('userinfo.userId,status,nickName,joinTime').select();
+    }
+     
 }

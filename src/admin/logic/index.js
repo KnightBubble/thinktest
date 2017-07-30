@@ -44,7 +44,7 @@ export default class extends think.logic.base {
                 required: true
             }
         };
-        let flog = this.validate(rules);
+        let flag = this.validate(rules);
         if (!flag) {
             return this.fail('数据校验错误', this.errors());
         }
@@ -57,7 +57,7 @@ export default class extends think.logic.base {
                 required: true
             }
         };
-        let flog = this.validate(rules);
+        let flag = this.validate(rules);
         if (!flag) {
             return this.fail('数据校验错误', this.errors());
         }

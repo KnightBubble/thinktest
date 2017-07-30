@@ -10,7 +10,6 @@ export default {
     log_connect: true, // 是否记录连接数据库的信息
     adapter: {
         mysql: {
-            //http://100.66.152.57:8360
             host: '100.66.152.57',
             port: '3306',
             database: 'marketing',
@@ -19,8 +18,6 @@ export default {
             prefix: '',
             encoding: 'utf8'
         },
-        mongo: {
-
-        }
+        mongo: {}
     }
 };

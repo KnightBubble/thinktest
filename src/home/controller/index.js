@@ -63,6 +63,25 @@ export default class extends Base {
         }
     }
 
+    async userSupportAction() {
+        let data = this.post();
+        let parentId = data.parentId;
+        let openId = data.openId;
+        let activityId = data.activityId;
+        let model = this.model('participator');
+        let result = await model.userSupportors(parentId, activityId, openId);
+        if (result && result.length > 0) {
+            this.json({
+                errno: 0,
+                errmsg: '查询成功',
+                data: {
+                    list: result
+                }
+            });
+        } else {
+            this.fail('USER_SUPPORTS_EMPTY_ERROR');
+        }
+    }
     detailAction() {
         return this.display('detail');
     }
@@ -70,5 +89,4 @@ export default class extends Base {
     registerAction() {
         return this.display('register');
     }
-
 }
