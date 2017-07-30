@@ -41,7 +41,11 @@ export default class extends Base {
     async listAction() {
         let userModel = this.model('admin/user');
         let result = await userModel.getUserListByPage(1);
-        this.json(result);
+        this.json({
+            errno:0,
+            errmsg:'查询成功',
+            data:result
+        });
     }
 
     // 参加活动
