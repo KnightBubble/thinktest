@@ -7,22 +7,25 @@
         activityId: "111",
         openId: "aa1501395236744",
     }, function(res) {
-        debugger;
-        if (res.data.errorno == '0') {
+        if (res.errno == '0') {
             renderView(res.data);
         } else {
-            toastError('test');
+            toastError(res.errmsg);
         }
     });
 
     renderView = function(data) {
         //status 0====未参与    1===已经参与
+        var map = {
+            0: "否",
+            1: "是"
+        }
         if (!data.status == 1) {
             var dom = '';
-            var data = data.data;
+            var data = data.list;
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
-                var li = "<li><span>" + item.nickName + "</span><span class = 'middle'>" + item.phone + "</span ><span>" + item.signTime + "</span> </li>";
+                var li = "<li><span>" + item.nickName + "</span><span class = 'middle'>" + map[item.status] + "</span ><span>" + item.joinTime + "</span> </li>";
                 dom += li;
             }
             $('ul.list').append(dom);
