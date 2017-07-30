@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <script>
+        (function() {
+            var base = 750;
+            (function() {
+                var scale = screen.width / base;
+                var meta = document.querySelector('meta[name="viewport"]');
+                meta.setAttribute('content', 'width=' + base + ',initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=0,target-densitydpi=device-dpi');
+            })();
+        })();
+    </script>
+    <style>
+        body {
+            background-image: url(../../img/dsp/result-page-bg.png);
+            background-repeat: no-repeat;
+            background-position: 34px 640px;
+        }
+    </style>
+    <link rel="stylesheet" href="/static/css/detail.min.css">
+    <title>借贷宝</title>
+</head>
+
+<body>
+    <ul class='list'>
+        <li>
+            <span>好友</span>
+            <span class='middle'>是否参与</span>
+            <span>日期</span>
+        </li>
+        <li>
+            <span>再见猪八戒</span>
+            <span class='middle'>是</span>
+            <span>2017-07-08</span>
+        </li>
+        <li>
+            <span>再见猪八戒</span>
+            <span class='middle'>是</span>
+            <span>2017-07-08</span>
+        </li>
+        <li>
+            <span>再见猪八戒</span>
+            <span class='middle'>是</span>
+            <span>2017-07-08</span>
+        </li>
+        <li>
+            <span>再见猪八戒</span>
+            <span class='middle'>是</span>
+            <span>2017-07-08</span>
+        </li>
+    </ul>
+    <script src="/static/js/zepto.min.js"></script>
+    <script src="/static/js/jweixin-1.0.0.js"></script>
+    <script src="/static/js/toast.js"></script>
+    <script src="/static/js/shareConfig.js"></script>
+    <script src="/static/js/detail.js"></script>
+</body>
+
+</html>
