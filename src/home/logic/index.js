@@ -52,6 +52,11 @@ export default class extends think.logic.base {
         if (!flag) {
             return this.fail('数据校验错误', this.errors());
         }
-
     }
+
+    /**
+     * 活动列表
+     */
+
+    activityListAction
 }

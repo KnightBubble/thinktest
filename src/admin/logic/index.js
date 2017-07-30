@@ -13,6 +13,9 @@ export default class extends think.logic.base {
 
     }
 
+    /**
+     * 添加活动
+     */
     activityAddAction() {
         this.allowMethods = 'post';
         let rules = {
@@ -37,6 +40,9 @@ export default class extends think.logic.base {
         }
     }
 
+    /**
+     * 活动下线
+     */
     activityOffAction() {
         this.allowMethods = 'post';
         let rules = {
@@ -50,6 +56,9 @@ export default class extends think.logic.base {
         }
     }
 
+    /**
+     * 活动上线
+     */
     activityOnAction() {
         this.allowMethods = 'post';
         let rules = {
@@ -61,5 +70,12 @@ export default class extends think.logic.base {
         if (!flag) {
             return this.fail('数据校验错误', this.errors());
         }
+    }
+
+    /**
+     * 活动列表
+     */
+    async activityListAction() {
+        this.allowMethods = ['post', 'get'];
     }
 }

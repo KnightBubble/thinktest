@@ -16,6 +16,9 @@ export default class extends Base {
         return this.display('test');
     }
 
+    /**
+     * 添加一条用户信息
+     */
     async addAction() {
         let userModel = this.model('admin/user');
         var userId = 'aa' + Date.now();
