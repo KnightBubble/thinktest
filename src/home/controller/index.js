@@ -42,9 +42,9 @@ export default class extends Base {
         let userModel = this.model('admin/user');
         let result = await userModel.getUserListByPage(1);
         this.json({
-            errno:0,
-            errmsg:'查询成功',
-            data:result
+            errno: 0,
+            errmsg: '查询成功',
+            data: result
         });
     }
 
@@ -65,6 +65,10 @@ export default class extends Base {
 
     detailAction() {
         return this.display('detail');
+    }
+
+    registerAction() {
+        return this.display('register');
     }
 
 }

@@ -23,40 +23,33 @@
         }
     </style>
     <link rel="stylesheet" href="/static/css/detail.min.css">
-    <title>借贷宝</title>
+    <title>活动详情</title>
 </head>
 
 <body>
-    <ul class='list'>
-        <li>
-            <span>好友</span>
-            <span class='middle'>是否参与</span>
-            <span>日期</span>
-        </li>
-        <li>
-            <span>再见猪八戒</span>
-            <span class='middle'>是</span>
-            <span>2017-07-08</span>
-        </li>
-        <li>
-            <span>再见猪八戒</span>
-            <span class='middle'>是</span>
-            <span>2017-07-08</span>
-        </li>
-        <li>
-            <span>再见猪八戒</span>
-            <span class='middle'>是</span>
-            <span>2017-07-08</span>
-        </li>
-        <li>
-            <span>再见猪八戒</span>
-            <span class='middle'>是</span>
-            <span>2017-07-08</span>
-        </li>
-    </ul>
+    <div class="section notJoin">
+        <p class="tip">您还未参与活动，请赶快参加吧！！！</p>
+        <div class="btn-box">
+            <div class="button go2join">立即参与</div>
+        </div>
+    </div>
+    <div class="section joined">
+        <div class='url-box'>
+            <span>你的专属链接是</span>
+            <a href="" class='url'></a>
+        </div>
+        <ul class='list'>
+            <li>
+                <span>好友</span>
+                <span class='middle'>是否参与</span>
+                <span>日期</span>
+            </li>
+        </ul>
+    </div>
     <script src="/static/js/zepto.min.js"></script>
     <script src="/static/js/jweixin-1.0.0.js"></script>
     <script src="/static/js/toast.js"></script>
+    <script src="/static/js/cookie.js"></script>
     <script src="/static/js/shareConfig.js"></script>
     <script src="/static/js/detail.js"></script>
 </body>

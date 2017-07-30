@@ -81,7 +81,7 @@
             if (isTel) {
                 // TODO 获取验证码
                 $.post('{{dspGetCodeApi}}', { phone: telVal }, function(res) {
-                    if (res.error.returnCode == "0") {
+                    if (res.data) {
                         eventId = res.data.eventId;
                     } else {
                         toastError(res.error.returnUserMessage);

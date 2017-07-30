@@ -1,1 +1,545 @@
-/*! normalize.css v3.0.2 | MIT License | git.io/normalize */a,img{-webkit-user-drag:none}li,ol,ul{list-style:none}.form,sub,sup{position:relative}a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;vertical-align:baseline;font:inherit;font-size:100%}body,html{height:100%;margin:0 auto}*{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent}html{-webkit-touch-callout:none;touch-callout:none;-webkit-user-select:none;user-select:none;@include user-select(none);font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;max-width:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}audio:not([controls]){display:none;height:0}[hidden],template{display:none}script{display:none!important}:focus,a,a:active,a:focus,a:hover,button,button:focus{outline:0}a{-webkit-tap-highlight-color:transparent;&[href]:hover { cursor: pointer; }}b,strong{font-weight:700}dfn{font-style:italic}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}code,kbd,pre,samp{font-size:1em;font-family:monospace,serif}pre{white-space:pre-wrap}q{quotes:"\201C" "\201D" "\2018" "\2019"}small{font-size:80%}sub,sup{vertical-align:baseline;font-size:75%;line-height:0}sup{top:-.5em}sub{bottom:-.25em}fieldset{margin:0 2px;padding:.35em .625em .75em;border:1px solid silver}legend{padding:0;border:0}button,input{line-height:normal}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{cursor:pointer;-webkit-appearance:button}button[disabled],html input[disabled]{cursor:default}input[type=search]{-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;-webkit-appearance:textfield}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{-webkit-appearance:none!important;margin:0}textarea{overflow:auto;vertical-align:top}body{line-height:1;font-family:STHeiti,"Helvetica Neue",Helvetica,Arial,sans-serif;background-color:#d43510;padding:0;width:750px}.clearfix:after,.clearfix:before{content:" ";display:table}.clearfix:after{clear:both}li,ul{margin:0;padding:0}.info{padding:10px 36px;font-size:28px;color:#fff}.info img{width:100%}.wrap-1,.wrap-2{width:675px;height:565px}button,input,select,textarea{margin:0;font-size:100%;font-family:inherit;outline-offset:0;outline-style:none;outline-width:0;-webkit-font-smoothing:inherit;background-image:none}.form{background:url(../../img/dsp/start-bg.png) 10px 28px no-repeat;padding:90px 36px 120px}.tel-tip{position:absolute;top:45px;left:50px}.wrap-3,.wrap-3 .code{position:relative}.wrap-1{border:1px solid #8c3f05;background-color:#b13910;border-radius:16px}.wrap-2,.wrap-3{border-radius:16px}.wrap-2{background-color:#ef631f;background-image:url(../../img/dsp/o-bg.png);background-repeat:no-repeat;background-position:15px 26px}.wrap-3{width:546px;height:410px;background-color:#cd4011;top:52px;left:41px;font-size:26px;padding:31px 22px}.wrap-3 input{line-height:1;height:26px;font-size:26px;padding:0;margin:0;outline:0;border:none;float:left;display:block}.wrap-3 label{border-radius:16px;display:inline-block;background-color:#FFF;padding:29px 20px;margin-bottom:12px;overflow:hidden;width:500px}.wrap-3 .code span{position:absolute;border-radius:0 16px 16px 0;top:0;right:0;line-height:1;padding:30px 0;width:190px;text-align:center;background-color:#ff7a0f;color:#fffd81}.wrap-3 .code .disable{background-color:#ea6e0a}.wrap-3 .button-wrap{border-radius:16px;width:548px;height:105px;background-color:#ba4119;border-bottom:1px solid #c34419;margin-top:10px}.wrap-3 .button{border-radius:16px;width:548px;height:95px;line-height:95px;text-align:center;background-color:#ffcf0f;color:#cd4011}ul.list{background:#fff}ul.list li{padding:10px 15px}ul.list li span{display:inline-block;width:32%;font-size:28px;height:30px;height:36px;line-height:36px;text-align:center}ul.list li span:first{text-align:left}ul.list li span:last{text-align:right}.toast-base{position:fixed;top:50%;left:50%;border-radius:5px;overflow:hidden;z-index:998}.toast-base .toast-background{position:absolute;top:0;left:0;height:100%;width:100%;background:rgba(0,0,0,.6);z-index:-1}.toast-base .toast-content{padding:25px 20px}.toast-base .toast-icon{display:block;margin:0 auto 14px;width:50px;height:50px;background:url(../../img/common/toast-icon.png) no-repeat;background-size:50px auto;background-position-x:center}.toast-base .toast-text{margin:0;line-height:36px;text-align:center;font-size:24px;color:#fff;max-width:200px}.toast-success .toast-icon{background-position-y:0}.toast-error .toast-icon,.toast-warn .toast-icon{background-position-y:-73px}.toast-fade{-webkit-animation:fade .5s linear;animation:fade .5s linear}@-webkit-keyframes fade{0%{opacity:1}100%{opacity:0}}@keyframes opacity{0%{opacity:1}100%{opacity:0}}
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+a,
+img {
+    -webkit-user-drag: none
+}
+
+li,
+ol,
+ul {
+    list-style: none
+}
+
+.form,
+sub,
+sup {
+    position: relative
+}
+
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    font: inherit;
+    font-size: 100%
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0 auto
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent
+}
+
+html {
+    -webkit-touch-callout: none;
+    touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    @include user-select(none);
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    max-width: none
+}
+
+blockquote,
+q {
+    quotes: none
+}
+
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+    content: '';
+    content: none
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0
+}
+
+[hidden],
+template {
+    display: none
+}
+
+script {
+    display: none!important
+}
+
+:focus,
+a,
+a:active,
+a:focus,
+a:hover,
+button,
+button:focus {
+    outline: 0
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
+    &[href]:hover {
+        cursor: pointer;
+    }
+}
+
+b,
+strong {
+    font-weight: 700
+}
+
+dfn {
+    font-style: italic
+}
+
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-size: 1em;
+    font-family: monospace, serif
+}
+
+pre {
+    white-space: pre-wrap
+}
+
+q {
+    quotes: "\201C" "\201D" "\2018" "\2019"
+}
+
+small {
+    font-size: 80%
+}
+
+sub,
+sup {
+    vertical-align: baseline;
+    font-size: 75%;
+    line-height: 0
+}
+
+sup {
+    top: -.5em
+}
+
+sub {
+    bottom: -.25em
+}
+
+fieldset {
+    margin: 0 2px;
+    padding: .35em .625em .75em;
+    border: 1px solid silver
+}
+
+legend {
+    padding: 0;
+    border: 0
+}
+
+button,
+input {
+    line-height: normal
+}
+
+button,
+select {
+    text-transform: none
+}
+
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit] {
+    cursor: pointer;
+    -webkit-appearance: button
+}
+
+button[disabled],
+html input[disabled] {
+    cursor: default
+}
+
+input[type=search] {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-appearance: textfield
+}
+
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none!important;
+    margin: 0
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top
+}
+
+body {
+    line-height: 1;
+    font-family: STHeiti, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /* background-color: #d43510; */
+    padding: 0;
+    width: 750px
+}
+
+.clearfix:after,
+.clearfix:before {
+    content: " ";
+    display: table
+}
+
+.clearfix:after {
+    clear: both
+}
+
+li,
+ul {
+    margin: 0;
+    padding: 0
+}
+
+.register {
+    padding: 30px 36px;
+}
+
+.info {
+    font-size: 28px;
+    color: #e1e3e5;
+}
+
+.info img {
+    width: 100%
+}
+
+.wrap-1,
+.wrap-2 {
+    width: 675px;
+    height: 565px
+}
+
+button,
+input,
+select,
+textarea {
+    margin: 0;
+    font-size: 100%;
+    font-family: inherit;
+    outline-offset: 0;
+    outline-style: none;
+    outline-width: 0;
+    -webkit-font-smoothing: inherit;
+    background-image: none
+}
+
+.form {
+    background: url(../../img/dsp/start-bg.png) 10px 28px no-repeat;
+}
+
+.tel-tip {
+    position: absolute;
+    top: 45px;
+    left: 50px
+}
+
+.wrap-3,
+.wrap-3 .code {
+    position: relative
+}
+
+.wrap-1 {
+    border: 1px solid #8c3f05;
+    background-color: #b13910;
+    border-radius: 16px
+}
+
+.wrap-2,
+.wrap-3 {
+    border-radius: 16px
+}
+
+.wrap-2 {
+    background-color: #ef631f;
+    background-image: url(../../img/dsp/o-bg.png);
+    background-repeat: no-repeat;
+    background-position: 15px 26px
+}
+
+.wrap-3 {
+    width: 546px;
+    height: 410px;
+    background-color: #cd4011;
+    top: 52px;
+    left: 41px;
+    font-size: 26px;
+    padding: 31px 22px
+}
+
+.wrap-3 input {
+    line-height: 1;
+    height: 26px;
+    font-size: 26px;
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    border: none;
+    float: left;
+    display: block
+}
+
+.wrap-3 label {
+    border-radius: 16px;
+    display: inline-block;
+    background-color: #FFF;
+    padding: 29px 20px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    width: 500px
+}
+
+.wrap-3 .code span {
+    position: absolute;
+    border-radius: 0 16px 16px 0;
+    top: 0;
+    right: 0;
+    line-height: 1;
+    padding: 30px 0;
+    width: 190px;
+    text-align: center;
+    background-color: #ff7a0f;
+    color: #fffd81
+}
+
+.wrap-3 .code .disable {
+    background-color: #ea6e0a
+}
+
+.wrap-3 .button-wrap {
+    border-radius: 16px;
+    width: 548px;
+    height: 105px;
+    background-color: #ba4119;
+    border-bottom: 1px solid #c34419;
+    margin-top: 10px
+}
+
+.wrap-3 .button {
+    border-radius: 16px;
+    width: 548px;
+    height: 95px;
+    line-height: 95px;
+    text-align: center;
+    background-color: #ffcf0f;
+    color: #cd4011
+}
+
+ul.list {
+    background: #fff
+}
+
+ul.list li {
+    padding: 10px 15px
+}
+
+ul.list li span {
+    display: inline-block;
+    width: 32%;
+    font-size: 28px;
+    height: 30px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center
+}
+
+ul.list li span:first {
+    text-align: left
+}
+
+ul.list li span:last {
+    text-align: right
+}
+
+.toast-base {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 998
+}
+
+.toast-base .toast-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .6);
+    z-index: -1
+}
+
+.toast-base .toast-content {
+    padding: 25px 20px
+}
+
+.toast-base .toast-icon {
+    display: block;
+    margin: 0 auto 14px;
+    width: 50px;
+    height: 50px;
+    background: url(../../img/common/toast-icon.png) no-repeat;
+    background-size: 50px auto;
+    background-position-x: center
+}
+
+.toast-base .toast-text {
+    margin: 0;
+    line-height: 36px;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    max-width: 200px
+}
+
+.toast-success .toast-icon {
+    background-position-y: 0
+}
+
+.toast-error .toast-icon,
+.toast-warn .toast-icon {
+    background-position-y: -73px
+}
+
+.toast-fade {
+    -webkit-animation: fade .5s linear;
+    animation: fade .5s linear
+}
+
+@-webkit-keyframes fade {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}

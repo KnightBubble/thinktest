@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="orientation" content="portrait">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <script>
+        (function() {
+            var base = 750;
+            (function() {
+                var scale = screen.width / base;
+                var meta = document.querySelector('meta[name="viewport"]');
+                meta.setAttribute('content', 'width=' + base + ',initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=0,target-densitydpi=device-dpi');
+            })();
+        })();
+    </script>
+    <link rel="stylesheet" href="/static/css/register.min.css">
+    <title>活动参与</title>
+</head>
+
+<body>
+    <div class="content register">
+        <div class="info">
+            <img src="http://img0.imgtn.bdimg.com/it/u=564515174,2876839444&fm=26&gp=0.jpg" alt="">
+            <p>demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo</p>
+        </div>
+        <div class="form">
+            <div class="wrap-1">
+                <div class="wrap-2">
+                    <div class="wrap-3">
+                        <label for="name">
+                            <input type="text" id="name" name="name" value="" placeholder="请输入姓名">
+                        </label>
+                        <label for="tel">
+                            <input type="number" id="tel" name="tel" value="" placeholder="请输入手机号码">
+                        </label>
+                        <label class="code" for="code">
+                            <input type="number" id="code" name="code" value="" placeholder="请输入验证码">
+                            <span id="codeBtn" class="disable">获取验证码</span>
+                        </label>
+                        <div class="button-wrap">
+                            <div class="button" id="submitBtn">参与活动</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/zepto.min.js"></script>
+    <script src="/static/js/jweixin-1.0.0.js"></script>
+    <script src="/static/js/toast.js"></script>
+    <script src="/static/js/shareConfig.js"></script>
+    <script src="/static/js/register.js"></script>
+
+</body>
+
+</html>
