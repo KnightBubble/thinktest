@@ -5,6 +5,13 @@
 
 Application created by [ThinkJS](http://www.thinkjs.org)
 
+// 设置全局
+git config --global user.name "Author Name"
+git config --global user.email "Author Email"
+ 
+// 或者设置本地项目库配置
+git config user.name "Author Name"
+git config user.email "Author Email"
 
 ## Install dependencies
 

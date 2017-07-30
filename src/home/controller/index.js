@@ -42,9 +42,9 @@ export default class extends Base {
         let userModel = this.model('admin/user');
         let result = await userModel.getUserListByPage(1);
         this.json({
-            errno:0,
-            errmsg:'查询成功',
-            data:result
+            errno: 0,
+            errmsg: '查询成功',
+            data: result
         });
     }
 
@@ -60,6 +60,28 @@ export default class extends Base {
             });
         } else {
             this.fail('ADDA_ACTIVITY_DB_ERROR');
+        }
+    }
+
+
+    async userSupportAction() {
+        let data = this.post();
+        let parentId = data.parentId;
+        let openId = data.openId;
+        let activityId = data.activityId;
+        let model = this.model('participator');
+        let result = await model.userSupportors(parentId, activityId, openId);
+        if (result && result.length > 0) {
+            this.json({
+                errno: 0,
+                errmsg: '查询成功',
+                data: {
+                    list: result
+                }
+            });
+        }
+        else {
+            this.fail('USER_SUPPORTS_EMPTY_ERROR');
         }
     }
 

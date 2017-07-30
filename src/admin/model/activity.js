@@ -22,16 +22,20 @@ export default class extends think.model.base {
      * 上线
      * status => 1
      */
-    async ononLine() {
-
+    async activityOnAction() {
+         this.json({
+            name:'offLine'
+        });
     }
 
     /**
      * 下线
      * status => 0
      */
-    async offLine() {
-
+    async activityOfflineAction() {
+        this.json({
+            name:'offLine'
+        });
     }
 
 

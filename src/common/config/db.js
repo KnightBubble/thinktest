@@ -10,7 +10,7 @@ export default {
   log_connect: true, // 是否记录连接数据库的信息
   adapter: {
     mysql: {
-      host: '127.0.0.1',
+      host: '100.66.152.57',
       port: '3306',
       database: 'marketing',
       user: 'root',

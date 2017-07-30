@@ -5,16 +5,16 @@
  * @return {}     []
  */
 export default class extends think.logic.base {
-  /**
-   * index action logic
-   * @return {} []
-   */
-  indexAction(){
-   
-  }
+    /**
+     * index action logic
+     * @return {} []
+     */
+    indexAction() {
 
-  joinAction() {
-      this.allowMethods = 'post';
+    }
+
+    joinAction() {
+        this.allowMethods = 'post';
         let rules = {
             openId: {
                 required: true,
@@ -33,5 +33,28 @@ export default class extends think.logic.base {
         if (!flag) {
             return this.fail('数据校验错误', this.errors());
         }
-  }
+    }
+
+    /**
+     * 获取当前用户的助力者
+     */
+    userSupportAction() {
+        this.allowMethods = 'post';
+        let rules = {
+            openId: {
+                required: true
+            },
+            activityId: {
+                required: true
+            },
+            parentId:{
+                required: true
+            }
+        };
+        let flag = this.validate(rules);
+        if(!flag) {
+            return this.fail('数据校验错误', this.errors());
+        }
+
+    }
 }
