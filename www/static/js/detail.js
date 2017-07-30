@@ -1,10 +1,14 @@
 (function() {
-    var detailApi = "http://127.0.0.1:8360/home/index/list";
+    var detailApi = "/home/index/user_support";
     $('.section').hide();
     $.fn.cookie('openId', '1KDJFKDJ4989DKFJK3D93KKLWL');
 
-    $.post(detailApi, {}, function(res) {
-        if (res.data) {
+    $.post(detailApi, {
+        activityId: "111",
+        openId: "aa1501395236744",
+    }, function(res) {
+        debugger;
+        if (res.data.errorno == '0') {
             renderView(res.data);
         } else {
             toastError('test');

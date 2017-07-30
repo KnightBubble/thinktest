@@ -46,13 +46,10 @@ export default class extends think.logic.base {
             },
             activityId: {
                 required: true
-            },
-            parentId:{
-                required: true
             }
         };
         let flag = this.validate(rules);
-        if(!flag) {
+        if (!flag) {
             return this.fail('数据校验错误', this.errors());
         }
 

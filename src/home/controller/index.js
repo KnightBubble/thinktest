@@ -65,11 +65,10 @@ export default class extends Base {
 
     async userSupportAction() {
         let data = this.post();
-        let parentId = data.parentId;
-        let openId = data.openId;
+        let parentId = data.openId;
         let activityId = data.activityId;
         let model = this.model('participator');
-        let result = await model.userSupportors(parentId, activityId, openId);
+        let result = await model.userSupportors(parentId, activityId);
         if (result && result.length > 0) {
             this.json({
                 errno: 0,
