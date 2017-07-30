@@ -11,7 +11,10 @@ export default class extends Base {
         return this.display();
     }
 
-    async addAction() {
+    /**
+     * 添加活动
+     */
+    async activityAddAction() {
         let postData = this.post();
         let activityModel = this.model('activity');
         let insertId = await activityModel.addOneActivity(postData);// 返回数据自增id
@@ -27,6 +30,22 @@ export default class extends Base {
     }
 
 
+    /**
+     * 活动下线
+     */
+    async activityOffAction() {
+        
+    }
+
+    /**
+     * 上线活动
+     */
+
+    async activityOnAction() {
+        this.json({
+            name:11
+        })
+    }
 
 
 }

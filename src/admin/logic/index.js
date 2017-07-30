@@ -13,7 +13,7 @@ export default class extends think.logic.base {
 
     }
 
-    addAction() {
+    activityAddAction() {
         this.allowMethods = 'post';
         let rules = {
             title: {
@@ -32,6 +32,32 @@ export default class extends think.logic.base {
             shareIcon: 'string'
         };
         let flag = this.validate(rules);
+        if (!flag) {
+            return this.fail('数据校验错误', this.errors());
+        }
+    }
+
+    activityOffAction() {
+        this.allowMethods = 'post';
+        let rules = {
+            id: {
+                required: true
+            }
+        };
+        let flog = this.validate(rules);
+        if (!flag) {
+            return this.fail('数据校验错误', this.errors());
+        }
+    }
+
+    activityOnAction() {
+        this.allowMethods = 'post';
+        let rules = {
+            id: {
+                required: true
+            }
+        };
+        let flog = this.validate(rules);
         if (!flag) {
             return this.fail('数据校验错误', this.errors());
         }
