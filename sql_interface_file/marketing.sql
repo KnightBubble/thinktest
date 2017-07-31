@@ -100,3 +100,19 @@ INSERT INTO `user` VALUES ('111', 'asdjfaksadfjk', 'aaaa', 'aaa', '121212', '121
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------
+--  Table structure for `token`
+-- ----------------------------
+DROP TABLE IF EXISTS `token`;
+CREATE TABLE `token` (
+  `access_token` varchar(107) NOT NULL COMMENT '令牌',
+  `expires_in` varchar(10) NOT NULL COMMENT '有效期',
+  `refresh_token` varchar(107) NOT NULL COMMENT '刷新参数',
+  `openid` varchar(28) NOT NULL COMMENT '用户编号',
+  `scope` varchar(50) NOT NULL COMMENT '作用域',
+  `create_at` varchar(20) NOT NULL COMMENT '令牌建立时间',
+  PRIMARY KEY (`openid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微信令牌表';
+
+
