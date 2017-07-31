@@ -22,8 +22,8 @@ export default class extends Base {
             this.json({
                 errno: 0,
                 errmsg: '添加活动成功',
-                data:{
-                    activityId:insertId
+                data: {
+                    activityId: insertId
                 }
             });
         } else {
@@ -79,17 +79,47 @@ export default class extends Base {
             let pageData = this.get() || this.post();
             let pageSize = pageData.pageSize;
             let pageNum = pageData.pageNum;
-            let model =  this.model('activity');
+            let model = this.model('activity');
             let result = await model.getListByPage(pageNum, pageSize);
             this.json({
                 errno: 0,
                 data: result
             });
-        }
-        catch(error) {
+        } catch (error) {
             this.fail(error.message);
         }
+    }
 
+    /**
+     * 根据手机号获取参与用户信息数据
+     * admin/index/user_phone
+     */
+    async userPhoneAction() {
+        try {
+            let model = this.model('home/participator');
+            let data = this.post();
+            let phone = data.phone;
+            let result = await model.getUserByPhone(phone);
+            this.json(result);
+        } catch (error) {
+            this.fail(error.message);
+        }
+    }
+
+    /**
+     * 更改参与者的状态
+     * /admin/index/user_set_status
+     */
+    async userSetStatusAction() {
+        try {
+            let model = this.model('home/participator');
+            let data = this.post();
+            let userId = data.userId;
+            let result = await model.userSetStatus(userId, 1);
+            this.json(result);
+        } catch (error) {
+            this.fail(error.message);
+        }
     }
 
 }

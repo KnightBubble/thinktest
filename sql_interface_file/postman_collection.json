@@ -11,7 +11,9 @@
 		"e595806b-42fc-1521-b692-e47725da0bb3",
 		"9561270a-c788-3af4-3cca-cd32860a43ec",
 		"c6ab4100-0985-eafa-a5e8-b6d65311f43f",
-		"fdb54080-3198-23d6-3576-29986a05490b"
+		"fdb54080-3198-23d6-3576-29986a05490b",
+		"296a05ea-32c9-5d36-d05d-2530d28f649d",
+		"1e35fd7c-498e-a978-239f-80cdf066afe3"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -53,6 +55,66 @@
 			"time": 1501426704433,
 			"name": "http://think.baidu.com:8360/admin/index/activity_off",
 			"description": "下线活动",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"responses": []
+		},
+		{
+			"id": "1e35fd7c-498e-a978-239f-80cdf066afe3",
+			"headers": "",
+			"headerData": [],
+			"url": "http://127.0.0.1:8360/admin/index/user_set_status",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
+			"data": [
+				{
+					"key": "userId",
+					"value": "aa1501394597884",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "http://127.0.0.1:8360/admin/index/user_set_status",
+			"description": "更改参与者状态",
+			"descriptionFormat": "html",
+			"time": 1501508880470,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "296a05ea-32c9-5d36-d05d-2530d28f649d",
+			"headers": "",
+			"headerData": [],
+			"url": "http://127.0.0.1:8360/admin/index/user_phone",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "phone",
+					"value": "18513622821",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1501505970917,
+			"name": "http://127.0.0.1:8360/admin/index/user_phone",
+			"description": "根据手机号获取参与用户信息",
 			"collectionId": "ade58494-b229-f2cd-6712-91e14adb2207",
 			"responses": []
 		},
