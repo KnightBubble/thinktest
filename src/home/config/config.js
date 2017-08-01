@@ -3,5 +3,4 @@
  * config
  */
 export default {
-  //key: value
 };
