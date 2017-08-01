@@ -23,9 +23,7 @@
     "leancloud-storage": "^3.0.4",
     "leanengine": "^3.0.0"
   },
-  "devDependencies": {
-    
-  },
+  "devDependencies": {},
   "repository": "",
   "license": "MIT",
   "engines": {

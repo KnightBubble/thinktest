@@ -2,6 +2,15 @@
 import Base from './base.js';
 
 export default class extends Base {
+    async __before() {
+        this.userInfo = await this.session('userInfo');
+        if (this.userInfo) {
+            this.assign('user', this.userInfo);
+            return Promise.resolve();
+        }
+        this.redirect('/admin/user/index');
+        return Promise.reject('Required login --> redirecting.');
+    }   
     /**
      * index action
      * @return {Promise} []
@@ -142,6 +151,41 @@ export default class extends Base {
         this.download(filePath);
 
         // this.json({aa:111})
+    }
+
+     exportExcelAction() {
+        var nodeExcel = require('excel-export');
+        var conf = {};
+        // conf.stylesXmlFile = "styles.xml";
+        conf.name = "mysheet";
+        conf.cols = [{
+            caption: '姓名',
+            type: 'string',
+            beforeCellWrite: function (row, cellData) {
+                return cellData;
+            },
+            width: 28.7109375
+        }, {
+            caption: '日期',
+            type: 'string',
+        }, {
+            caption: '布尔',
+            type: 'string'
+        }, {
+            caption: '数字',
+            type: 'string'
+        }];
+        conf.rows = [
+            ['张三', '2017-08-20', '是', 2004],
+            ["张三-1", '2017-08-20', '是', 27182],
+            ["张三-2", '2017-08-20', '是', 161803],
+            ["张三-3", '2017-08-20', , '是', 1414]
+        ];
+        var result = nodeExcel.execute(conf);
+        var res = this.http.res;
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+        res.setHeader("Content-Disposition", "attachment; filename=" + "Report.xlsx");
+        res.end(result, 'binary');
     }
 
 }
