@@ -20,7 +20,7 @@ export default class extends Base {
      * @desc 微信授权
      */
     wechatAction() {
-        let wechatUrl = wechat.getAuthorizeURL(`${this.config('host')}/home/index/callback`, '', 'snsapi_base');
+        let wechatUrl = wechat.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_base');
         this.redirect(wechatUrl);
     }
 
