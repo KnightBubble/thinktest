@@ -1,5 +1,4 @@
 'use strict';
-
 import Base from './base.js';
 
 export default class extends Base {
@@ -120,6 +119,22 @@ export default class extends Base {
         } catch (error) {
             this.fail(error.message);
         }
+    }
+
+    /**
+     * download excel
+     */
+    downAction() {
+        var file = fs.readFileSync(__dirname + '/test.xlsx');
+        var filePath  = __dirname + '/aaa.xlsx';
+        var filePath  = __dirname + '/test.xlsx';
+        // this.download(fileName);
+        // this.download(filePath, 'application/vnd.ms-excel');
+        // application/vnd.openxmlformats
+        // this.type("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        this.download(filePath);
+        
+        // this.json({aa:111})
     }
 
 }

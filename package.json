@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "babel-runtime": "6.x.x",
+    "excel-export": "^0.5.1",
     "source-map-support": "^0.4.0",
     "thinkjs": "2.2.x",
     "wechat-oauth": "^1.2.1"
