@@ -6,7 +6,14 @@ export default class extends Base {
      * index action
      * @return {Promise} []
      */
-    indexAction() {
+    async indexAction() {
+        //auto render template file index_index.html
+        let userInfo = await this.session('userInfo');
+        if (userInfo) {
+            return this.display();
+        } else {
+            this.redirect('/admin/user/index');
+        }
         return this.display();
     }
 
@@ -126,14 +133,14 @@ export default class extends Base {
      */
     downAction() {
         var file = fs.readFileSync(__dirname + '/test.xlsx');
-        var filePath  = __dirname + '/aaa.xlsx';
-        var filePath  = __dirname + '/test.xlsx';
+        var filePath = __dirname + '/aaa.xlsx';
+        var filePath = __dirname + '/test.xlsx';
         // this.download(fileName);
         // this.download(filePath, 'application/vnd.ms-excel');
         // application/vnd.openxmlformats
         // this.type("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         this.download(filePath);
-        
+
         // this.json({aa:111})
     }
 

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "babel-runtime": "6.x.x",
+    "crypto": "0.0.3",
     "excel-export": "^0.5.1",
     "source-map-support": "^0.4.0",
     "thinkjs": "2.2.x",
