@@ -51,7 +51,7 @@ export default class extends Base {
         let userInfo = await userModel.getUserByOpenid(openid);
 
         if (!userInfo || !userInfo.openid) {
-            userInfo = await client.getUser('openid');
+            userInfo = await wechat.getUser('openid');
             let insertId = await userModel.add({
                 userId: userInfo.openid,
                 openId: userInfo.openid,
