@@ -38,9 +38,12 @@ export default class extends Base {
     wechatAction() {
         let parrentId = this.get('parrentId') || "";
         let artivityId = this.get('artivityId');
-        let callbackUrl = `${this.config('url')}/home/index/callback`;
+        let callbackUrl = `${this.config('url')}/home/index/callback?`;
         if (parrentId) {
-            callbackUrl += `?parrentId=${parrentId}`;
+            callbackUrl += `parrentId=${parrentId}`;
+
+        }
+        if (artivityId) {
             callbackUrl += '&artivityId=${artivityId}'
         }
         let oauthUrl = WechatOAuthApi.getAuthorizeURL(callbackUrl, '', 'snsapi_userinfo');
@@ -71,7 +74,7 @@ export default class extends Base {
                 wechat: JSON.stringify(userInfo),
             });
         }
-        this.cookie('openId',openid);
+        this.cookie('openId', openid);
         this.redirect(`/home/index/detail?parrentId=${parrentId}&artivityId=${artivityId}`);
     }
 
@@ -159,10 +162,7 @@ export default class extends Base {
     }
 
     testAction() {
-        this.json({
-            name:this.get('name')
-        })
-        // return this.display('test');
+        return this.display('test');
     }
-    
+
 }
