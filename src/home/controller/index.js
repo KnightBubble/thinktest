@@ -159,7 +159,10 @@ export default class extends Base {
     }
 
     testAction() {
-        return this.display('test');
+        this.json({
+            name:this.get('name')
+        })
+        // return this.display('test');
     }
     
 }
