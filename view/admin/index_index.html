@@ -23,7 +23,6 @@
 </head>
 
 <body>
-    <%= JSON.stringify(data)%>
         <div id="header">
             <h1>运营管理后台</h1>
         </div>
@@ -37,7 +36,7 @@
         <div id="content">
             <div id="content-header">
                 <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
-                <h1>12312313</h1>
+                <h1>活动列表</h1>
             </div>
             <div class="container-fluid">
                 <hr>
@@ -67,16 +66,36 @@
                                             <% for(var i = 0;i<count; i++){%>
                                                 <tr>
                                                     <td><input type="checkbox" data-id="19"></td>
-                                                    <td><a href="/admin/slide/preview?id=19&amp;theme=black" title="preview"
-                                                            target="_blank">我是前端工程师2</a></td>
-                                                    <td>black</td>
-                                                    <td>admin</td>
-                                                    <td class="taskStatus"><span class="in-progress">draft</span></td>
-                                                    <td class="center">2016-03-14 18:23:50</td>
+                                                    <td>
+                                                        <%=activityDataList[i].title%>
+                                                    </td>
+                                                    <td>
+                                                        <%=activityDataList[i].shareTitle%>
+                                                    </td>
+                                                    <td>
+                                                        <%=activityDataList[i].startTime%> -
+                                                            <%=activityDataList[i].endTime%>
+                                                    </td>
+                                                    <td class="taskStatus">
+                                                        <% if(activityDataList[i].status == 1){%>
+                                                            <span class="in-progress">已上线</span>
+                                                            <%} else if (activityDataList[i].status == 2){%>
+                                                                <span class="in-progress">已下线</span>
+                                                                <%} else {%>
+                                                                    <span class="in-progress">待上线</span>
+                                                                    <%}%>
+                                                    </td>
                                                     <td class="center">
-                                                        <a href="/admin/index/edit?id=19" title="edit"><i class="fa fa-pencil-square-o"></i></a>
-                                                        <a href="/admin/slide/publish?id=19" title="publish"><i class="fa fa-lock"></i></a>
-                                                        <a href="/admin/slide/delete?id=19" title="delete"><i class="fa fa-trash"></i></a>
+                                                        <%=activityDataList[i].createTime%>
+                                                    </td>
+                                                    <td class="center">
+                                                        <% if(activityDataList[i].status == 1){%>
+                                                            <button type="button" onclick="modifyStatus('<%=activityDataList[i].id  %>', 2)">下线</button>
+                                                            <%} else{%>
+                                                                <button type="button" onclick="modifyStatus('<%=activityDataList[i].id  %>', 1)">上线</button>
+                                                                <%}%>
+                                                                    <!-- <a href="/admin/slide/publish?id=19" title="publish"><i class="fa fa-lock"></i></a>
+                                                        <a href="/admin/slide/delete?id=19" title="delete"><i class="fa fa-trash"></i></a> -->
                                                     </td>
                                                 </tr>
                                                 <% }%>
@@ -139,6 +158,21 @@
                     $(this).addClass('open');
                 }
             });
+            var modifyStatusApi = '/admin/index/modify_activity_status';
+
+            function modifyStatus(activityId, status) {
+                $.post(modifyStatusApi, {
+                    id: activityId,
+                    status: status
+                }, function (res) {
+                    if (res.errno == '0') {
+                        alert('成功');
+                        window.location.reload();
+                    } else {
+                        alert(res.errmsg);
+                    }
+                })
+            }
         </script>
 </body>
 

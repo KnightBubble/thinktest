@@ -41,28 +41,17 @@ export default class extends think.logic.base {
     }
 
     /**
-     * 活动下线
+     * /admin/index/modify_activity_status
+     * 
      */
-    activityOffAction() {
+
+    modifyActivityStatusAction() {
         this.allowMethods = 'post';
         let rules = {
             id: {
                 required: true
-            }
-        };
-        let flag = this.validate(rules);
-        if (!flag) {
-            return this.fail('数据校验错误', this.errors());
-        }
-    }
-
-    /**
-     * 活动上线
-     */
-    activityOnAction() {
-        this.allowMethods = 'post';
-        let rules = {
-            id: {
+            },
+            status: {
                 required: true
             }
         };
@@ -107,7 +96,7 @@ export default class extends think.logic.base {
             userId: {
                 required: true
             },
-            status:{
+            status: {
                 required: true
             }
         };

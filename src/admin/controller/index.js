@@ -24,8 +24,8 @@ export default class extends Base {
             console.log('-->' + value.startTime * 1);
             value.startTime = think.datetime(new Date(value.startTime * 1), 'YYYY-MM-DD');
 
-            value.endTime = think.datetime(new Date(value.endTime*1),'YYYY-MM-DD');
-            value.createTime = think.datetime(new Date(value.createTime*1),'YYYY-MM-DD');
+            value.endTime = think.datetime(new Date(value.endTime * 1), 'YYYY-MM-DD');
+            value.createTime = think.datetime(new Date(value.createTime * 1), 'YYYY-MM-DD');
         });
         this.assign({
             data: {
@@ -63,6 +63,8 @@ export default class extends Base {
 
     /**
      * 添加活动
+     * /admin/index/activity_add
+     * 
      */
     async activityAddAction() {
         let postData = this.post();
@@ -81,45 +83,33 @@ export default class extends Base {
         }
     }
 
-
     /**
-     * 活动下线
+     * 活动状态修改
+     * /admin/index/modify_activity_status
      */
-    async activityOffAction() {
+    async modifyActivityStatusAction() {
         let data = this.post();
         let id = data.id;
+        let status = data.status;
         let model = this.model('activity');
-        let updateEffectRows = await model.offlineActivity(id);
+        let updateEffectRows = 0;
+        if (status == 1) {
+            // 上线活动
+            updateEffectRows = await model.onLineActivity(id);
+        }
+        else {
+            updateEffectRows = await model.offlineActivity(id);
+        }
         if (updateEffectRows === 1) {
             this.json({
                 errno: 0,
-                errmsg: '上线失效成功',
+                errmsg: '更新成功',
                 data: {}
             });
         } else {
             this.fail('OFF_LINE_ACTIVITY_ERROR');
         }
-
     }
-
-    /**
-     * 上线活动
-     */
-    async activityOnAction() {
-        let data = this.post();
-        let id = data.id;
-        let model = this.model('activity');
-        let updateEffectRows = await model.onLineActivity(id);
-        if (updateEffectRows === 1) {
-            this.json({
-                errno: 0,
-                errmsg: '上线生效成功'
-            });
-        } else {
-            this.fail('ON_LINE_ACTIVITY_ERROR');
-        }
-    }
-
 
     /**
      * 活动列表
