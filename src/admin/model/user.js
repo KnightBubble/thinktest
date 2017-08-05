@@ -8,18 +8,9 @@ export default class extends think.model.base {
      * @type {Object}
      */
     schema = {
-        userName: { //user_name
-            default: 0 //默认为 0
-        },
-        userId: { //id
-            default: function () {
-                return '100';
-            }
-        },
-        signTime: { //创建时间
-            default: () => { //获取当前时间
+        signTime: {
+            default: () => {
                 return Date.now();
-                // return moment().format('YYYY-MM-DD HH:mm:ss')
             }
         }
     }
@@ -37,5 +28,9 @@ export default class extends think.model.base {
         return data;
     }
 
-    
+    getUserByOpenid(openid) {
+        return this.where({
+            openid: openid
+        }).find();
+    }
 }

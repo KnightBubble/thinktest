@@ -1,12 +1,26 @@
 'use strict';
-
+import fs from 'fs';
+import path from 'path';
+import {
+    promisify
+} from 'util';
 import Base from './base.js';
-import OAuth from 'wechat-oauth';
+import OAuth from 'co-wechat-oauth';
+
+const readFileAsync = promisify(fs.readFile);
+const writeFileAsync = promisify(fs.writeFile);
 
 const wechatConf = think.config('wechat');
-const wechat = new OAuth(wechatConf.appid, wechatConf.appsecret);
-var fs = require('fs');
-var path = require('path');
+const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async function (openid) {
+    // 传入一个根据openid获取对应的全局token的方法
+    var txt = await readFileAsync(openid + ':access_token.txt', 'utf8');
+    return JSON.parse(txt);
+}, async function (openid, token) {
+    // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
+    // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
+    // 持久化时请注意，每个openid都对应一个唯一的token!
+    await writeFileAsync(openid + ':access_token.txt', JSON.stringify(token));
+});
 
 export default class extends Base {
     /**
@@ -22,10 +36,13 @@ export default class extends Base {
      * @desc 微信授权
      */
     wechatAction() {
-        console.log('wechatUrl-----');
-        let wechatUrl = wechat.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_userinfo');
-        console.log('cowechatUrlde');
-        this.redirect(wechatUrl);
+        let parrentId = this.get('parrentId');
+        let callbackUrl = `${this.config('url')}/home/index/callback`;
+        if (parrentId) {
+            callbackUrl += `?parrentId=${parrentId}`;
+        }
+        let oauthUrl = WechatOAuthApi.getAuthorizeURL(callbackUrl, '', 'snsapi_userinfo');
+        this.redirect(oauthUrl);
     }
 
     /**
@@ -33,21 +50,25 @@ export default class extends Base {
      */
     async callbackAction() {
         let code = this.get('code');
-        console.log('code');
-        wechat.getAccessToken(code, (err, result) => {
-            console.log('hello');
-            /**
-             * access_token expires_in refresh_token openid scope create_at
-             */
-            let accessToken = result.data.access_token;
-            let openid = result.data.openid;
-            wechat.getUser(openid, (err, res) => {
-                console.log(err, res);
-                    // 创建用户
-                this.display('index');
+        let parrentId = this.get('parrentId');
+
+        let token = await WechatOAuthApi.getAccessToken(code);
+        let openid = token.data.openid;
+        let userModel = this.model('admin/user');
+        let userInfo = await userModel.getUserByOpenid(openid);
+
+        if (!userInfo || !userInfo.openId) {
+            userInfo = await WechatOAuthApi.getUser(openid);
+            let insertId = await userModel.add({
+                userId: userInfo.openid,
+                openId: userInfo.openid,
+                uerPortrait: userInfo.headimgurl,
+                nickName: userInfo.nickname,
+                parrentId: parrentId,
+                wechat: JSON.stringify(userInfo),
             });
-            
-        });
+        }
+        this.redirect(`/home/index/detail?parrentId=${parrentId}`);
     }
 
     /**
