@@ -22,30 +22,31 @@ export default class extends Base {
      * @desc 微信授权
      */
     wechatAction() {
-        let wechatUrl = wechat.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_base');
+        console.log('wechatUrl-----');
+        let wechatUrl = wechat.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_userinfo');
+        console.log('cowechatUrlde');
         this.redirect(wechatUrl);
     }
 
     /**
      * @desc 授权回调
      */
-    callbackAction() {
+    async callbackAction() {
         let code = this.get('code');
+        console.log('code');
         wechat.getAccessToken(code, (err, result) => {
-            // let accessToken = result.data.access_token;
-            // let openid = result.data.openid;
-            // let unionid = result.data.unionid;
-            console.log(result);
-            // 判断有没有用户先
-            if (true) {
-                // 获取用户信息
-            } else {
-                wechat.getUser(openid, (err, res) => {
-                    console.log(user);
+            console.log('hello');
+            /**
+             * access_token expires_in refresh_token openid scope create_at
+             */
+            let accessToken = result.data.access_token;
+            let openid = result.data.openid;
+            wechat.getUser(openid, (err, res) => {
+                console.log(err, res);
                     // 创建用户
-                });
-            }
-            this.display();
+                this.display('index');
+            });
+            
         });
     }
 
