@@ -96,8 +96,7 @@ export default class extends Base {
         if (status == 1) {
             // 上线活动
             updateEffectRows = await model.onLineActivity(id);
-        }
-        else {
+        } else {
             updateEffectRows = await model.offlineActivity(id);
         }
         if (updateEffectRows === 1) {
@@ -232,6 +231,35 @@ export default class extends Base {
         res.setHeader('Content-Type', 'application/vnd.openxmlformats');
         res.setHeader("Content-Disposition", "attachment; filename=" + "Report.xlsx");
         res.end(result, 'binary');
+    }
+
+    /**
+     * 上传图片接口
+     * /admin/index/upload_image
+     */
+    uploadImageAction() {
+        //这里的 key 需要和 form 表单里的 name 值保持一致
+        try {
+            var file = think.extend({}, this.file('file'));
+            var filepath = file.path;
+            //文件上传后，需要将文件移动到项目其他地方，否则会在请求结束时删除掉该文件
+            var uploadPath = think.RESOURCE_PATH + '/staticimgs';
+            think.mkdir(uploadPath);
+            var basename = path.basename(filepath);
+            fs.renameSync(filepath, uploadPath + '/' + basename);
+            file.path = uploadPath + '/' + basename;
+            // if (think.isFile(file.path)) {
+            //     console.log('is file')
+            // } else {
+            //     console.log('not exist')
+            // }
+            this.assign('fileInfo', file);
+            this.json({
+                url: '/staticimgs/' + basename
+            });
+        } catch (error) {
+            this.fail('UPLOAD_IAMGE_ERROR');
+        }
     }
 
 }
