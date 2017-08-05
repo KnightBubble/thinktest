@@ -1,6 +1,6 @@
-(function() {
-    var loginApi = "/admin/index/userLogin";
-    $('button.submit').click(function() {
+(function () {
+    var loginApi = "/admin/admin/signin";
+    $('button.submit').click(function () {
         var name = $('#username').val();
         var pwd = $('#passwd').val()
         if (!name) {
@@ -9,7 +9,10 @@
         if (!pwd) {
             return;
         }
-        $.post(loginApi, {}, function(res) {
+        $.post(loginApi, {
+            username: name,
+            password: pwd,
+        }, function (res) {
             if (res.errno == '0') {
                 window.location = '/admin/index/index.html';
             } else {

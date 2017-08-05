@@ -106,6 +106,9 @@ export default class extends think.logic.base {
         let rules = {
             userId: {
                 required: true
+            },
+            status:{
+                required: true
             }
         };
         let flag = this.validate(rules);

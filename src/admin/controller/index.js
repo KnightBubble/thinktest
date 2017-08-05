@@ -1,6 +1,5 @@
 'use strict';
 import Base from './base.js';
-
 export default class extends Base {
     async __before() {
         this.userInfo = await this.session('userInfo');
@@ -8,9 +7,9 @@ export default class extends Base {
             this.assign('user', this.userInfo);
             return Promise.resolve();
         }
-        this.redirect('/admin/user/index');
+        this.redirect('/admin/admin/index');
         return Promise.reject('Required login --> redirecting.');
-    }   
+    }
     /**
      * index action
      * @return {Promise} []
@@ -21,7 +20,7 @@ export default class extends Base {
         if (userInfo) {
             return this.display();
         } else {
-            this.redirect('/admin/user/index');
+            this.redirect('/admin/admin/index');
         }
         return this.display();
     }
@@ -155,7 +154,9 @@ export default class extends Base {
             let model = this.model('home/participator');
             let data = this.post();
             let userId = data.userId;
-            let result = await model.userSetStatus(userId, 1);
+            let status = data.status;
+            let result = await model.userSetStatus(userId, status);
+
             this.json(result);
         } catch (error) {
             this.fail(error.message);
@@ -178,7 +179,26 @@ export default class extends Base {
         // this.json({aa:111})
     }
 
-     exportExcelAction() {
+    /**
+     * 管理后台 参与者列表
+     */
+    async participatorAction() {
+        let model = this.model('home/participator');
+        var data = think.extend({}, this.get(), this.post());
+        console.log(data);
+        let result = await model.getParticatorListByPage(data['page'] || 1);
+        result.data.forEach(function (element) {
+            element.joinTime = think.datetime(new Date(1501914300755), 'YYYY-MM-DD');
+        });
+        this.assign({
+            data: {
+                userList: result,
+            }
+        });
+        this.display('participator');
+    }
+
+    exportExcelAction() {
         var nodeExcel = require('excel-export');
         var conf = {};
         // conf.stylesXmlFile = "styles.xml";

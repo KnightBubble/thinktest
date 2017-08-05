@@ -13,36 +13,41 @@ export default class extends Base {
         let userInfo = await this.session('userInfo');
         if (userInfo) {
             return this.redirect('/admin/index/index');
-        }
-        else {
-            this.json({
-                errno: 1,
-                errmsg: '未登录用户',
-                username: await this.session('userInfo')
-            });
+        } else {
+            this.display('login');
         }
 
         // return this.display();
     }
 
+
     /**
      * 实际登陆接口
      */
-    async loginAction() {
+    async signinAction() {
         let {
             username,
             password,
-        } = this.get();
+        } = this.post();
         let secPwd = md5("0801asdf2017");
         if (username && password) {
             if (username === "good" && secPwd === "2d65ab0ebc1fc3802fb89f85fb0b0fe2") {
                 //console.log('login');
                 // await this.session('userInfo', user);
                 await this.session('userInfo', username);
-                return this.redirect('/admin/index/index');
+                this.json({
+                    errno: 0,
+                    errnomsg: '登录成功'
+                });
+                // return this.redirect('/admin/index/index');
+            } else {
+                this.fail('LOGIN_FAIL_ACCOUNT_ERROR');
             }
         }
-        return this.redirect('/admin/index/index');
+        else {
+            this.fail('LOGIN_FAIL_ACCOUNT_ERROR');
+        }
+        // return this.redirect('/admin/index/index');
     }
 
     /**
