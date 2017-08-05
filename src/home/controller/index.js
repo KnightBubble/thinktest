@@ -35,7 +35,7 @@ export default class extends Base {
         if (parrentId) {
             callbackUrl += `?parrentId=${parrentId}`;
         }
-        let oauthUrl = WechatOAuthApi.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_userinfo');
+        let oauthUrl = WechatOAuthApi.getAuthorizeURL(callbackUrl, '', 'snsapi_userinfo');
         this.redirect(oauthUrl);
     }
 
@@ -46,12 +46,12 @@ export default class extends Base {
         let code = this.get('code');
         let parrentId = this.get('parrentId');
 
-        let token = await WechatOAuthApi.getAccessToken();
+        let token = await WechatOAuthApi.getAccessToken(code);
         let openid = token.data.openid;
         let userInfo = await userModel.getUserByOpenid(openid);
 
         if (!userInfo || !userInfo.openid) {
-            userInfo = await WechatOAuthApi.getUser('openid');
+            userInfo = await WechatOAuthApi.getUser(openid);
             let insertId = await userModel.add({
                 userId: userInfo.openid,
                 openId: userInfo.openid,
