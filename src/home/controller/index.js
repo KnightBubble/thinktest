@@ -1,12 +1,20 @@
 'use strict';
-
+import fs from 'fs';
+import path from 'path';
 import Base from './base.js';
 import OAuth from 'co-wechat-oauth';
 
 const wechatConf = think.config('wechat');
-const wechat = new OAuth(wechatConf.appid, wechatConf.appsecret);
-var fs = require('fs');
-var path = require('path');
+const wechat = new OAuth(wechatConf.appid, wechatConf.appsecret, async function (openid) {
+    // 传入一个根据openid获取对应的全局token的方法
+    var txt = await fs.readFile(openid + ':access_token.txt', 'utf8');
+    return JSON.parse(txt);
+}, async function (openid, token) {
+    // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
+    // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
+    // 持久化时请注意，每个openid都对应一个唯一的token!
+    await fs.writeFile(openid + ':access_token.txt', JSON.stringify(token));
+});
 
 export default class extends Base {
     /**
@@ -37,7 +45,7 @@ export default class extends Base {
     async callbackAction() {
         let code = this.get('code');
         let parrentId = this.get('parrentId');
-        
+
         let token = await wechat.getAccessToken();
         let openid = token.data.openid;
         let userInfo = await userModel.getUserByOpenid(openid);
