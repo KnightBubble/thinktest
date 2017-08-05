@@ -55,6 +55,7 @@ export default class extends think.model.base {
     }
 
 
+
     /**
      * 修改活动内容
      */
