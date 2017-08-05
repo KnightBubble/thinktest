@@ -27,6 +27,6 @@
   "repository": "",
   "license": "MIT",
   "engines": {
-    "node": "6.x"
+    "node": "8.x"
   }
 }
