@@ -14,16 +14,63 @@
     <script src="https://fex.baidu.com/webuploader/js/jquery-1.10.2.min.js"></script>
     <script src="/static/js/webuploader/webuploader.nolog.js"></script>
     <script src="/static/js/jquery.min.js"></script>
-     <script src="/static/lib/toast/jquery.toast.min.js"></script> 
-    
+    <script src="/static/lib/toast/jquery.toast.min.js"></script>
     <style>
         table td.center {
             text-align: center;
         }
-        
+
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
+        }
+
+        label {
+            height: 35px;
+            margin: 10px;
+        }
+
+        label span {
+            display: inline-block;
+            height: 35px;
+            line-height: 35px;
+            vertical-align: top;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        label input {
+            height: 35px!important;
+            border-radius: 3px!important;
+        }
+
+        #uploader {
+            display: inline-block!important;
+        }
+
+        #uploader .btns {
+            display: inline-block!important;
+        }
+
+        #uploader #picker {
+            display: inline-block!important;
+        }
+
+        .btn,
+        .btn:hover {
+            vertical-align: top;
+            width: 70px;
+            height: 32px;
+            background: #00b7ee;
+            color: white;
+            line-height: 32px;
+            outline: none;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .creatActivity {
+            box-sizing: content-box;
         }
     </style>
 </head>
@@ -35,27 +82,29 @@
     <%include inc/sidebar.html%>
         <div id="content">
             <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
                 <h1>创建活动</h1>
             </div>
             <div class="container-fluid">
                 <form>
                     <label for="title">
                       <span>活动名称</span>
-                      <input type='text' name='title' required>
+                      <input type='text' name='title' class='title' required>
                   </label>
                     <label for="descption">
                       <span>活动描述</span>
-                      <input type='text' name='descption' required>
+                      <input type='text' name='descption' class='descption'  required>
                   </label>
                     <label for="picUrl">
                       <span>活动图片</span>
-                      <input type='text' name='picUrl' required disabled>
-                      <div onClick='upload(1)'>上传图片</div>
-                  </label>
-                    <label for="picUrl">
-                      <span>活动图片</span>
-                      <input type='text' name='picUrl' required>
+                      <div id="uploader" class="wu-example">
+                          <!--用来存放文件信息-->
+                          <div id="thelist" class="uploader-list"></div>
+                          <div class="btns">
+                              <div id="picker">选择文件</div>
+                              <div id="ctlBtn" class="btn btn-default" data-id='1'>开始上传</div>
+                          </div>
+                      </div>
                   </label>
                     <label for="shareTitle">
                       <span>二次分享描述</span>
@@ -72,19 +121,20 @@
                           </div>
                       </div>
                   </label>
-                    <button type='submit'>创建活动</button>
+                    <div class='btn creatActivity'>创建活动</div>
                 </form>
             </div>
         </div>
         <script src="/static/js/bootstrap.min.js"></script>
         <script>
-            (function() {
+            (function () {
                 var lis = document.querySelectorAll('#sidebar>ul>li');
                 lis[3].className = 'active';
             })();
         </script>
         <script>
             var type = 1;
+            var activityUrl, shareIcon
             var uploader = WebUploader.create({
                 // swf文件路径
                 swf: '/static/js/webuploader/Uploader.swf',
@@ -99,13 +149,48 @@
                 mimeTypes: 'image/*',
                 // sendAsBinary:true,
             });
-
-            uploader.on('uploadFinished', function(file) {
-                console.log('uploadFinished......');
+            uploader.on('uploadSuccess', function (file, result) {
+                if (file) {
+                    alert('上传成功');
+                    if (type == 1) {
+                        activityUrl = result.url;
+                    } else {
+                        shareIcon = result.url;
+                    }
+                } else {
+                    alert('上传图片失败')
+                }
             });
-            $('#ctlBtn').on('click', function() {
+            $('#ctlBtn').on('click', function () {
                 type = $(this).data('id');
                 uploader.upload();
+            })
+            $('.creatActivity').click(function () {
+                var title = $('.title').val();
+                var descption = $('.descption').val();
+                if (!title) {
+                    alert('请填写活动名称');
+                    return;
+                }
+                if (!descption) {
+                    alert('请填写活动描述');
+                    return;
+                }
+                if (!activityUrl) {
+                    alert('请上传活动图片！！！');
+                    return;
+                }
+                $.post('/admin/index/activity_add', {
+                    title: title,
+                    descption: descption,
+                    picUrl: activityUrl
+                }, function (res) {
+                    if (res.errno == '0') {
+                        debugger;
+                    } else {
+                        alert(res.errmsg);
+                    }
+                });
             })
         </script>
 </body>

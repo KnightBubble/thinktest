@@ -9,7 +9,24 @@ export default class extends think.model.base {
      * status => 0 待上线
      * status => 1 已上线
      * status => 2 已下线
+     * 数据表字段定义
      */
+    schema = {
+            startTime: {
+                default: () => {
+                    return Date.now();
+                }
+            },
+            status: {
+                default: () => {
+                    return 0;
+                }
+            }
+        }
+        /**
+         * 添加活动
+         * @param {* Object} postData
+         */
     async addOneActivity(postData) {
         let data = {
             title: postData.title,
@@ -74,11 +91,10 @@ export default class extends think.model.base {
         var data = {};
         try {
             data = this.page(pageNum, pageSize).countSelect();
-        }
-        catch(e) {
+        } catch (e) {
             console.log(e.message);
         }
         return data;
-    }    
+    }
 
 }

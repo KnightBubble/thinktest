@@ -2,6 +2,7 @@
 import Base from './base.js';
 var path = require('path');
 var fs = require('fs');
+
 export default class extends Base {
     async __before() {
             this.userInfo = await this.session('userInfo');
@@ -70,7 +71,7 @@ export default class extends Base {
     /**
      * 添加活动
      * /admin/index/activity_add
-     * 
+     *
      */
     async activityAddAction() {
         let postData = this.post();
