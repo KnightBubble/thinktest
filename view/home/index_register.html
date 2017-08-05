@@ -1,61 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style='font-size: 31.25px' ;>
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0,target-densitydpi=device-dpi">
     <meta name="format-detection" content="telephone=no">
-    <meta name="orientation" content="portrait">
-    <meta name="screen-orientation" content="portrait">
-    <meta name="x5-orientation" content="portrait">
-    <script>
-        (function() {
-            var base = 750;
-            (function() {
-                var scale = screen.width / base;
-                var meta = document.querySelector('meta[name="viewport"]');
-                meta.setAttribute('content', 'width=' + base + ',initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=0,target-densitydpi=device-dpi');
-            })();
-        })();
-    </script>
-    <link rel="stylesheet" href="/static/css/register.min.css">
+    <link rel="stylesheet" href="/static/css/common.css">
     <title>活动参与</title>
 </head>
 
-<body>
-    <div class="content register">
-        <div class="info">
-            <img src="http://img0.imgtn.bdimg.com/it/u=564515174,2876839444&fm=26&gp=0.jpg" alt="">
-            <p>demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo</p>
+<body style="background: rgb(137, 80, 46);">
+    <div class="wrapper">
+        <div class="t-banner">
+            <a class="banner-img" href="javascript:void(0)">
+                <img src="http://p0.meituan.net/coupon/62f66038223742ebdcbe7071cda092f9238523.gif" alt="">
+            </a>
         </div>
-        <div class="form">
-            <div class="wrap-1">
-                <div class="wrap-2">
-                    <div class="wrap-3">
-                        <label for="name">
+        <div class="content-bg" id="j-fetch">
+            <!-- <div class="form">
+                <div class="wrap-1">
+                    <div class="wrap-2">
+                        <div class="wrap-3">
+                            <label for="name">
                             <input type="text" id="name" name="name" value="" placeholder="请输入姓名">
                         </label>
-                        <label for="tel">
+                            <label for="tel">
                             <input type="number" id="tel" name="tel" value="" placeholder="请输入手机号码">
                         </label>
-                        <label class="code" for="code">
+                            <label class="code" for="code">
                             <input type="number" id="code" name="code" value="" placeholder="请输入验证码">
                             <span id="codeBtn" class="disable">获取验证码</span>
                         </label>
-                        <div class="button-wrap">
-                            <div class="button" id="submitBtn">参与活动</div>
+                            <div class="button-wrap">
+                                <div class="button" id="submitBtn">参与活动</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <section id="j-fetch-inner" class="content1">
+                <div class="opr">
+                    <input type="text" id="name" name="name" class="borderradius-3" value="" placeholder="请输入姓名">
+                    <input id="tel" type="tel" class="borderradius-3" placeholder="请输入您的手机号" maxlength="11">
+                    </label>
+                    <input type="number" id="code" class="borderradius-3" name="code" value="" placeholder="请输入验证码">
+                    <span id="codeBtn" class="disable">获取验证码</span>
+                    <div id="capture-tip" class="capture-tip"></div>
+                    <input id="submitBtn" class="combtn borderradius-3" type="button" value="立即参与" style="background: rgb(255, 63, 38);">
+                </div>
+            </section>
+        </div>
+        <div class="content-bg margin-gap" style="display: block;">
+            <section class="rule">
+                <h4 class="sec-sub-title">活动规则</h4>
+                <ul class="act-rules">
+                    <li>1.下单即可分享红包给小伙伴</li>
+                    <li></li>
+                    <li>2.每个链接仅限20人领取</li>
+                    <li></li>
+                    <li>3.每个链接会按领取顺序随机发放一个大额红包</li>
+                    <li></li>
+                    <li>4.每人每天仅限领取5次</li>
+                    <li></li>
+                    <li>5.红包仅限在线支付使用，且收餐人手机号、领取红包时输入的手机号和账号中的手机号需为同一手机号</li>
+                    <li></li>
+                    <li>6.其他未尽事宜，请咨询客服</li>
+                    <li></li>
+                </ul>
+            </section>
         </div>
     </div>
-    <script src="/static/js/zepto.min.js"></script>
-    <script src="/static/js/jweixin-1.0.0.js"></script>
-    <script src="/static/js/toast.js"></script>
-    <script src="/static/js/shareConfig.js"></script>
-    <script src="/static/js/register.js"></script>
-
 </body>
+<script src="/static/js/zepto.min.js"></script>
+<script src="/static/js/jweixin-1.0.0.js"></script>
+<script src="/static/js/toast.js"></script>
+<script src="/static/js/shareConfig.js"></script>
+<script src="/static/js/register.js"></script>
 
 </html>

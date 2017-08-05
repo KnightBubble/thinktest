@@ -11,6 +11,31 @@ export default class extends Base {
         return this.display();
     }
 
+    tongjiAction() {
+        return this.display('tongji');
+    }
+
+    changeAction() {
+        return this.display('change');
+    }
+
+    loginAction() {
+        return this.display('login');
+    }
+
+    /**
+     * 登录
+     */
+    userloginAction() {
+        this.json({
+            errno: 0,
+            errmsg: '登录成功成功',
+            data: {
+
+            }
+        });
+    }
+
     /**
      * 添加活动
      */
