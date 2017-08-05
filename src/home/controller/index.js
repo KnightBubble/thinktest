@@ -71,7 +71,7 @@ export default class extends Base {
                 wechat: JSON.stringify(userInfo),
             });
         }
-        this.cookie('openid',openid);
+        this.cookie('openId',openid);
         this.redirect(`/home/index/detail?parrentId=${parrentId}&artivityId=${artivityId}`);
     }
 

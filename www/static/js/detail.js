@@ -1,11 +1,10 @@
 (function() {
     var detailApi = "/home/index/user_support";
     $('.section').hide();
-    $.fn.cookie('openId', '1KDJFKDJ4989DKFJK3D93KKLWL');
+    // $.fn.cookie('openId', '1KDJFKDJ4989DKFJK3D93KKLWL');
 
     $.post(detailApi, {
-        activityId: "111",
-        openId: "aa1501395236744",
+        activityId: 13,
     }, function(res) {
         if (res.errno == '0') {
             renderView(res.data);
