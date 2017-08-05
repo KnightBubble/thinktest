@@ -8,6 +8,7 @@ export default class extends think.model.base {
      * @type {Object}
      */
     schema = {
+        
         userName: { //user_name
             default: 0 //默认为 0
         },
@@ -37,5 +38,7 @@ export default class extends think.model.base {
         return data;
     }
 
-    
+    async getUserByOpenid(openid) {
+        return this.where({openid: openid}).find();
+    }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 import Base from './base.js';
-import OAuth from 'wechat-oauth';
+import OAuth from 'co-wechat-oauth';
 
 const wechatConf = think.config('wechat');
 const wechat = new OAuth('wxcb816a269be9eebe', '6bacd2cdc8344530629f5a420a86e518');
@@ -20,9 +20,12 @@ export default class extends Base {
      * @desc 微信授权
      */
     wechatAction() {
-        console.log('wechatUrl-----');
+        let parrentId = this.get('parrentId');
+        let callbackUrl = `${this.config('url')}/home/index/callback`;
+        if (parrentId) {
+            callbackUrl += `?parrentId=${parrentId}`;
+        }
         let wechatUrl = wechat.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_userinfo');
-        console.log('cowechatUrlde');
         this.redirect(wechatUrl);
     }
 
@@ -31,21 +34,24 @@ export default class extends Base {
      */
     async callbackAction() {
         let code = this.get('code');
-        console.log('code');
-        wechat.getAccessToken(code, (err, result) => {
-            console.log('hello');
-            /**
-             * access_token expires_in refresh_token openid scope create_at
-             */
-            let accessToken = result.data.access_token;
-            let openid = result.data.openid;
-            wechat.getUser(openid, (err, res) => {
-                console.log(err, res);
-                    // 创建用户
-                this.display('index');
+        let parrentId = this.get('parrentId');
+        
+        let token = await wechat.getAccessToken();
+        let openid = token.data.openid;
+        let userInfo = await userModel.getUserByOpenid(openid);
+
+        if (!userInfo || !userInfo.openid) {
+            userInfo = await client.getUser('openid');
+            let insertId = await userModel.add({
+                userId: userInfo.openid,
+                openId: userInfo.openid,
+                uerPortrait: userInfo.headimgurl,
+                nickName: userInfo.nickname,
+                parrentId: parrentId,
+                wechat: JSON.stringify(userInfo),
             });
-            
-        });
+        }
+        this.redirect(`/home/index/detail?parrentId=${parrentId}`);
     }
 
     /**
