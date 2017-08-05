@@ -30,7 +30,7 @@ export default class extends think.model.base {
     }
 
     async getUserByOpenid(openid) {
-        return this.where({
+        return await this.where({
             openid: openid
         }).find();
     }
