@@ -36,10 +36,12 @@ export default class extends Base {
      * @desc 微信授权
      */
     wechatAction() {
-        let parrentId = this.get('parrentId');
+        let parrentId = this.get('parrentId') || "";
+        let artivityId = this.get('artivityId');
         let callbackUrl = `${this.config('url')}/home/index/callback`;
         if (parrentId) {
             callbackUrl += `?parrentId=${parrentId}`;
+            callbackUrl += '&=artivityId=${artivityId}'
         }
         let oauthUrl = WechatOAuthApi.getAuthorizeURL(callbackUrl, '', 'snsapi_userinfo');
         this.redirect(oauthUrl);
@@ -50,7 +52,8 @@ export default class extends Base {
      */
     async callbackAction() {
         let code = this.get('code');
-        let parrentId = this.get('parrentId');
+        let parrentId = this.get('parrentId') || '';
+        let artivityId = this.get('artivityId');
 
         let token = await WechatOAuthApi.getAccessToken(code);
         let openid = token.data.openid;
@@ -68,7 +71,8 @@ export default class extends Base {
                 wechat: JSON.stringify(userInfo),
             });
         }
-        this.redirect(`/home/index/detail?parrentId=${parrentId}`);
+        this.cookie('openid',openid);
+        this.redirect(`/home/index/detail?parrentId=${parrentId}&artivityId=${artivityId}`);
     }
 
     /**
@@ -143,6 +147,10 @@ export default class extends Base {
         }
     }
     detailAction() {
+        this.json({
+            get: this.get(),
+            coolie: this.cookie('openId');
+        })
         return this.display('detail');
     }
 
