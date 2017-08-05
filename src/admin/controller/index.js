@@ -15,13 +15,24 @@ export default class extends Base {
      * @return {Promise} []
      */
     async indexAction() {
-        //auto render template file index_index.html
-        let userInfo = await this.session('userInfo');
-        if (userInfo) {
-            return this.display();
-        } else {
-            this.redirect('/admin/admin/index');
-        }
+        let activityModel = this.model('activity');
+        let data = think.extend({}, this.get(), this.post());
+        let page = data.page || 1;
+        let pageSize = data.pageSize || 10;
+        let result = await activityModel.getListByPage(page, pageSize);
+        result.data.forEach((value) => {
+            console.log('-->' + value.startTime * 1);
+            value.startTime = think.datetime(new Date(value.startTime * 1), 'YYYY-MM-DD');
+
+            value.endTime = think.datetime(new Date(value.endTime*1),'YYYY-MM-DD');
+            value.createTime = think.datetime(new Date(value.createTime*1),'YYYY-MM-DD');
+        });
+        this.assign({
+            data: {
+                activityData: result
+            }
+        });
+        console.log(result);
         return this.display();
     }
 
@@ -188,7 +199,7 @@ export default class extends Base {
         console.log(data);
         let result = await model.getParticatorListByPage(data['page'] || 1);
         result.data.forEach(function (element) {
-            element.joinTime = think.datetime(new Date(1501914300755), 'YYYY-MM-DD');
+            element.joinTime = think.datetime(new Date(element.joinTime * 1), 'YYYY-MM-DD');
         });
         this.assign({
             data: {
