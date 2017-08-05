@@ -40,11 +40,11 @@ export default class extends Base {
         let artivityId = this.get('artivityId');
         let callbackUrl = `${this.config('url')}/home/index/callback?`;
         if (parrentId) {
-            callbackUrl += `parrentId=${parrentId}`;
+            callbackUrl += `parrentId=`+parrentId;
 
         }
         if (artivityId) {
-            callbackUrl += '&artivityId=${artivityId}'
+            callbackUrl += `&artivityId=${artivityId}`;
         }
         let oauthUrl = WechatOAuthApi.getAuthorizeURL(callbackUrl, '', 'snsapi_userinfo');
         this.redirect(oauthUrl);
