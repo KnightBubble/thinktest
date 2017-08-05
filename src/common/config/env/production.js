@@ -6,7 +6,7 @@ export default {
     //     appid: 'wx580c5fee09078215',
     //     appsecret: 'ddc46a6eafa7fcbc075efd5a649d2205'
     // }
-    port: parseInt(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3000),
+    port: 80,
     url: 'http://serve.leanapp.cn',
     wechat: {
         appid: 'wxcb816a269be9eebe',

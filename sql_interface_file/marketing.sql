@@ -18,13 +18,10 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
---  Table structure for `     
-tongji`
+--  Table structure for `tongji`
 -- ----------------------------
-DROP TABLE IF EXISTS `     
-tongji`;
-CREATE TABLE `     
-tongji` (
+DROP TABLE IF EXISTS `tongji`;
+CREATE TABLE `tongji` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
   `openId` varchar(50) DEFAULT NULL,
   `activityId` int(100) DEFAULT NULL,
