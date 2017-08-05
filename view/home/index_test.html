@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <form action="/home/index/upload" enctype="multipart/form-data" method="post">
+    <!-- <form action="/home/index/upload" enctype="multipart/form-data" method="post">
         <input type="file" name="file" />
         <input type="submit" value="Submit" />
-    </form>
+    </form> -->
     <div id="uploader" class="wu-example">
         <!--用来存放文件信息-->
         <div id="thelist" class="uploader-list"></div>
@@ -25,17 +25,13 @@
     <div id="list"></div>
     <script>
         var uploader = WebUploader.create({
-
             // swf文件路径
             swf: '/static/js/webuploader/Uploader.swf',
-
             // 文件接收服务端。
-            server: '/home/index/upload',
-
+            server: '/admin/index/upload_image',
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#picker',
-
             // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
             resize: false,
             extensions: 'gif,jpg,jpeg,bmp,png',
