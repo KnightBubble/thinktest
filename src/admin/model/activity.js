@@ -6,6 +6,9 @@ export default class extends think.model.base {
     /**
      * 添加活动
      * @param {* Object} postData 
+     * status => 0 待上线
+     * status => 1 已上线
+     * status => 2 已下线
      */
     async addOneActivity(postData) {
         let data = {
@@ -16,7 +19,7 @@ export default class extends think.model.base {
             shareIcon: postData.shareIcon,
             startTime: postData.startTime,
             endTime: postData.endTime,
-            status: 1,
+            status: 0,
         }
         return await this.add(postData);
     }
