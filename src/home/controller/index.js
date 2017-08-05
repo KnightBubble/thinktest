@@ -30,20 +30,17 @@ export default class extends Base {
     callbackAction() {
         let code = this.get('code');
         wechat.getAccessToken(code, (err, result) => {
-            // let accessToken = result.data.access_token;
-            // let openid = result.data.openid;
-            // let unionid = result.data.unionid;
-            console.log(result);
-            // 判断有没有用户先
-            if (true) {
-                // 获取用户信息
-            } else {
-                wechat.getUser(openid, (err, res) => {
-                    console.log(user);
+            /**
+             * access_token expires_in refresh_token openid scope create_at
+             */
+            let accessToken = result.data.access_token;
+            let openid = result.data.openid;
+            wechat.getUser(openid, (err, res) => {
+                console.log(res);
                     // 创建用户
-                });
-            }
-            this.display();
+                this.display();
+            });
+            
         });
     }
 
