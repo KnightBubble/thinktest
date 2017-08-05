@@ -8,10 +8,9 @@ export default class extends think.model.base {
      * @type {Object}
      */
     schema = {
-        signTime: { //创建时间
-            default: () => { //获取当前时间
+        signTime: {
+            default: () => {
                 return Date.now();
-                // return moment().format('YYYY-MM-DD HH:mm:ss')
             }
         }
     }

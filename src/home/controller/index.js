@@ -57,7 +57,7 @@ export default class extends Base {
         let userModel = this.model('admin/user');
         let userInfo = await userModel.getUserByOpenid(openid);
 
-        if (!userInfo || !userInfo.openid) {
+        if (!userInfo || !userInfo.openId) {
             userInfo = await WechatOAuthApi.getUser(openid);
             let insertId = await userModel.add({
                 userId: userInfo.openid,
