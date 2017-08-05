@@ -5,7 +5,7 @@ import Base from './base.js';
 import OAuth from 'co-wechat-oauth';
 
 const wechatConf = think.config('wechat');
-const wechat = new OAuth(wechatConf.appid, wechatConf.appsecret, async function (openid) {
+const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async function (openid) {
     // 传入一个根据openid获取对应的全局token的方法
     var txt = await fs.readFile(openid + ':access_token.txt', 'utf8');
     return JSON.parse(txt);
@@ -35,8 +35,8 @@ export default class extends Base {
         if (parrentId) {
             callbackUrl += `?parrentId=${parrentId}`;
         }
-        let wechatUrl = wechat.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_userinfo');
-        this.redirect(wechatUrl);
+        let oauthUrl = WechatOAuthApi.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_userinfo');
+        this.redirect(oauthUrl);
     }
 
     /**
@@ -46,12 +46,12 @@ export default class extends Base {
         let code = this.get('code');
         let parrentId = this.get('parrentId');
 
-        let token = await wechat.getAccessToken();
+        let token = await WechatOAuthApi.getAccessToken();
         let openid = token.data.openid;
         let userInfo = await userModel.getUserByOpenid(openid);
 
         if (!userInfo || !userInfo.openid) {
-            userInfo = await wechat.getUser('openid');
+            userInfo = await WechatOAuthApi.getUser('openid');
             let insertId = await userModel.add({
                 userId: userInfo.openid,
                 openId: userInfo.openid,
