@@ -1,0 +1,114 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Matrix Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/matrix-style.css">
+    <style>
+        body {
+            padding-top: 60px;
+            /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+        
+        .container {
+            min-width: 320px;
+        }
+        
+        .main {
+            margin-top: 20px;
+        }
+        
+        .form-signin {
+            max-width: 300px;
+            padding: 19px 29px 29px;
+            margin: 0 auto 20px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        }
+        
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 10px;
+        }
+        
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+            font-size: 16px;
+            height: auto;
+            margin-bottom: 15px;
+            padding: 7px 9px;
+        }
+        
+        .footer-links {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            margin-right: 15px;
+            color: #333c48;
+            text-decoration: none;
+        }
+        
+        .span5 form button {
+            width: 70%;
+            border-radius: 5px;
+        }
+    </style>
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <!-- <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="/admin/"><img src="/static/img/logo2.png" alt="Matrix"></a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="/"><i class="fa fa-slideshare"></i> Portal</a></li>
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <h1 style='text-align:center'>运营活动管理后台</h1>
+            </div>
+            <div class="row" style='margin-top:30px;'>
+                <div class="span5" style='width: 100%;margin-left:0'>
+                    <form class="form-signin" style='text-align:center'>
+                        <h2 class="form-signin-heading">请登录</h2>
+                        <input id="username" name="username" type="text" class="input-block-level" required="" placeholder="用户名称">
+                        <input id="passwd" name="passwd" type="password" class="input-block-level" required="" placeholder="用户密码">
+                        <button class="btn btn-large btn-primary submit">登录</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/login.js"></script>
+</body>
+
+</html>

@@ -21,7 +21,6 @@
     var eventId; // 检验验证码的凭证
 
     tel.on('input', function() {
-
         telVal = $(this).val();
 
         clearTimeout(checkTimer);
@@ -74,7 +73,6 @@
             toastError('请等到倒计时结束');
             return;
         }
-
         if (!telVal) {
             toastError('手机号码不能为空');
         } else {
@@ -84,7 +82,7 @@
                     if (res.data) {
                         eventId = res.data.eventId;
                     } else {
-                        toastError(res.error.returnUserMessage);
+                        toastError(res.errmsg);
                     }
                 });
                 // 开始倒计时
@@ -102,14 +100,14 @@
         codeVal = code.val();
         if (name && isTel && !!codeVal) {
             $.post('{{dspCheckCodeApi}}', { phone: telVal, eventId: eventId, code: codeVal }, function(res) {
-                if (res.error.returnCode == "0") {
+                if (res.errno == "0") {
                     var _eventId = res.data.eventId;
                     $("#tel").val(''); //置空手机号
                     $("#code").val(''); //置空验证码
                     var prefix = location.protocol + '//' + location.host + '/h5app/partials/dsp';
                     location.href = prefix + '/' + resultPage + '?eventId=' + _eventId + '&pageType=' + pageType + '&channel=' + channelFrom;
                 } else {
-                    toastError(res.error.returnUserMessage);
+                    toastError(res.errmsg);
                 }
             });
         } else {

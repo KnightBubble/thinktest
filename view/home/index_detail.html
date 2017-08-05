@@ -1,57 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" style='font-size: 31.25px' ;>
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0,target-densitydpi=device-dpi">
     <meta name="format-detection" content="telephone=no">
-    <script>
-        (function() {
-            var base = 750;
-            (function() {
-                var scale = screen.width / base;
-                var meta = document.querySelector('meta[name="viewport"]');
-                meta.setAttribute('content', 'width=' + base + ',initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=0,target-densitydpi=device-dpi');
-            })();
-        })();
-    </script>
-    <style>
-        body {
-            background-image: url(../../img/dsp/result-page-bg.png);
-            background-repeat: no-repeat;
-            background-position: 34px 640px;
-        }
-    </style>
-    <link rel="stylesheet" href="/static/css/detail.min.css">
+    <link rel="stylesheet" href="/static/css/common.css">
     <title>活动详情</title>
 </head>
 
-<body>
-    <div class="section notJoin">
-        <p class="tip">您还未参与活动，请赶快参加吧！！！</p>
-        <div class="btn-box">
-            <div class="button go2join">立即参与</div>
+<body style="background: rgb(137, 80, 46);">
+    <div class="wrapper">
+        <div class="t-banner">
+            <a class="banner-img" href="javascript:void(0)">
+                <img src="http://p0.meituan.net/coupon/62f66038223742ebdcbe7071cda092f9238523.gif" alt="">
+            </a>
+        </div>
+        <div class="notJoin" hidden>
+            <p class="tip">您还未参与活动，请赶快参加吧！！！</p>
+            <div class="btn-box">
+                <div class="button go2join">立即参与</div>
+            </div>
+        </div>
+        <div class="joined content-bg margin-gap">
+            <div class='url-box'>
+                <span>你的专属链接是</span>
+                <a href="" class='url'></a>
+            </div>
+            <section class="rule help-list">
+                <h4 class="sec-sub-title">助力情况</h4>
+                <ul class="act-rules list">
+                    <li>
+                        <span class='name'>好友</span>
+                        <span class='status'>是否购买</span>
+                        <span class='date'>日期</span>
+                    </li>
+                    <li>
+                        <span class='name'>许金星</span>
+                        <span class='status'>未购买</span>
+                        <span class='date'>2017-08-02</span>
+                    </li>
+                </ul>
+            </section>
         </div>
     </div>
-    <div class="section joined">
-        <div class='url-box'>
-            <span>你的专属链接是</span>
-            <a href="" class='url'></a>
-        </div>
-        <ul class='list'>
-            <li>
-                <span>好友</span>
-                <span class='middle'>是否购买</span>
-                <span>日期</span>
-            </li>
-        </ul>
-    </div>
-    <script src="/static/js/zepto.min.js"></script>
-    <script src="/static/js/jweixin-1.0.0.js"></script>
-    <script src="/static/js/toast.js"></script>
-    <script src="/static/js/cookie.js"></script>
-    <script src="/static/js/shareConfig.js"></script>
-    <script src="/static/js/detail.js"></script>
 </body>
+<script src="/static/js/zepto.min.js"></script>
+<script src="/static/js/jweixin-1.0.0.js"></script>
+<script src="/static/js/toast.js"></script>
+<script src="/static/js/cookie.js"></script>
+<script src="/static/js/shareConfig.js"></script>
+<script src="/static/js/detail.js"></script>
 
 </html>
