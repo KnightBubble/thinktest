@@ -2,7 +2,11 @@
 
 import Base from './base.js';
 import OAuth from 'wechat-oauth';
-const wechat = new OAuth('your appid', 'your secret');
+
+const wechatConf = think.config('wechat');
+const wechat = new OAuth(wechatConf.appid, wechatConf.appsecret);
+var fs = require('fs');
+var path = require('path');
 
 export default class extends Base {
     /**
@@ -14,36 +18,35 @@ export default class extends Base {
         return this.display();
     }
 
-    testAction() {
-        return this.display('test');
-    }
-
     /**
      * @desc 微信授权
      */
-    wechat() {
-        let wechatUrl = wechat.getAuthorizeURL('/home/index/callback', '', 'snsapi_base');
+    wechatAction() {
+        console.log('wechatUrl-----');
+        let wechatUrl = wechat.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_userinfo');
+        console.log('cowechatUrlde');
         this.redirect(wechatUrl);
     }
 
     /**
      * @desc 授权回调
      */
-    callback() {
+    async callbackAction() {
         let code = this.get('code');
+        console.log('code');
         wechat.getAccessToken(code, (err, result) => {
+            console.log('hello');
+            /**
+             * access_token expires_in refresh_token openid scope create_at
+             */
             let accessToken = result.data.access_token;
             let openid = result.data.openid;
-            let unionid = result.data.unionid;
-            // 判断有没有用户先
-            if (true) {
-                // 获取用户信息
-            } else {
-                wechat.getUser(openid, (err, res) => {
-                    console.log(user);
+            wechat.getUser(openid, (err, res) => {
+                console.log(err, res);
                     // 创建用户
-                });
-            }
+                this.display('index');
+            });
+            
         });
     }
 
@@ -124,5 +127,34 @@ export default class extends Base {
 
     registerAction() {
         return this.display('register');
+    }
+
+    testAction() {
+        return this.display('test');
+    }
+    uploadAction() {
+        //这里的 key 需要和 form 表单里的 name 值保持一致
+        var file = think.extend({}, this.file('file'));
+        var filepath = file.path;
+        //文件上传后，需要将文件移动到项目其他地方，否则会在请求结束时删除掉该文件
+        var uploadPath = think.RESOURCE_PATH + '/staticimgs';
+        think.mkdir(uploadPath);
+        var basename = path.basename(filepath);
+        fs.renameSync(filepath, uploadPath + '/' + basename);
+
+        file.path = uploadPath + '/' + basename;
+
+        if (think.isFile(file.path)) {
+            console.log('is file')
+        } else {
+            console.log('not exist')
+        }
+
+        this.assign('fileInfo', file);
+
+        this.json({
+            uploadPath: uploadPath,
+            basename: basename
+        });
     }
 }
