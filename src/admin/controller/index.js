@@ -1,5 +1,7 @@
 'use strict';
 import Base from './base.js';
+var path = require('path');
+var fs = require('fs');
 export default class extends Base {
     async __before() {
             this.userInfo = await this.session('userInfo');
@@ -243,7 +245,7 @@ export default class extends Base {
      */
     uploadImageAction() {
         //这里的 key 需要和 form 表单里的 name 值保持一致
-        try {
+        // try {
             var file = think.extend({}, this.file('file'));
             var filepath = file.path;
             //文件上传后，需要将文件移动到项目其他地方，否则会在请求结束时删除掉该文件
@@ -261,9 +263,9 @@ export default class extends Base {
             this.json({
                 url: '/staticimgs/' + basename
             });
-        } catch (error) {
-            this.fail('UPLOAD_IAMGE_ERROR');
-        }
+        // } catch (error) {
+            // this.fail('UPLOAD_IAMGE_ERROR');
+        // }
     }
 
 }
