@@ -4,7 +4,7 @@ import Base from './base.js';
 import OAuth from 'wechat-oauth';
 
 const wechatConf = think.config('wechat');
-const wechat = new OAuth(wechatConf.appid, wechatConf.appsecret);
+const wechat = new OAuth('wxcb816a269be9eebe', '6bacd2cdc8344530629f5a420a86e518');
 
 export default class extends Base {
     /**
@@ -20,25 +20,29 @@ export default class extends Base {
      * @desc 微信授权
      */
     wechatAction() {
-        let wechatUrl = wechat.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_base');
+        console.log('wechatUrl-----');
+        let wechatUrl = wechat.getAuthorizeURL(`${this.config('url')}/home/index/callback`, '', 'snsapi_userinfo');
+        console.log('cowechatUrlde');
         this.redirect(wechatUrl);
     }
 
     /**
      * @desc 授权回调
      */
-    callbackAction() {
+    async callbackAction() {
         let code = this.get('code');
+        console.log('code');
         wechat.getAccessToken(code, (err, result) => {
+            console.log('hello');
             /**
              * access_token expires_in refresh_token openid scope create_at
              */
             let accessToken = result.data.access_token;
             let openid = result.data.openid;
             wechat.getUser(openid, (err, res) => {
-                console.log(res);
+                console.log(err, res);
                     // 创建用户
-                this.display();
+                this.display('index');
             });
             
         });
