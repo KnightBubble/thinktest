@@ -10,10 +10,10 @@
 </head>
 
 <body>
-     <form action="/home/index/upload" enctype="multipart/form-data" method="post">
-            <input type="file" name="image" />
-            <input type="submit" value="Submit" />
-        </form> 
+    <form action="/home/index/upload" enctype="multipart/form-data" method="post">
+        <input type="file" name="file" />
+        <input type="submit" value="Submit" />
+    </form>
     <div id="uploader" class="wu-example">
         <!--用来存放文件信息-->
         <div id="thelist" class="uploader-list"></div>
@@ -44,14 +44,14 @@
         });
         var $list = $('#list');
         // 当有文件被添加进队列的时候
-        uploader.on('fileQueued', function (file) {
+        uploader.on('fileQueued', function(file) {
             $list.append('<div id="' + file.id + '" class="item">' +
                 '<h4 class="info">' + file.name + '</h4>' +
                 '<p class="state">等待上传...</p>' +
                 '</div>');
         });
         // 文件上传过程中创建进度条实时显示。
-        uploader.on('uploadProgress', function (file, percentage) {
+        uploader.on('uploadProgress', function(file, percentage) {
             var $li = $('#' + file.id),
                 $percent = $li.find('.progress .progress-bar');
 
@@ -68,7 +68,7 @@
             $percent.css('width', percentage * 100 + '%');
         });
 
-        $('#ctlBtn').on('click', function () {
+        $('#ctlBtn').on('click', function() {
             uploader.upload();
         })
     </script>

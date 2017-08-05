@@ -14,7 +14,7 @@
         table td.center {
             text-align: center;
         }
-
+        
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
@@ -27,62 +27,55 @@
         <div id="header">
             <h1>运营管理后台</h1>
         </div>
-        <div id="sidebar">
-            <ul>
-                <li><a href="/admin"><i class="icon icon-th"></i> <span>活动配置</span></a> </li>
-                <li><a href="/admin/index/tongji"><i class="icon icon-th"></i> <span>统计查询</span></a> </li>
-                <li><a href="/admin/index/participator"><i class="icon icon-th"></i> <span>更改购买状态</span></a> </li>
-            </ul>
-        </div>
-        <div id="content">
-            <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
-                <h1>12312313</h1>
-            </div>
-            <div class="container-fluid">
-                <hr>
-                <div class="row-fluid">
-                    <div class="span12">
-                        <div class="widget-box">
-                            <div class="widget-content nopadding">
-                                <table class="table table-bordered table-striped with-check">
-                                    <thead>
-                                        <tr>
-                                            <th><input type="checkbox" id="checkall" name="checkall"></th>
-                                            <th>活动标题</th>
-                                            <th>分享title</th>
-                                            <th>活动时间</th>
-                                            <th>状态</th>
-                                            <th>Create Time</th>
-                                            <th>操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+        <%include inc/sidebar.html%>
+            <div id="content">
+                <div id="content-header">
+                    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
+                    <h1>12312313</h1>
+                </div>
+                <div class="container-fluid">
+                    <hr>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="widget-box">
+                                <div class="widget-content nopadding">
+                                    <table class="table table-bordered table-striped with-check">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox" id="checkall" name="checkall"></th>
+                                                <th>活动标题</th>
+                                                <th>分享title</th>
+                                                <th>活动时间</th>
+                                                <th>状态</th>
+                                                <th>Create Time</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                        <%
+                                            <%
                                         var activityData = data.activityData;
                                         var count = activityData.count;
                                         var activityDataList = activityData.data;
                                         %>
-                                            <% for(var i = 0;i<count; i++){%>
-                                                <tr>
-                                                    <td><input type="checkbox" data-id="19"></td>
-                                                    <td><a href="/admin/slide/preview?id=19&amp;theme=black" title="preview"
-                                                            target="_blank">我是前端工程师2</a></td>
-                                                    <td>black</td>
-                                                    <td>admin</td>
-                                                    <td class="taskStatus"><span class="in-progress">draft</span></td>
-                                                    <td class="center">2016-03-14 18:23:50</td>
-                                                    <td class="center">
-                                                        <a href="/admin/index/edit?id=19" title="edit"><i class="fa fa-pencil-square-o"></i></a>
-                                                        <a href="/admin/slide/publish?id=19" title="publish"><i class="fa fa-lock"></i></a>
-                                                        <a href="/admin/slide/delete?id=19" title="delete"><i class="fa fa-trash"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <% }%>
+                                                <% for(var i = 0;i<count; i++){%>
+                                                    <tr>
+                                                        <td><input type="checkbox" data-id="19"></td>
+                                                        <td><a href="/admin/slide/preview?id=19&amp;theme=black" title="preview" target="_blank">我是前端工程师2</a></td>
+                                                        <td>black</td>
+                                                        <td>admin</td>
+                                                        <td class="taskStatus"><span class="in-progress">draft</span></td>
+                                                        <td class="center">2016-03-14 18:23:50</td>
+                                                        <td class="center">
+                                                            <a href="/admin/index/edit?id=19" title="edit"><i class="fa fa-pencil-square-o"></i></a>
+                                                            <a href="/admin/slide/publish?id=19" title="publish"><i class="fa fa-lock"></i></a>
+                                                            <a href="/admin/slide/delete?id=19" title="delete"><i class="fa fa-trash"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <% }%>
 
 
-                                                    <!-- <tr>
+                                                        <!-- <tr>
                                         <td><input type="checkbox" data-id="6"></td>
                                         <td><a href="/admin/slide/preview?id=6&amp;theme=black" title="preview" target="_blank">Slide 5</a></td>
                                         <td>black</td>
@@ -94,52 +87,52 @@
                                             <a href="/admin/slide/publish?id=6" title="publish"><i class="fa fa-unlock"></i></a>
                                             <a href="/admin/slide/delete?id=6" title="delete"><i class="fa fa-trash"></i></a>
                                         </td> -->
-                                                    </tr>
+                                                        </tr>
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <script src="/static/js/bootstrap.min.js"></script>
-        <script>
-            (function () {
-                var lis = document.querySelectorAll('#sidebar>ul>li');
-                lis[0].className = 'active';
-            })();
-        </script>
-        <script>
-            $('#checkall').on('click', function (e) {
-                if (e.target.checked) {
-                    $('table input[type="checkbox"]').attr('checked', true);
-                } else {
-                    $('table input[type="checkbox"]').attr('checked', false);
-                }
-            });
-            $('#remove').on('click', function (e) {
-                var ids = [];
-                $('table input[type="checkbox"]').each(function (i, o) {
-                    if (o.id !== 'checkall' && o.checked) {
-                        ids.push($(o).attr('data-id'));
+            <script src="/static/js/bootstrap.min.js"></script>
+            <script>
+                (function() {
+                    var lis = document.querySelectorAll('#sidebar>ul>li');
+                    lis[0].className = 'active';
+                })();
+            </script>
+            <script>
+                $('#checkall').on('click', function(e) {
+                    if (e.target.checked) {
+                        $('table input[type="checkbox"]').attr('checked', true);
+                    } else {
+                        $('table input[type="checkbox"]').attr('checked', false);
                     }
                 });
-                location.href = '/admin/slide/delete?id=' + ids.join();
-            });
-        </script>
-        <script>
-            $('#addons').click(function () {
-                if ($(this).hasClass('open')) {
-                    $('#addons > ul').slideUp();
-                    $(this).removeClass('open');
-                } else {
-                    $('#addons > ul').slideDown();
-                    $(this).addClass('open');
-                }
-            });
-        </script>
+                $('#remove').on('click', function(e) {
+                    var ids = [];
+                    $('table input[type="checkbox"]').each(function(i, o) {
+                        if (o.id !== 'checkall' && o.checked) {
+                            ids.push($(o).attr('data-id'));
+                        }
+                    });
+                    location.href = '/admin/slide/delete?id=' + ids.join();
+                });
+            </script>
+            <script>
+                $('#addons').click(function() {
+                    if ($(this).hasClass('open')) {
+                        $('#addons > ul').slideUp();
+                        $(this).removeClass('open');
+                    } else {
+                        $('#addons > ul').slideDown();
+                        $(this).addClass('open');
+                    }
+                });
+            </script>
 </body>
 
 </html>

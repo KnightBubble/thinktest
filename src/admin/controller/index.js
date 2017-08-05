@@ -2,18 +2,18 @@
 import Base from './base.js';
 export default class extends Base {
     async __before() {
-        this.userInfo = await this.session('userInfo');
-        if (this.userInfo) {
-            this.assign('user', this.userInfo);
-            return Promise.resolve();
+            this.userInfo = await this.session('userInfo');
+            if (this.userInfo) {
+                this.assign('user', this.userInfo);
+                return Promise.resolve();
+            }
+            this.redirect('/admin/admin/index');
+            return Promise.reject('Required login --> redirecting.');
         }
-        this.redirect('/admin/admin/index');
-        return Promise.reject('Required login --> redirecting.');
-    }
-    /**
-     * index action
-     * @return {Promise} []
-     */
+        /**
+         * index action
+         * @return {Promise} []
+         */
     async indexAction() {
         let activityModel = this.model('activity');
         let data = think.extend({}, this.get(), this.post());
@@ -24,8 +24,8 @@ export default class extends Base {
             console.log('-->' + value.startTime * 1);
             value.startTime = think.datetime(new Date(value.startTime * 1), 'YYYY-MM-DD');
 
-            value.endTime = think.datetime(new Date(value.endTime*1),'YYYY-MM-DD');
-            value.createTime = think.datetime(new Date(value.createTime*1),'YYYY-MM-DD');
+            value.endTime = think.datetime(new Date(value.endTime * 1), 'YYYY-MM-DD');
+            value.createTime = think.datetime(new Date(value.createTime * 1), 'YYYY-MM-DD');
         });
         this.assign({
             data: {
@@ -46,6 +46,10 @@ export default class extends Base {
 
     loginAction() {
         return this.display('login');
+    }
+
+    addactivityAction() {
+        return this.display('addactivity');
     }
 
     /**
@@ -198,7 +202,7 @@ export default class extends Base {
         var data = think.extend({}, this.get(), this.post());
         console.log(data);
         let result = await model.getParticatorListByPage(data['page'] || 1);
-        result.data.forEach(function (element) {
+        result.data.forEach(function(element) {
             element.joinTime = think.datetime(new Date(element.joinTime * 1), 'YYYY-MM-DD');
         });
         this.assign({
@@ -217,7 +221,7 @@ export default class extends Base {
         conf.cols = [{
             caption: '姓名',
             type: 'string',
-            beforeCellWrite: function (row, cellData) {
+            beforeCellWrite: function(row, cellData) {
                 return cellData;
             },
             width: 28.7109375
