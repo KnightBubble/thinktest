@@ -149,7 +149,7 @@ export default class extends Base {
     detailAction() {
         this.json({
             get: this.get(),
-            coolie: this.cookie('openId');
+            coolie: this.cookie('openId')
         })
         return this.display('detail');
     }
