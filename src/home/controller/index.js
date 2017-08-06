@@ -162,7 +162,7 @@ export default class extends Base {
      * 根据openid 获取是否参与的状态
      * 如果参与则返回支持者列表
      */
-    userSupportInfo() {
+    async userSupportInfo() {
         try {
             let data = this.post();
             let openId = this.cookie('openId');
