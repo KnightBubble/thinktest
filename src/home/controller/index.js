@@ -127,7 +127,7 @@ export default class extends Base {
         let postData = this.post();
         let phone = postData.phone;
         let code = postData.code;
-        if (this.cache(phone) != code) {
+        if (await this.cache(phone) != code) {
             this.fail('PHONE_CODE_ERROR');
             return;
         }
@@ -208,25 +208,29 @@ export default class extends Base {
         return this.display('test');
     }
 
+    testweAction() {
+        let parentId = this.get('parentId');
+        let artivityId = this.get('artivityId');
+        this.cookie('openId', 'oXm4awBQJ0dn9tIxDA2_XdCbcis0');
+        this.redirect(`/home/index/detail?parentId=${parentId}&artivityId=${artivityId}`);
+    }
+
     /**
      * 短信发送接口
      * /home/index/sms
      */
-    smsAction() {
+    async smsAction() {
         let phone = this.post('phone');
-        let cacheCode = this.cache(phone);
-        console.log('==============');
-        console.log(cacheCode);
-        console.log('==============');
+        let cacheCode = await this.cache(phone);
         if (cacheCode) {
             this.json({
                 errno: 0,
-                code: this.cache(cacheCode),
+                code: cacheCode,
                 errmsg: '已发'
             });
             return;
         }
-        if (this.cookie('openId')) {
+        if (!this.cookie('openId')) {
             this.fail('NOT_HAVE_OPENID_ERROR');
             return;
         }
@@ -245,7 +249,10 @@ export default class extends Base {
                 // BizId: BizId,
                 errno: 0,
                 msg: '成功',
-                code: code
+                data: {
+                    code: code
+                }
+
             });
         });
     }
