@@ -5,7 +5,7 @@
 - thinkjs model home/user 创建模型：
 - [excel](https://www.npmjs.com/package/excel-export)
 Application created by [ThinkJS](http://www.thinkjs.org)
-
+- jquery toast plugin,https://github.com/kamranahmedse/jquery-toast-plugin 
 
 ## mysql
 增加新用户
