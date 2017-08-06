@@ -124,16 +124,20 @@ export default class extends Base {
      * /home/index/join
      */
     async joinAction() {
-        let postData = this.post();
+        let postData = think.extend({}, this.post(), this.cookie());
+        let openId = postData.openId;
         let phone = postData.phone;
         let code = postData.code;
-        if (await this.cache(phone) != code) {
+        let cacheCode = await this.cache(phone);
+        if (cacheCode != code) {
             this.fail('PHONE_CODE_ERROR');
             return;
         }
         let participatorModel = this.model('participator');
+        let userModel = this.model('admin/user');
+        let effectRow = userModel.updateNamePhone(openId, postData.userName, postData.phone);
         let insertId = await participatorModel.addParticipator(postData);
-        if (insertId) {
+        if (insertId && effectRow) {
             this.json({
                 errno: 0,
                 errmsg: '参与活动成功'

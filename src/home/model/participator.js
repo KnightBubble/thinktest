@@ -4,19 +4,25 @@
  */
 export default class extends think.model.base {
     async addParticipator(participatorInfo) {
-        let insertId = await this.add({
+        let insertId = await this.thenAdd({
             userId: participatorInfo.openId,
             parendId: participatorInfo.parendId,
             activityId: participatorInfo.activityId,
             status: 0,
             joinTime: Date.now()
+        }, {
+            userId: participatorInfo.openId,
+            activityId: participatorInfo.activityId,
         });
         return insertId;
     }
 
     async isJoin(userId, activityId) {
         let isJoin = false;
-        let result = await this.where({userId:userId, activityId:activityId}).find();
+        let result = await this.where({
+            userId: userId,
+            activityId: activityId
+        }).find();
         if (result && result.userId) {
             isJoin = true;
         }

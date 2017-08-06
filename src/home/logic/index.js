@@ -24,6 +24,10 @@ export default class extends think.logic.base {
                 required: true,
                 string: true
             },
+            phone: {
+                required: true,
+                string: true
+            },
             code: {
                 required: true,
                 string: true
@@ -71,6 +75,4 @@ export default class extends think.logic.base {
     /**
      * 活动列表
      */
-
-    activityListAction
 }
