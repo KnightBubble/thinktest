@@ -24,9 +24,7 @@ export default class extends Base {
         let pageSize = data.pageSize || 10;
         let result = await activityModel.getListByPage(page, pageSize);
         result.data.forEach((value) => {
-            console.log('-->' + value.startTime * 1);
             value.startTime = think.datetime(new Date(value.startTime * 1), 'YYYY-MM-DD');
-
             value.endTime = think.datetime(new Date(value.endTime * 1), 'YYYY-MM-DD');
             value.createTime = think.datetime(new Date(value.createTime * 1), 'YYYY-MM-DD');
         });

@@ -55,7 +55,8 @@ export default class extends think.model.base {
         let affectedRows = await this.where({
             id: id
         }).update({
-            status: 1
+            status: 1,
+            startTime:  Date.now()
         });
         return affectedRows;
     }
@@ -70,7 +71,8 @@ export default class extends think.model.base {
             affectedRows = await this.where({
                 id: id
             }).update({
-                status: 0
+                status: 2,
+                endTime: Date.now()
             });
         } catch (error) {
             console.log(error.message);
@@ -95,7 +97,7 @@ export default class extends think.model.base {
     async getListByPage(pageNum = 1, pageSize = 10) {
         var data = {};
         try {
-            data = this.page(pageNum, pageSize).countSelect();
+            data = this.page(pageNum, pageSize).where('status = 0 OR status = 1').countSelect();
         } catch (e) {
             console.log(e.message);
         }
