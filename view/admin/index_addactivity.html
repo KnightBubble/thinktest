@@ -264,7 +264,7 @@
                     return;
                 }
                 $.post('/admin/index/activity_add', {
-                    id: id,
+                    activityId: id,
                     title: title,
                     descption: descption.join('-----'),
                     picUrl: activityUrl,
@@ -299,6 +299,7 @@
                 }, function(res) {
                     if (res.errno == '0') {
                         renderView(res.data);
+                        $('.creatActivity').text('修改活动')
                     } else {
                         alert(res.errmsg);
                     }

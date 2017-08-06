@@ -12,26 +12,26 @@ export default class extends think.model.base {
      * 数据表字段定义
      */
     schema = {
-        startTime: {
-            default: () => {
-                return Date.now();
-            }
-        },
-        status: {
-            default: () => {
-                return 0;
-            }
-        },
-        createTime: {
-            default: () => {
-                return Date.now();
+            startTime: {
+                default: () => {
+                    return Date.now();
+                }
+            },
+            status: {
+                default: () => {
+                    return 0;
+                }
+            },
+            createTime: {
+                default: () => {
+                    return Date.now();
+                }
             }
         }
-    }
-    /**
-     * 添加活动
-     * @param {* Object} postData
-     */
+        /**
+         * 添加活动
+         * @param {* Object} postData
+         */
     async addOneActivity(postData) {
         let data = {
             title: postData.title,
@@ -43,6 +43,7 @@ export default class extends think.model.base {
             endTime: postData.endTime,
             status: 0,
         }
+        console.log('----->' + postData.activityId);
         return await this.add(postData, {
             id: postData.activityId || 0
         });
