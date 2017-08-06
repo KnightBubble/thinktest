@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/static/lib/toast/jquery.toast.min.css">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/webuploader/webuploader.nolog.js"></script>
+    <script src="/static/lib/jscolor/jscolor.min.js"></script>
     <style>
         table td.center {
             text-align: center;
@@ -86,6 +87,7 @@
             </div>
             <div class="container-fluid">
                 <form>
+
                     <label for="title">
                       <span>活动名称</span>
                       <input type='text' name='title' class='title' required>
@@ -125,6 +127,13 @@
                       <span>活动背景色</span>
                       <input type='text' name='background' class='background' placeholder='16进制 例 #39da81'>
                   </label>
+
+                    <label>
+                        <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTextColor(this)'}">
+                            Pick text color
+                        </button>
+                     HEX value: <input id="chosen-value" value="000000">
+                    </label>
                     <div class='btn creatActivity'>创建活动</div>
                 </form>
             </div>
@@ -246,9 +255,18 @@
                     descption: descption.join('-----'),
                     picUrl: activityUrl,
                     shareTitle: shareTitle,
+                    <<
+                    <<
+                    << < HEAD
                     shareIcon: shareIcon,
                     bgColor: bgColor
-                }, function(res) {
+                }, function(res) { ===
+                    ===
+                    =
+                    shareIcon: shareIcon
+                }, function(res) { >>>
+                    >>>
+                    > 2e829 a013b239cadd8cc660065ddb48e16319928
                     if (res.errno == '0') {
                         alert('活动创建成功');
                     } else {

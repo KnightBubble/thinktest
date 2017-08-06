@@ -2,6 +2,10 @@
 
 export default {
     port: parseInt(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3000),
+    // route_on: true,
+    // route: [
+    //     ['1.1/functions/_ops/metadatas', 'home/lean/index']
+    // ],
     url: 'http://serve.leanapp.cn',
     // wechat: {
     //     appid: 'wxcb816a269be9eebe',

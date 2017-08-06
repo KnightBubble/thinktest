@@ -6,7 +6,7 @@ export default class extends think.model.base {
     async addParticipator(participatorInfo) {
         let insertId = await this.thenAdd({
             userId: participatorInfo.openId,
-            parendId: participatorInfo.parendId,
+            parentId: participatorInfo.parentId,
             activityId: participatorInfo.activityId,
             status: 0,
             joinTime: Date.now()
@@ -30,6 +30,10 @@ export default class extends think.model.base {
 
     }
 
+    /**
+     * 获取所有的参与者列表
+     * @param {*} pageNum 
+     */
     async getParticatorListByPage(pageNum = 1) {
         return await this.join({
             table: 'user',
@@ -39,15 +43,38 @@ export default class extends think.model.base {
         }).field('userinfo.userId,status,nickName,userName,joinTime,phone').page(pageNum, 10).countSelect();
     }
 
-    async userSupportors(parendId, activityId) {
+    /**
+     * 根据活动id获取参与者
+     * @param {*string} activityId 
+     */
+    async getParticatorListByActivityId(activityId, pageNum = 1, pageSize = 10, startTime, endTime) {
+        startTime = startTime ? +new Date(startTime) : 0;
+        endTime = endTime ? +new Date(endTime) : +new Date();
+        return await this.join({
+            table: 'user',
+            join: 'inner', //join 方式，有 left, right, inner 3 种方式
+            as: 'userinfo', // 表别名
+            on: ['userId', 'userId'] //ON 条件
+        }).field('userinfo.userId,status,nickName,userName,joinTime,phone').where({
+            activityId: activityId,
+            joinTime: {
+                '>=': startTime
+            },
+            joinTime: {
+                '<': endTime
+            }
+        }).page(pageNum, pageSize).countSelect();
+    }
+
+    async userSupportors(userId, activityId) {
         return await this.join({
             table: 'user',
             join: 'inner', //join 方式，有 left, right, inner 3 种方式
             as: 'userinfo', // 表别名
             on: ['userId', 'userId'] //ON 条件
         }).where({
-            parendId: ['=', parendId]
-        }).field('userinfo.userId,status,nickName,joinTime').select();
+            parentId: ['=', userId]
+        }).field('userinfo.userId,userinfo.uerPortrait,status,nickName,joinTime').select();
     }
 
     /**
