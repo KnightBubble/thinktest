@@ -11,12 +11,12 @@ const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
 const wechatConf = think.config('wechat');
-const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async function(openid) {
+const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async function (openid) {
     // 传入一个根据openid获取对应的全局token的方法
     //think.cache('name', 'value');
     let token = await think.cache(openid);
     return token;
-}, async function(openid, token) {
+}, async function (openid, token) {
     // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
     // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
     // 持久化时请注意，每个openid都对应一个唯一的token!
@@ -213,7 +213,11 @@ export default class extends Base {
      * /home/index/sms
      */
     smsAction() {
+        let phone = this.post('phone');
         let cacheCode = this.cache(phone);
+        console.log('==============');
+        console.log(cacheCode);
+        console.log('==============');
         if (cacheCode) {
             this.json({
                 errno: 0,
@@ -226,7 +230,7 @@ export default class extends Base {
             this.fail('NOT_HAVE_OPENID_ERROR');
             return;
         }
-        let phone = this.post('phone');
+
         let SmsService = think.service('sms');
         let instance = new SmsService();
         var code = Math.floor(Math.random() * (9999 - 999 + 1) + 999);
