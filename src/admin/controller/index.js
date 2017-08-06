@@ -234,7 +234,7 @@ export default class extends Base {
         let model = this.model('home/participator');
         var data = think.extend({}, this.get(), this.post());
         console.log(data);
-        let result = await model.getParticatorListByPage(data['page'] || 1);
+        let result = await model.getParticatorListByPage(data['page'] || 1, this.get('phone'));
         result.data.forEach(function (element) {
             element.joinTime = think.datetime(new Date(element.joinTime * 1), 'YYYY-MM-DD');
         });
