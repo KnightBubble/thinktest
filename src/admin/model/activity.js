@@ -12,26 +12,26 @@ export default class extends think.model.base {
      * 数据表字段定义
      */
     schema = {
-            startTime: {
-                default: () => {
-                    return Date.now();
-                }
-            },
-            status: {
-                default: () => {
-                    return 0;
-                }
-            },
-            createTime: {
-                default: () => {
-                    return Date.now();
-                }
+        startTime: {
+            default: () => {
+                return Date.now();
+            }
+        },
+        status: {
+            default: () => {
+                return 0;
+            }
+        },
+        createTime: {
+            default: () => {
+                return Date.now();
             }
         }
-        /**
-         * 添加活动
-         * @param {* Object} postData
-         */
+    }
+    /**
+     * 添加活动
+     * @param {* Object} postData
+     */
     async addOneActivity(postData) {
         let data = {
             title: postData.title,
@@ -56,7 +56,7 @@ export default class extends think.model.base {
             id: id
         }).update({
             status: 1,
-            startTime:  Date.now()
+            startTime: Date.now()
         });
         return affectedRows;
     }
@@ -102,6 +102,24 @@ export default class extends think.model.base {
             console.log(e.message);
         }
         return data;
+    }
+
+    /**
+     * 活动是否有效
+     * @param {*string} activityId 
+     */
+    async isActivityValid(activityId) {
+        console.log('model isActivityValid params=>' + activityId);
+        let isValid = false;
+        var result = await this.where({
+            id: activityId,
+            status: 1
+        });
+        if (result && result.id) {
+            isValid = true;
+        }
+        console.log('model isActivityValid return =>' + isValid);
+        return isValid;
     }
 
 }
