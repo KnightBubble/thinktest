@@ -122,7 +122,6 @@
             }, function(res) {
                 if (res.errno == "0") {
                     toast('参与成功');
-                    var parentId = $.fn.cookie('openId');
                     var url = 'detail.html?parentId=' + $.fn.cookie('openId') + "&activityId=" + activityId
                     alert(url)
                     window.location.href = url;
