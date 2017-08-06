@@ -41,9 +41,6 @@ export default class extends think.logic.base {
     userSupportAction() {
         this.allowMethods = 'post';
         let rules = {
-            openId: {
-                required: true
-            },
             activityId: {
                 required: true
             }
