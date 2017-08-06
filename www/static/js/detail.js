@@ -25,13 +25,14 @@
             var data = data.list;
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
-                var li = "<li><span>" + item.nickName + "</span><span class = 'middle'>" + map[item.status] + "</span ><span>" + item.joinTime + "</span> </li>";
+                var li = "<li><span class = 'name'>" + item.nickName + "</span><span class = 'status'>" + map[item.status] + "</span ><span class='date'>" + item.joinTime + "</span> </li>";
                 dom += li;
             }
             $('ul.list').append(dom);
             openId = $.fn.cookie('openId');
             var url = 'http://127.0.0.1:8360/home/index/register.html?openId=' + openId;
-            $('.url').text(url).attr('href', url);
+            // $('.url').text(url).attr('href', url);
+            $('.url').attr('href', url);
             $('.joined').show();
         } else {
             $('.notJoin').show();
