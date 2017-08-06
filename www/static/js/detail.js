@@ -1,9 +1,7 @@
 (function() {
     var detailApi = "/home/index/user_support_info";
     $('.section').hide();
-    // $.fn.cookie('openId', '1KDJFKDJ4989DKFJK3D93KKLWL');
     var activityId = getUrlParameter('activityId');
-    alert(activityId);
     $.post(detailApi, {
         activityId: activityId
     }, function(res) {
@@ -31,7 +29,7 @@
             0: "否",
             1: "是"
         }
-        if (!data.status == 1) {
+        if (data.status == true) {
             var dom = '';
             var data = data.list;
             for (var i = 0; i < data.length; i++) {
@@ -42,7 +40,6 @@
             $('ul.list').append(dom);
             openId = $.fn.cookie('openId');
             var url = 'http://127.0.0.1:8360/home/index/register.html?openId=' + openId;
-            // $('.url').text(url).attr('href', url);
             $('.url').attr('href', url);
             $('.joined').show();
         } else {
@@ -51,7 +48,7 @@
     }
 
     $('.go2join').click(function() {
-        window.location.href = './register.html';
+        window.location.href = './register.html?activityId=' + activityId;
     })
 
 })();
