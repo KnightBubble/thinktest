@@ -55,26 +55,30 @@ export default class extends Base {
      */
     async callbackAction() {
         let code = this.get('code');
-        let parentId = this.get('parentId') || '';
+        let parentId = this.get('parentId');
         let artivityId = this.get('artivityId');
-        let token = await WechatOAuthApi.getAccessToken(code);
-        let openid = token.data.openid;
-        let cacheOpenid = await this.session('openid');
-        if (!cacheOpenid) {
-            let userModel = this.model('admin/user');
-            let userInfo = await userModel.getUserByOpenid(openid);
-            if (!userInfo || !userInfo.openId) {
-                userInfo = await WechatOAuthApi.getUser(openid);
-                let insertId = await userModel.add({
-                    userId: userInfo.openid,
-                    openId: userInfo.openid,
-                    uerPortrait: userInfo.headimgurl,
-                    nickName: userInfo.nickname,
-                    parentId: parentId,
-                    wechat: JSON.stringify(userInfo),
-                });
+
+        if (this.wechatCode !== code) {
+            let token = await WechatOAuthApi.getAccessToken(code);
+            let openid = token.data.openid;
+            let cacheOpenid = await this.session('openid');
+            if (!cacheOpenid) {
+                let userModel = this.model('admin/user');
+                let userInfo = await userModel.getUserByOpenid(openid);
+                if (!userInfo || !userInfo.openId) {
+                    userInfo = await WechatOAuthApi.getUser(openid);
+                    let insertId = await userModel.add({
+                        userId: userInfo.openid,
+                        openId: userInfo.openid,
+                        uerPortrait: userInfo.headimgurl,
+                        nickName: userInfo.nickname,
+                        parentId: parentId,
+                        wechat: JSON.stringify(userInfo),
+                    });
+                }
             }
         }
+        this.wechatCode = code;
         this.session('openid', openid);
         this.cookie('openId', openid);
         this.redirect(`/home/index/detail?parentId=${parentId}&artivityId=${artivityId}`);
@@ -195,4 +199,19 @@ export default class extends Base {
         return this.display('test');
     }
 
+    smsAction() {
+        let SmsService = think.service('sms');
+        let instance = new SmsService();
+        instance.sendSMS({
+            PhoneNumbers: '18201059300',
+            TemplateParam: JSON.stringify({
+                code: '123456'
+            }),
+        }).then(BizId => {
+            this.json({
+                BizId: BizId,
+                msg: '成功'
+            });
+        });
+    }
 }

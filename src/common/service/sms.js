@@ -17,7 +17,7 @@ export default class extends think.service.base {
      * @return {}
      */
     init(accessKeyId, secretAccessKey) {
-        super.init(...args);
+        super.init(accessKeyId, secretAccessKey);
 
         if (!accessKeyId || !secretAccessKey) {
             accessKeyId = smsConf.accessKeyId;
@@ -49,8 +49,8 @@ export default class extends think.service.base {
      * 发送短信
      * @param {Object} params
      * @param {string} params.PhoneNumbers - 短信接收号码，多个逗号分隔
-     * @param {string} params.SignName - 短信签名
-     * @param {string} params.TemplateCode - 短信模板ID
+     * @param {string} [params.SignName] - 短信签名
+     * @param {string} [params.TemplateCode] - 短信模板ID
      * @param {string} params.TemplateParam - 短信模板变量JSON字符串
      * @param {string} [params.OutId] - 外部流水扩展字段
      * @return {Promise.<string|Error>} - BizId 发送回执ID,可根据该ID查询具体的发送状态
