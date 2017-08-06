@@ -35,3 +35,4 @@ app/
 runtime/
 
 package-lock.json
+www/staticimgs/

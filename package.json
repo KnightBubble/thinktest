@@ -21,6 +21,7 @@
     "excel-export": "^0.5.1",
     "leancloud-storage": "^3.0.4",
     "leanengine": "^3.0.0",
+    "redis": "^2.3.0",
     "source-map-support": "^0.4.15",
     "thinkjs": "2.2.x",
     "@alicloud/dybaseapi": "^1.0.0",

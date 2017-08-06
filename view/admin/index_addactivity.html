@@ -19,17 +19,17 @@
         table td.center {
             text-align: center;
         }
-
+        
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
         }
-
+        
         label {
             height: 35px;
             margin: 10px;
         }
-
+        
         label span {
             display: inline-block;
             height: 35px;
@@ -38,24 +38,24 @@
             min-width: 100px;
             text-align: center;
         }
-
+        
         label input {
             height: 35px!important;
             border-radius: 3px!important;
         }
-
+        
         #uploader {
             display: inline-block!important;
         }
-
+        
         #uploader .btns {
             display: inline-block!important;
         }
-
+        
         #uploader #picker {
             display: inline-block!important;
         }
-
+        
         .btn,
         .btn:hover {
             vertical-align: top;
@@ -68,7 +68,7 @@
             border: none;
             border-radius: 3px;
         }
-
+        
         .creatActivity {
             box-sizing: content-box;
         }
@@ -82,7 +82,7 @@
     <%include inc/sidebar.html%>
         <div id="content">
             <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
                 <h1>创建活动</h1>
             </div>
             <div class="container-fluid">
@@ -108,7 +108,7 @@
                   </label>
                     <label for="shareTitle">
                       <span>二次分享描述</span>
-                      <input type='text' name='shareTitle' required>
+                      <input type='text' name='shareTitle' class='shareTitle'>
                   </label>
                     <label for="shareIcon">
                       <span>二次分享icon</span>
@@ -127,7 +127,7 @@
         </div>
         <script src="/static/js/bootstrap.min.js"></script>
         <script>
-            (function () {
+            (function() {
                 var lis = document.querySelectorAll('#sidebar>ul>li');
                 lis[3].className = 'active';
             })();
@@ -149,7 +149,7 @@
                 mimeTypes: 'image/*',
                 // sendAsBinary:true,
             });
-            uploader.on('uploadSuccess', function (file, result) {
+            uploader.on('uploadSuccess', function(file, result) {
                 if (file) {
                     alert('上传成功');
                     if (type == 1) {
@@ -161,13 +161,14 @@
                     alert('上传图片失败')
                 }
             });
-            $('#ctlBtn').on('click', function () {
+            $('#ctlBtn').on('click', function() {
                 type = $(this).data('id');
                 uploader.upload();
             })
-            $('.creatActivity').click(function () {
+            $('.creatActivity').click(function() {
                 var title = $('.title').val();
                 var descption = $('.descption').val();
+                var shareTitle = $('.shareTitle').val();
                 if (!title) {
                     alert('请填写活动名称');
                     return;
@@ -183,10 +184,12 @@
                 $.post('/admin/index/activity_add', {
                     title: title,
                     descption: descption,
-                    picUrl: activityUrl
-                }, function (res) {
+                    picUrl: activityUrl,
+                    shareTitle: shareTitle,
+                    shareIcon: shareIcon
+                }, function(res) {
                     if (res.errno == '0') {
-                        debugger;
+                        alert('活动创建成功');
                     } else {
                         alert(res.errmsg);
                     }
