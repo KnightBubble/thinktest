@@ -16,15 +16,19 @@ export default class extends think.logic.base {
     joinAction() {
         this.allowMethods = 'post';
         let rules = {
-            openId: {
-                required: true,
-                string: true
-            },
-            parendId: {
-                required: true,
-                string: true
-            },
             activityId: {
+                required: true,
+                string: true
+            },
+            userName: {
+                required: true,
+                string: true
+            },
+            phone: {
+                required: true,
+                string: true
+            },
+            code: {
                 required: true,
                 string: true
             }
@@ -71,6 +75,4 @@ export default class extends think.logic.base {
     /**
      * 活动列表
      */
-
-    activityListAction
 }

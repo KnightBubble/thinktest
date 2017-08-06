@@ -11,12 +11,12 @@ const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
 const wechatConf = think.config('wechat');
-const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async function(openid) {
+const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async function (openid) {
     // 传入一个根据openid获取对应的全局token的方法
     //think.cache('name', 'value');
     let token = await think.cache(openid);
     return token;
-}, async function(openid, token) {
+}, async function (openid, token) {
     // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
     // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
     // 持久化时请注意，每个openid都对应一个唯一的token!
@@ -119,12 +119,25 @@ export default class extends Base {
         });
     }
 
-    // 参加活动
+    /**
+     * 参加活动
+     * /home/index/join
+     */
     async joinAction() {
-        let postData = this.post();
+        let postData = think.extend({}, this.post(), this.cookie());
+        let openId = postData.openId;
+        let phone = postData.phone;
+        let code = postData.code;
+        let cacheCode = await this.cache(phone);
+        if (cacheCode != code) {
+            this.fail('PHONE_CODE_ERROR');
+            return;
+        }
         let participatorModel = this.model('participator');
+        let userModel = this.model('admin/user');
+        let effectRow = userModel.updateNamePhone(openId, postData.userName, postData.phone);
         let insertId = await participatorModel.addParticipator(postData);
-        if (insertId) {
+        if (insertId && effectRow) {
             this.json({
                 errno: 0,
                 errmsg: '参与活动成功'
@@ -158,7 +171,22 @@ export default class extends Base {
     // }
 
     detailAction() {
-        return this.display('detail');
+        let openId = this.cookie('openId');
+        if (openId) {
+            return this.display('detail');
+        } else {
+            let parentId = this.get('parentId') || "";
+            let artivityId = this.get('artivityId');
+            let callbackUrl = `${this.config('url')}/home/index/callback?`;
+            if (parentId) {
+                callbackUrl += `parentId=` + parentId;
+            }
+            if (artivityId) {
+                callbackUrl += `&artivityId=${artivityId}`;
+            }
+            let oauthUrl = WechatOAuthApi.getAuthorizeURL(callbackUrl, '', 'snsapi_userinfo');
+            this.redirect(oauthUrl);
+        }
     }
 
     /**
@@ -199,25 +227,33 @@ export default class extends Base {
         return this.display('test');
     }
 
+    testweAction() {
+        let parentId = this.get('parentId');
+        let artivityId = this.get('artivityId');
+        this.cookie('openId', 'oXm4awBQJ0dn9tIxDA2_XdCbcis0');
+        this.redirect(`/home/index/detail?parentId=${parentId}&artivityId=${artivityId}`);
+    }
+
     /**
      * 短信发送接口
      * /home/index/sms
      */
-    smsAction() {
-        let cacheCode = this.cache(phone);
+    async smsAction() {
+        let phone = this.post('phone');
+        let cacheCode = await this.cache(phone);
         if (cacheCode) {
             this.json({
                 errno: 0,
-                code: this.cache(cacheCode),
+                code: cacheCode,
                 errmsg: '已发'
             });
             return;
         }
-        if (this.cookie('openId')) {
+        if (!this.cookie('openId')) {
             this.fail('NOT_HAVE_OPENID_ERROR');
             return;
         }
-        let phone = this.post('phone');
+
         let SmsService = think.service('sms');
         let instance = new SmsService();
         var code = Math.floor(Math.random() * (9999 - 999 + 1) + 999);
@@ -232,7 +268,10 @@ export default class extends Base {
                 // BizId: BizId,
                 errno: 0,
                 msg: '成功',
-                code: code
+                data: {
+                    code: code
+                }
+
             });
         });
     }

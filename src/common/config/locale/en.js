@@ -10,5 +10,6 @@ export default {
     OFF_LINE_ACTIVITY_ERROR: [100004, '活动线上失效失败'],
     LOGIN_FAIL_ACCOUNT_ERROR: [100005, '用户名或者密码错误'],
     UPLOAD_IAMGE_ERROR: ['100006', '上传图片错误'],
-    NOT_HAVE_OPENID_ERROR: ['100007', '请在微信内打开']
+    NOT_HAVE_OPENID_ERROR: ['100007', '请在微信内打开'],
+    PHONE_CODE_ERROR: ['100008', '短信验证码错误']
 };

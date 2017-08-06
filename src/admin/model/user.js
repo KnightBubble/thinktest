@@ -33,4 +33,27 @@ export default class extends think.model.base {
             openId: openid
         }).find();
     }
+
+
+    /**
+     * 
+     * @param {* openid} userId 
+     * @param {* userName} userName 
+     * @param {* phone} phone 
+     */
+    async updateNamePhone(userId, userName, phone) {
+        let affectedRows;
+        try {
+            affectedRows = await this.where({
+                userId: userId
+            }).update({
+                userName: userName,
+                phone: phone
+            });
+        } catch (error) {
+            console.log(error.message);
+            affectedRows = 0;
+        }
+        return affectedRows;
+    }
 }
