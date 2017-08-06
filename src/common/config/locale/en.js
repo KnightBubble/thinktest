@@ -11,5 +11,6 @@ export default {
     LOGIN_FAIL_ACCOUNT_ERROR: [100005, '用户名或者密码错误'],
     UPLOAD_IAMGE_ERROR: ['100006', '上传图片错误'],
     NOT_HAVE_OPENID_ERROR: ['100007', '请在微信内打开'],
-    PHONE_CODE_ERROR: ['100008', '短信验证码错误']
+    PHONE_CODE_ERROR: ['100008', '短信验证码错误'],
+    ACTIVITY_UNVALID_ERROR: ['100009', '活动无效']
 };

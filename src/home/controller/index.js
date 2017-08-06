@@ -128,13 +128,22 @@ export default class extends Base {
         let openId = postData.openId;
         let phone = postData.phone;
         let code = postData.code;
+        let activityId = postData.activityId;
         let cacheCode = await this.cache(phone);
         if (cacheCode != code) {
             this.fail('PHONE_CODE_ERROR');
             return;
         }
+        let activityModel = this.model('admin/activity');
+        let isActivityValid = await activityModel.isActivityValid(activityId)
+
+        if (!isActivityValid) {
+            return this.fail('ACTIVITY_UNVALID_ERROR');
+        }
+
         let participatorModel = this.model('participator');
         let userModel = this.model('admin/user');
+        
         let effectRow = userModel.updateNamePhone(openId, postData.userName, postData.phone);
         let insertId = await participatorModel.addParticipator(postData);
         if (insertId && effectRow) {
@@ -230,7 +239,7 @@ export default class extends Base {
     testweAction() {
         let parentId = this.get('parentId');
         let activityId = this.get('activityId');
-        this.cookie('openId', 'oXm4awBQJ0dn9tIxDA2_XdCbcis0');
+        this.cookie('openId', 'oXm4awPHXv8PfhVjfzMj-aEuJ-Q8');
         this.redirect(`/home/index/detail?parentId=${parentId}&activityId=${activityId}`);
     }
 
