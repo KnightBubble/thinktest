@@ -52,13 +52,13 @@
                                     <tbody>
                                         <%
                                         var activityData = data.activityData;
-                                        var count = activityData.count;
+                                        var count = activityData && activityData.data && activityData.data.length || 0;
                                         var activityDataList = activityData.data;
                                         %>
                                             <% for(var i = 0;i<count; i++){%>
                                                 <tr>
                                                     <td>
-                                                        <%=activityDataList[i].title%>
+                                                         <%=activityDataList[i].title%> 
                                                     </td>
                                                     <td>
                                                         <%=activityDataList[i].id%>

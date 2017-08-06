@@ -44,7 +44,7 @@ export default class extends think.model.base {
             status: 0,
         }
         console.log('----->' + postData.activityId);
-        return await this.add(postData, {
+        return await this.thenAdd(postData, {
             id: postData.activityId || 0
         });
     }

@@ -5,18 +5,18 @@ var fs = require('fs');
 
 export default class extends Base {
     async __before() {
-            this.userInfo = await this.session('userInfo');
-            if (this.userInfo) {
-                this.assign('user', this.userInfo);
-                return Promise.resolve();
-            }
-            this.redirect('/admin/admin/index');
-            return Promise.reject('Required login --> redirecting.');
+        this.userInfo = await this.session('userInfo');
+        if (this.userInfo) {
+            this.assign('user', this.userInfo);
+            return Promise.resolve();
         }
-        /**
-         * index action
-         * @return {Promise} []
-         */
+        this.redirect('/admin/admin/index');
+        return Promise.reject('Required login --> redirecting.');
+    }
+    /**
+     * index action
+     * @return {Promise} []
+     */
     async indexAction() {
         let activityModel = this.model('activity');
         let data = think.extend({}, this.get(), this.post());
@@ -235,7 +235,7 @@ export default class extends Base {
         var data = think.extend({}, this.get(), this.post());
         console.log(data);
         let result = await model.getParticatorListByPage(data['page'] || 1);
-        result.data.forEach(function(element) {
+        result.data.forEach(function (element) {
             element.joinTime = think.datetime(new Date(element.joinTime * 1), 'YYYY-MM-DD');
         });
         this.assign({
