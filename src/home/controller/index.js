@@ -254,6 +254,9 @@ export default class extends Base {
         let result = {};
         if (isJoin) {
             result = await model.userSupportors(openId, activityId);
+            result.forEach(function (value) {
+                value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
+            });
         }
         console.log(result);
         this.json({
