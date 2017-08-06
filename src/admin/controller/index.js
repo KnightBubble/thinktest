@@ -37,7 +37,36 @@ export default class extends Base {
         return this.display();
     }
 
-    tongjiAction() {
+    async tongjiAction() {
+        let data = Object.assign({}, this.post(), this.get());
+        let activityId = data.activityId;
+        let activityModel = this.model('activity');
+
+        let participatorPageData = {};
+        try {
+            if (activityId) {
+                let isActivityValid = await activityModel.isHasActivity(activityId);
+                if (!isActivityValid) {
+                    return this.json({
+                        errno: 1,
+                        errmsg: '此活动不存在',
+                        data: {}
+                    });
+                }
+                let pageSize = data.pageSize;
+                let pageNum = data.page;
+                let participatorModel = this.model('home/participator');
+                participatorPageData = await participatorModel.getParticatorListByActivityId(activityId, pageNum, pageSize);
+                participatorPageData && participatorPageData.data && participatorPageData.data.forEach((value) => {
+                    value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
+                });
+            }
+
+        } catch (error) {
+            console.log(error.message);
+        }
+
+        this.assign('data', participatorPageData);
         return this.display('tongji');
     }
 
