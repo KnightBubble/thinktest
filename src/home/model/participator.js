@@ -15,12 +15,12 @@ export default class extends think.model.base {
     }
 
     async isJoin(userId, activityId) {
-        let result = false;
-        result = await this.where({userId:userId, activityId:activityId}).find();
+        let isJoin = false;
+        let result = await this.where({userId:userId, activityId:activityId}).find();
         if (result && result.userId) {
-            result = true;
+            isJoin = true;
         }
-        return result;
+        return isJoin;
 
     }
 
