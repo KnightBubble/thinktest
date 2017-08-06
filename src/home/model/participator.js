@@ -6,7 +6,7 @@ export default class extends think.model.base {
     async addParticipator(participatorInfo) {
         let insertId = await this.thenAdd({
             userId: participatorInfo.openId,
-            parendId: participatorInfo.parendId,
+            parentId: participatorInfo.parentId,
             activityId: participatorInfo.activityId,
             status: 0,
             joinTime: Date.now()
@@ -39,14 +39,14 @@ export default class extends think.model.base {
         }).field('userinfo.userId,status,nickName,userName,joinTime,phone').page(pageNum, 10).countSelect();
     }
 
-    async userSupportors(parendId, activityId) {
+    async userSupportors(parentId, activityId) {
         return await this.join({
             table: 'user',
             join: 'inner', //join 方式，有 left, right, inner 3 种方式
             as: 'userinfo', // 表别名
             on: ['userId', 'userId'] //ON 条件
         }).where({
-            parendId: ['=', parendId]
+            parentId: ['=', parentId]
         }).field('userinfo.userId,status,nickName,joinTime').select();
     }
 
