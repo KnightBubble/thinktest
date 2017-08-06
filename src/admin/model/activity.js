@@ -93,7 +93,6 @@ export default class extends think.model.base {
     /**
      * 获取活动列表带有分页
      */
-
     async getListByPage(pageNum = 1, pageSize = 10) {
         var data = {};
         try {
@@ -105,7 +104,7 @@ export default class extends think.model.base {
     }
 
     /**
-     * 活动是否有效
+     * 活动是否有效, 线上活动
      * @param {*string} activityId 
      */
     async isActivityValid(activityId) {
@@ -120,6 +119,23 @@ export default class extends think.model.base {
         }
         console.log('model isActivityValid return =>' + isValid);
         return isValid;
+    }
+
+     /**
+     * 活动是否有效, 线上活动
+     * @param {*string} activityId 
+     */
+    async isHasActivity(activityId) {
+        console.log('model isHasActivity params=>' + activityId);
+        let isHasActivityFlag = false;
+        var result = await this.where({
+            id: activityId
+        }).find();
+        if (result && result.id) {
+            isHasActivityFlag = true;
+        }
+        console.log('model isHasActivity return =>' + isHasActivityFlag);
+        return isHasActivityFlag;
     }
 
 }

@@ -30,6 +30,10 @@ export default class extends think.model.base {
 
     }
 
+    /**
+     * 获取所有的参与者列表
+     * @param {*} pageNum 
+     */
     async getParticatorListByPage(pageNum = 1) {
         return await this.join({
             table: 'user',
@@ -37,6 +41,21 @@ export default class extends think.model.base {
             as: 'userinfo', // 表别名
             on: ['userId', 'userId'] //ON 条件
         }).field('userinfo.userId,status,nickName,userName,joinTime,phone').page(pageNum, 10).countSelect();
+    }
+
+    /**
+     * 根据活动id获取参与者
+     * @param {*string} activityId 
+     */
+    async getParticatorListByActivityId(activityId) {
+        return await this.join({
+            table: 'user',
+            join: 'inner', //join 方式，有 left, right, inner 3 种方式
+            as: 'userinfo', // 表别名
+            on: ['userId', 'userId'] //ON 条件
+        }).field('userinfo.userId,status,nickName,userName,joinTime,phone').where({
+            activityId: activityId
+        }).page(pageNum, 10).countSelect();
     }
 
     async userSupportors(userId, activityId) {

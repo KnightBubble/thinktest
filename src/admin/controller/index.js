@@ -5,18 +5,18 @@ var fs = require('fs');
 
 export default class extends Base {
     async __before() {
-            this.userInfo = await this.session('userInfo');
-            if (this.userInfo) {
-                this.assign('user', this.userInfo);
-                return Promise.resolve();
-            }
-            this.redirect('/admin/admin/index');
-            return Promise.reject('Required login --> redirecting.');
+        this.userInfo = await this.session('userInfo');
+        if (this.userInfo) {
+            this.assign('user', this.userInfo);
+            return Promise.resolve();
         }
-        /**
-         * index action
-         * @return {Promise} []
-         */
+        this.redirect('/admin/admin/index');
+        return Promise.reject('Required login --> redirecting.');
+    }
+    /**
+     * index action
+     * @return {Promise} []
+     */
     async indexAction() {
         let activityModel = this.model('activity');
         let data = think.extend({}, this.get(), this.post());
@@ -192,7 +192,7 @@ export default class extends Base {
         var data = think.extend({}, this.get(), this.post());
         console.log(data);
         let result = await model.getParticatorListByPage(data['page'] || 1);
-        result.data.forEach(function(element) {
+        result.data.forEach(function (element) {
             element.joinTime = think.datetime(new Date(element.joinTime * 1), 'YYYY-MM-DD');
         });
         this.assign({
@@ -203,6 +203,37 @@ export default class extends Base {
         this.display('participator');
     }
 
+    /**
+     * 根据活动id，获取活动的参与者
+     * /admin/index/activity_user_list
+     */
+    async activiyUserListAction() {
+        this.json({
+            anem:11
+        })
+        // let data = Object.assign({}, this.post(), this.get());
+        // let activityId = data.activityId;
+        // let activityModel = this.model('activity');
+        // let isActivityValid = await activityModel.isHasActivity(activityId);
+        // if (isActivityValid) {
+        //     return this.json({
+        //         errno: 1,
+        //         errmsg: '此活动不存在',
+        //         data: {}
+        //     });
+        // }
+        // let participatorModel = this.model('home/participator');
+        // let participatorPageData = await participatorModel.getParticatorListByActivityId(activityId);
+        // participatorPageData && participatorPageData.data && participatorPageData.data.forEach((value) => {
+        //     value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
+        // });
+        // this.json({
+        //     errno: 0,
+        //     errmsg: '查询成功',
+        //     data: participatorPageData
+        // });
+    }
+
     exportExcelAction() {
         var nodeExcel = require('excel-export');
         var conf = {};
@@ -211,7 +242,7 @@ export default class extends Base {
         conf.cols = [{
             caption: '姓名',
             type: 'string',
-            beforeCellWrite: function(row, cellData) {
+            beforeCellWrite: function (row, cellData) {
                 return cellData;
             },
             width: 28.7109375
@@ -245,25 +276,25 @@ export default class extends Base {
     uploadImageAction() {
         //这里的 key 需要和 form 表单里的 name 值保持一致
         // try {
-            var file = think.extend({}, this.file('file'));
-            var filepath = file.path;
-            //文件上传后，需要将文件移动到项目其他地方，否则会在请求结束时删除掉该文件
-            var uploadPath = think.RESOURCE_PATH + '/staticimgs';
-            think.mkdir(uploadPath);
-            var basename = path.basename(filepath);
-            fs.renameSync(filepath, uploadPath + '/' + basename);
-            file.path = uploadPath + '/' + basename;
-            // if (think.isFile(file.path)) {
-            //     console.log('is file')
-            // } else {
-            //     console.log('not exist')
-            // }
-            this.assign('fileInfo', file);
-            this.json({
-                url: '/staticimgs/' + basename
-            });
+        var file = think.extend({}, this.file('file'));
+        var filepath = file.path;
+        //文件上传后，需要将文件移动到项目其他地方，否则会在请求结束时删除掉该文件
+        var uploadPath = think.RESOURCE_PATH + '/staticimgs';
+        think.mkdir(uploadPath);
+        var basename = path.basename(filepath);
+        fs.renameSync(filepath, uploadPath + '/' + basename);
+        file.path = uploadPath + '/' + basename;
+        // if (think.isFile(file.path)) {
+        //     console.log('is file')
+        // } else {
+        //     console.log('not exist')
+        // }
+        this.assign('fileInfo', file);
+        this.json({
+            url: '/staticimgs/' + basename
+        });
         // } catch (error) {
-            // this.fail('UPLOAD_IAMGE_ERROR');
+        // this.fail('UPLOAD_IAMGE_ERROR');
         // }
     }
 
