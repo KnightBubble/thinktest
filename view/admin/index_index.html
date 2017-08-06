@@ -13,7 +13,7 @@
         table td.center {
             text-align: center;
         }
-        
+
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
@@ -28,7 +28,7 @@
     <%include inc/sidebar.html%>
         <div id="content">
             <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
                 <h1>活动列表</h1>
             </div>
             <div class="container-fluid">
@@ -84,7 +84,8 @@
                                                     </td>
                                                     <td class="center">
                                                         <% if(activityDataList[i].status == 1){%>
-                                                            <button type="button" onclick="modifyStatus('<%=activityDataList[i].id  %>', 2)">下线</button>
+                                                            <button type="button" onclick="modifyStatus('<%=activityDataList[i].id%>', 2)">下线</button>
+                                                            <button type="button" onclick="exportExcel('<%=activityDataList[i].id%>')">导出</button>
                                                             <%} else{%>
                                                                 <button type="button" onclick="modifyStatus('<%=activityDataList[i].id  %>', 1)">上线</button>
                                                                 <%}%>
@@ -105,7 +106,7 @@
         </div>
         <script src="/static/js/bootstrap.min.js"></script>
         <script>
-            (function() {
+            (function () {
                 var lis = document.querySelectorAll('#sidebar>ul>li');
                 lis[0].className = 'active';
             })();
@@ -117,7 +118,7 @@
                 $.post(modifyStatusApi, {
                     id: activityId,
                     status: status
-                }, function(res) {
+                }, function (res) {
                     if (res.errno == '0') {
                         alert('成功');
                         window.location.reload();
@@ -125,6 +126,10 @@
                         alert(res.errmsg);
                     }
                 })
+            }
+
+            function exportExcel(id) {
+                window.location.href = '/admin/index/export_excel?activityId=' + id
             }
         </script>
 </body>
