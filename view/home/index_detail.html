@@ -40,7 +40,7 @@
     <div class="wrapper">
         <div class="t-banner">
             <a class="banner-img" href="javascript:void(0)">
-                <img src="http://p0.meituan.net/coupon/62f66038223742ebdcbe7071cda092f9238523.gif" alt="">
+                <img src="<%=data.picUrl%>" alt="">
             </a>
         </div>
         <div class="content-bg margin-gap" style="display: block;">
@@ -72,18 +72,15 @@
             <section class="rule">
                 <h4 class="sec-sub-title">活动规则</h4>
                 <ul class="act-rules">
-                    <li>1.下单即可分享红包给小伙伴</li>
-                    <li></li>
-                    <li>2.每个链接仅限20人领取</li>
-                    <li></li>
-                    <li>3.每个链接会按领取顺序随机发放一个大额红包</li>
-                    <li></li>
-                    <li>4.每人每天仅限领取5次</li>
-                    <li></li>
-                    <li>5.红包仅限在线支付使用，且收餐人手机号、领取红包时输入的手机号和账号中的手机号需为同一手机号</li>
-                    <li></li>
-                    <li>6.其他未尽事宜，请咨询客服</li>
-                    <li></li>
+                    <% var desc=data.descption.split('-----')
+                     for(var i = 0; i < desc.length; i++ ) {
+                       var index = i+1;
+                    %>
+                        <li>
+                            <%=index%>.
+                                <%=desc[i]%>
+                        </li>
+                        <%}%>
                 </ul>
             </section>
         </div>

@@ -52,7 +52,7 @@ export default class extends think.model.base {
 
     /**
      * 根据手机获取用户信息，多表查询
-     * @param {*string} phone 
+     * @param {*string} phone
      */
     async getUserByPhone(phone) {
         let result = {
@@ -75,7 +75,6 @@ export default class extends think.model.base {
         }
         return result;
     }
-
 
     /**
      * 更改参与者的状态
