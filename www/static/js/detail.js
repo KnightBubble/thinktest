@@ -2,9 +2,10 @@
     var detailApi = "/home/index/user_support";
     $('.section').hide();
     // $.fn.cookie('openId', '1KDJFKDJ4989DKFJK3D93KKLWL');
-
+    var activityId = getUrlParameter('activityId');
+    alert(activityId);
     $.post(detailApi, {
-        activityId: 13,
+        activityId: activityId
     }, function(res) {
         if (res.errno == '0') {
             renderView(res.data);
@@ -12,6 +13,17 @@
             toastError(res.errmsg);
         }
     });
+
+    function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return decodeURI(sParameterName[1]);
+            }
+        }
+    }
 
     renderView = function(data) {
         //status 0====未参与    1===已经参与
