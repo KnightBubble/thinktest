@@ -5,6 +5,8 @@
     var submitBtn = $("#submitBtn");
 
     var activityId = getUrlParameter('activityId');
+    var parentId = getUrlParameter('parentId');
+
 
     function getUrlParameter(sParam) {
         var sPageURL = window.location.search.substring(1);
@@ -48,7 +50,6 @@
         }, 400);
 
     });
-
     // 倒计时开始
     var isCountDown = false;
     var startCountDown = function(time) {
@@ -116,11 +117,10 @@
                 phone: telVal,
                 code: codeVal,
                 userName: name,
-                activityId: activityId
+                activityId: activityId,
+                parentId: parentId
             }, function(res) {
                 if (res.errno == "0") {
-                    $("#tel").val(''); //置空手机号
-                    $("#code").val(''); //置空验证码
                     toast('参与成功');
                     var url = 'detail.html?parentId=' + $.fn.cookie('openId') + "&activityId=" + activityId
                     alert(url)
