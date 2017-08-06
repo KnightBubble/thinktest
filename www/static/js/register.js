@@ -123,7 +123,7 @@
                 if (res.errno == "0") {
                     toast('参与成功');
                     var url = 'detail.html?parentId=' + $.fn.cookie('openId') + "&activityId=" + activityId
-                    alert(url)
+                    alert(url);
                     window.location.href = url;
                 } else {
                     toastError(res.errmsg);
