@@ -36,11 +36,11 @@ export default class extends Base {
      * @desc 微信授权
      */
     wechatAction() {
-        let parrentId = this.get('parrentId') || "";
+        let parentId = this.get('parentId') || "";
         let artivityId = this.get('artivityId');
         let callbackUrl = `${this.config('url')}/home/index/callback?`;
-        if (parrentId) {
-            callbackUrl += `parrentId=`+parrentId;
+        if (parentId) {
+            callbackUrl += `parentId=` + parentId;
 
         }
         if (artivityId) {
@@ -55,7 +55,7 @@ export default class extends Base {
      */
     async callbackAction() {
         let code = this.get('code');
-        let parrentId = this.get('parrentId') || '';
+        let parentId = this.get('parentId') || '';
         let artivityId = this.get('artivityId');
 
         let token = await WechatOAuthApi.getAccessToken(code);
@@ -70,12 +70,12 @@ export default class extends Base {
                 openId: userInfo.openid,
                 uerPortrait: userInfo.headimgurl,
                 nickName: userInfo.nickname,
-                parrentId: parrentId,
+                parentId: parentId,
                 wechat: JSON.stringify(userInfo),
             });
         }
         this.cookie('openId', openid);
-        this.redirect(`/home/index/detail?parrentId=${parrentId}&artivityId=${artivityId}`);
+        this.redirect(`/home/index/detail?parentId=${parentId}&artivityId=${artivityId}`);
     }
 
     /**
@@ -130,31 +130,59 @@ export default class extends Base {
 
     /**
      * 获取用户助力者名单
+     * /home/index/support
      */
-    async userSupportAction() {
-        let data = this.post();
-        let parentId = data.openId;
-        let activityId = data.activityId;
-        let model = this.model('participator');
-        let result = await model.userSupportors(parentId, activityId);
-        if (result && result.length > 0) {
+    // async userSupportAction() {
+    //     let data = this.post();
+    //     let parentId = data.openId;
+    //     let activityId = data.activityId;
+    //     let model = this.model('participator');
+    //     let result = await model.userSupportors(parentId, activityId);
+    //     if (result && result.length > 0) {
+    //         this.json({
+    //             errno: 0,
+    //             errmsg: '查询成功',
+    //             data: {
+    //                 list: result
+    //             }
+    //         });
+    //     } else {
+    //         this.fail('USER_SUPPORTS_EMPTY_ERROR');
+    //     }
+    // }
+
+    detailAction() {
+        return this.display('detail');
+    }
+
+    /**
+     * /home/index/user_support
+     * 根据openid 获取是否参与的状态
+     * 如果参与则返回支持者列表
+     */
+    userSupportInfo() {
+        try {
+            let data = this.post();
+            let openId = this.cookie('openId');
+            let activityId = data.activityId;
+            let model = this.model('participator');
+            let isJoin = await model.isJoin(openId, activityId);
+            let result = {};
+            if (isJoin) {
+                result = await model.userSupportors(openId, activityId);
+            }
             this.json({
                 errno: 0,
                 errmsg: '查询成功',
                 data: {
+                    status: isJoin,
                     list: result
                 }
             });
-        } else {
+        } catch (error) {
+            console.log(error.message);
             this.fail('USER_SUPPORTS_EMPTY_ERROR');
         }
-    }
-    detailAction() {
-        this.json({
-            get: this.get(),
-            coolie: this.cookie('openId')
-        })
-        return this.display('detail');
     }
 
     registerAction() {

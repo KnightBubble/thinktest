@@ -14,6 +14,15 @@ export default class extends think.model.base {
         return insertId;
     }
 
+    async isJoin(userId, activityId) {
+        let result = false;
+        result = await this.where({userId:userId, activityId:activityId}).find();
+        if (result && result.userId) {
+            result = true;
+        }
+        return result;
+
+    }
 
     async getParticatorListByPage(pageNum = 1) {
         return await this.join({
