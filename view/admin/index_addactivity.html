@@ -49,6 +49,7 @@
         
         #uploader .btns {
             display: inline-block!important;
+            margin: 0 10px!important;
         }
         
         #uploader #picker,
@@ -60,17 +61,31 @@
         .btn:hover {
             vertical-align: top;
             width: 70px;
-            height: 32px;
+            height: 26px;
+            line-height: 26px;
             background: #00b7ee;
             color: white;
-            line-height: 32px;
             outline: none;
             border: none;
             border-radius: 3px;
+            margin-left: 15px;
         }
         
         .creatActivity {
             box-sizing: content-box;
+            margin-top: 30px;
+        }
+        
+        .jscolor {
+            box-sizing: content-box;
+            color: white!important;
+        }
+        
+        input {
+            border: none!important;
+            background: white!important;
+            padding: 5px!important;
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -87,15 +102,16 @@
             </div>
             <div class="container-fluid">
                 <form>
-
                     <label for="title">
                       <span>活动名称</span>
                       <input type='text' name='title' class='title' required>
                   </label>
                     <label for="descption">
                       <span>活动描述</span>
+                      <div style='display:inline-block'>
                       <input type='text' name='descption' class='descption'  required>
                       <div class='btn addDesc'>增加描述</div>
+                      </div>
                   </label>
                     <label for="shareTitle">
                       <span>二次分享描述</span>
@@ -125,8 +141,8 @@
                   </label>
                     <label for="descption">
                       <span>活动背景色</span>
-                        <input id="chosen-value" value="000000" name='background' readonly>
-                        <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTextColor(this)'}"></button>
+                        <input id="chosen-value" value="00b7ee" name='background' readonly>
+                        <button class="jscolor {valueElement:'chosen-value'} btn">选择背景色</button>
                   </label>
                     <div class='btn creatActivity'>创建活动</div>
                 </form>
@@ -144,7 +160,7 @@
                 $('<input type="text" name="descption" class="descption" required="">').insertBefore($(this));
             })
             var type = 1;
-            var activityUrl, shareIcon;
+            var id, activityUrl, shareIcon;
             var $list = $('#list');
             var $list1 = $('#list1');
 
@@ -230,7 +246,10 @@
                 var length = $('.descption').length;
                 var bgColor = $('.background').val() || '89502E';
                 for (var i = 0; i < length; i++) {
-                    descption.push($('.descption:eq(' + i + ')').val())
+                    var desc = $('.descption:eq(' + i + ')').val();
+                    if (desc) {
+                        descption.push(desc)
+                    }
                 }
                 if (!title) {
                     alert('请填写活动名称');
@@ -245,25 +264,14 @@
                     return;
                 }
                 $.post('/admin/index/activity_add', {
+                    id: id,
                     title: title,
                     descption: descption.join('-----'),
                     picUrl: activityUrl,
                     shareTitle: shareTitle,
-                    <<
-                    <<
-                    <<
-                    <
-                    HEAD
                     shareIcon: shareIcon,
                     bgColor: bgColor
-                }, function(res) { ===
-                    ===
-                    =
-                    shareIcon: shareIcon
-                }, function(res) { >>>
-                    >>>
-                    >
-                    2e829 a013b239cadd8cc660065ddb48e16319928
+                }, function(res) {
                     if (res.errno == '0') {
                         alert('活动创建成功');
                     } else {
@@ -271,6 +279,50 @@
                     }
                 });
             })
+
+            function getUrlParameter(sParam) {
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++) {
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] === sParam) {
+                        return decodeURI(sParameterName[1]);
+                    }
+                }
+            }
+            var activityId = getUrlParameter('activityId');
+            var modifyStatusApi = '/admin/index/get_activity_info';
+            if (activityId) {
+                $.post(modifyStatusApi, {
+                    id: activityId,
+                    status: status
+                }, function(res) {
+                    if (res.errno == '0') {
+                        renderView(res.data);
+                    } else {
+                        alert(res.errmsg);
+                    }
+                })
+            }
+
+            function renderView(data) {
+                for (key in data) {
+                    if (key == 'descption') {
+                        var descption = data[key].split('-----');
+                        for (var i = 0; i < descption.length; i++) {
+                            if (!$('.descption:eq(' + i + ')').length && descption[i]) {
+                                $('<input type="text" name="descption" class="descption" required="">').insertBefore($('.addDesc'));
+                            }
+                            $('.descption:eq(' + i + ')').val(descption[i]);
+                        }
+                    } else {
+                        $('.' + key).val(data[key]);
+                        shareIcon = data.shareIcon
+                        activityUrl = data.picUrl;
+                        id = data.id;
+                    }
+                }
+            }
         </script>
 </body>
 

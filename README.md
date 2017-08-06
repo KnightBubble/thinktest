@@ -6,7 +6,7 @@
 - [excel](https://www.npmjs.com/package/excel-export)
 Application created by [ThinkJS](http://www.thinkjs.org)
 - jquery toast plugin,https://github.com/kamranahmedse/jquery-toast-plugin 
-
+- js colore http://jscolor.com/examples/
 ## mysql
 增加新用户
 
