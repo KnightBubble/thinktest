@@ -4,6 +4,19 @@
     var codeBtn = $("#codeBtn");
     var submitBtn = $("#submitBtn");
 
+    var activityId = getUrlParameter('activityId');
+
+    function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return decodeURI(sParameterName[1]);
+            }
+        }
+    }
+
     var sendCodeApi = '/home/index/sms';
     var submitApi = '/home/index/join';
 
@@ -99,7 +112,12 @@
         var name = $("#name").val();
         codeVal = code.val();
         if (name && isTel && !!codeVal) {
-            $.post(submitApi, { phone: telVal, eventId: eventId, code: codeVal }, function(res) {
+            $.post(submitApi, {
+                phone: telVal,
+                code: codeVal,
+                userName: name,
+                activityId: activityId
+            }, function(res) {
                 if (res.errno == "0") {
                     $("#tel").val(''); //置空手机号
                     $("#code").val(''); //置空验证码
