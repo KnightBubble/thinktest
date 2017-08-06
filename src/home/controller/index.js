@@ -171,7 +171,22 @@ export default class extends Base {
     // }
 
     detailAction() {
-        return this.display('detail');
+        let openId = this.cookie('openId');
+        if (openId) {
+            return this.display('detail');
+        } else {
+            let parentId = this.get('parentId') || "";
+            let artivityId = this.get('artivityId');
+            let callbackUrl = `${this.config('url')}/home/index/callback?`;
+            if (parentId) {
+                callbackUrl += `parentId=` + parentId;
+            }
+            if (artivityId) {
+                callbackUrl += `&artivityId=${artivityId}`;
+            }
+            let oauthUrl = WechatOAuthApi.getAuthorizeURL(callbackUrl, '', 'snsapi_userinfo');
+            this.redirect(oauthUrl);
+        }
     }
 
     /**
