@@ -18,17 +18,17 @@
         table td.center {
             text-align: center;
         }
-
+        
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
         }
-
+        
         label {
             min-height: 35px;
             margin: 10px;
         }
-
+        
         label span {
             display: inline-block;
             height: 35px;
@@ -37,25 +37,25 @@
             min-width: 100px;
             text-align: center;
         }
-
+        
         label input {
             height: 35px!important;
             border-radius: 3px!important;
         }
-
+        
         #uploader {
             display: inline-block!important;
         }
-
+        
         #uploader .btns {
             display: inline-block!important;
         }
-
+        
         #uploader #picker,
         #uploader #picker1 {
             display: inline-block!important;
         }
-
+        
         .btn,
         .btn:hover {
             vertical-align: top;
@@ -68,7 +68,7 @@
             border: none;
             border-radius: 3px;
         }
-
+        
         .creatActivity {
             box-sizing: content-box;
         }
@@ -82,7 +82,7 @@
     <%include inc/sidebar.html%>
         <div id="content">
             <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
                 <h1>创建活动</h1>
             </div>
             <div class="container-fluid">
@@ -95,6 +95,7 @@
                     <label for="descption">
                       <span>活动描述</span>
                       <input type='text' name='descption' class='descption'  required>
+                      <div class='btn addDesc'>增加描述</div>
                   </label>
                     <label for="shareTitle">
                       <span>二次分享描述</span>
@@ -122,6 +123,11 @@
                           </div>
                       </div>
                   </label>
+                    <label for="descption">
+                      <span>活动背景色</span>
+                      <input type='text' name='background' class='background' placeholder='16进制 例 #39da81'>
+                  </label>
+
                     <label>
                         <button class="jscolor {valueElement:'chosen-value'}">
                             Pick text color
@@ -134,12 +140,15 @@
         </div>
         <script src="/static/js/bootstrap.min.js"></script>
         <script>
-            (function () {
+            (function() {
                 var lis = document.querySelectorAll('#sidebar>ul>li');
                 lis[3].className = 'active';
             })();
         </script>
         <script>
+            $('.addDesc').click(function() {
+                $('<input type="text" name="descption" class="descption" required="">').insertBefore($(this));
+            })
             var type = 1;
             var activityUrl, shareIcon;
             var $list = $('#list');
@@ -175,7 +184,7 @@
                 mimeTypes: 'image/*',
                 // sendAsBinary:true,
             });
-            uploader.on('uploadSuccess', function (file, result) {
+            uploader.on('uploadSuccess', function(file, result) {
                 var status = '';
                 if (file) {
                     activityUrl = result.url;
@@ -188,7 +197,7 @@
                     '<p class="state">' + status + '</p>' +
                     '</div>');
             });
-            uploader1.on('uploadSuccess', function (file, result) {
+            uploader1.on('uploadSuccess', function(file, result) {
                 var status = '';
                 if (file) {
                     status = '上传成功';
@@ -202,33 +211,38 @@
                     '</div>');
             });
             // 当有文件被添加进队列的时候
-            uploader.on('fileQueued', function (file) {
+            uploader.on('fileQueued', function(file) {
                 $list.html('<div id="' + file.id + '" class="item">' +
                     '<h4 class="info">' + file.name + '</h4>' +
                     '<p class="state">等待上传...</p>' +
                     '</div>');
             });
             // 当有文件被添加进队列的时候
-            uploader1.on('fileQueued', function (file) {
+            uploader1.on('fileQueued', function(file) {
                 $list1.html('<div id="' + file.id + '" class="item">' +
                     '<h4 class="info">' + file.name + '</h4>' +
                     '<p class="state">等待上传...</p>' +
                     '</div>');
             });
 
-            $('#ctlBtn').on('click', function () {
+            $('#ctlBtn').on('click', function() {
                 type = $(this).data('id');
                 uploader.upload();
             })
-            $('.creatActivity').click(function () {
+            $('.creatActivity').click(function() {
                 var title = $('.title').val();
-                var descption = $('.descption').val();
+                var descption = [];
                 var shareTitle = $('.shareTitle').val();
+                var length = $('.descption').length;
+                var bgColor = $('.background').val() || '89502E';
+                for (var i = 0; i < length; i++) {
+                    descption.push($('.descption:eq(' + i + ')').val())
+                }
                 if (!title) {
                     alert('请填写活动名称');
                     return;
                 }
-                if (!descption) {
+                if (descption.length == 0) {
                     alert('请填写活动描述');
                     return;
                 }
@@ -238,11 +252,21 @@
                 }
                 $.post('/admin/index/activity_add', {
                     title: title,
-                    descption: descption,
+                    descption: descption.join('-----'),
                     picUrl: activityUrl,
                     shareTitle: shareTitle,
+                    <<
+                    <<
+                    << < HEAD
+                    shareIcon: shareIcon,
+                    bgColor: bgColor
+                }, function(res) { ===
+                    ===
+                    =
                     shareIcon: shareIcon
-                }, function (res) {
+                }, function(res) { >>>
+                    >>>
+                    > 2e829 a013b239cadd8cc660065ddb48e16319928
                     if (res.errno == '0') {
                         alert('活动创建成功');
                     } else {

@@ -5,33 +5,33 @@
 export default class extends think.model.base {
     /**
      * 添加活动
-     * @param {* Object} postData 
+     * @param {* Object} postData
      * status => 0 待上线
      * status => 1 已上线
      * status => 2 已下线
      * 数据表字段定义
      */
     schema = {
-        startTime: {
-            default: () => {
-                return Date.now();
-            }
-        },
-        status: {
-            default: () => {
-                return 0;
-            }
-        },
-        createTime: {
-            default: () => {
-                return Date.now();
+            startTime: {
+                default: () => {
+                    return Date.now();
+                }
+            },
+            status: {
+                default: () => {
+                    return 0;
+                }
+            },
+            createTime: {
+                default: () => {
+                    return Date.now();
+                }
             }
         }
-    }
-    /**
-     * 添加活动
-     * @param {* Object} postData
-     */
+        /**
+         * 添加活动
+         * @param {* Object} postData
+         */
     async addOneActivity(postData) {
         let data = {
             title: postData.title,
@@ -81,6 +81,15 @@ export default class extends think.model.base {
         return affectedRows;
     }
 
+    /**
+     * 查询活动基本数据
+     */
+    async getActivityInfo(activityId) {
+        return await this.where({
+            id: activityId
+        }).find();
+    }
+
 
 
     /**
@@ -105,7 +114,7 @@ export default class extends think.model.base {
 
     /**
      * 活动是否有效, 线上活动
-     * @param {*string} activityId 
+     * @param {*string} activityId
      */
     async isActivityValid(activityId) {
         console.log('model isActivityValid params=>' + activityId);
@@ -121,9 +130,9 @@ export default class extends think.model.base {
         return isValid;
     }
 
-     /**
+    /**
      * 活动是否有效, 线上活动
-     * @param {*string} activityId 
+     * @param {*string} activityId
      */
     async isHasActivity(activityId) {
         console.log('model isHasActivity params=>' + activityId);
