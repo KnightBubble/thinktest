@@ -42,9 +42,19 @@
             // openId = $.fn.cookie('openId');
             // var url = './register.html?activityId=' + activityId + "&parentId=" + parentId
             // $('.url').attr('href', url);
+            if (data.length == 0) {
+                $('.act-rules.list').hide();
+                $('.no-supporter').show();
+            } else {
+                $('.act-rules.list').show();
+                $('.no-supporter').hide();
+            }
             $('.joined').show();
         } else {
-            $('.notJoin').show();
+            $('.act-rules.list').hide();
+            $('.no-supporter').show();
+            $('.joined').show();
+            // $('.notJoin').show();
         }
     }
 
