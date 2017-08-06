@@ -39,14 +39,14 @@ export default class extends think.model.base {
         }).field('userinfo.userId,status,nickName,userName,joinTime,phone').page(pageNum, 10).countSelect();
     }
 
-    async userSupportors(parentId, activityId) {
+    async userSupportors(userId, activityId) {
         return await this.join({
             table: 'user',
             join: 'inner', //join 方式，有 left, right, inner 3 种方式
             as: 'userinfo', // 表别名
             on: ['userId', 'userId'] //ON 条件
         }).where({
-            parentId: ['=', parentId]
+            parentId: ['=', userId]
         }).field('userinfo.userId,status,nickName,joinTime').select();
     }
 

@@ -233,13 +233,29 @@ export default class extends Base {
     }
 
     async testAction() {
+        // let activityId = 13;
+        // let status = 1;
+        // let activityModel = this.model('admin/activity');
+        // let isActivityValid = await activityModel.isActivityValid(activityId);
+        // this.json({
+        //     isActivityValid: isActivityValid
+        // });
+
+        let openId = 'oXm4awBQJ0dn9tIxDA2_XdCbcis0';
         let activityId = 13;
-        let status = 1;
-        let activityModel = this.model('admin/activity');
-        let isActivityValid = await activityModel.isActivityValid(activityId);
+        let model = this.model('participator');
+        let isJoin = await model.isJoin(openId, activityId);
+        console.log(isJoin);
+        let result = {};
+        if (isJoin) {
+            result = await model.userSupportors(openId, activityId);
+        }
+        console.log(result);
         this.json({
-            isActivityValid: isActivityValid
-        });
+            isJoin: isJoin,
+            data: result
+        })
+
         // return this.display('test');
     }
 
