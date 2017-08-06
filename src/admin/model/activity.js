@@ -114,7 +114,7 @@ export default class extends think.model.base {
         var result = await this.where({
             id: activityId,
             status: 1
-        });
+        }).find();
         if (result && result.id) {
             isValid = true;
         }

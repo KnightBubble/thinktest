@@ -143,7 +143,7 @@ export default class extends Base {
 
         let participatorModel = this.model('participator');
         let userModel = this.model('admin/user');
-        
+
         let effectRow = userModel.updateNamePhone(openId, postData.userName, postData.phone);
         let insertId = await participatorModel.addParticipator(postData);
         if (insertId && effectRow) {
@@ -232,8 +232,15 @@ export default class extends Base {
         return this.display('register');
     }
 
-    testAction() {
-        return this.display('test');
+    async testAction() {
+        let activityId = 13;
+        let status = 1;
+        let activityModel = this.model('admin/activity');
+        let isActivityValid = await activityModel.isActivityValid(activityId);
+        this.json({
+            isActivityValid: isActivityValid
+        });
+        // return this.display('test');
     }
 
     testweAction() {
