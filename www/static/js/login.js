@@ -1,6 +1,6 @@
-(function () {
+(function() {
     var loginApi = "/admin/admin/signin";
-    $('button.submit').click(function () {
+    $('button.submit').click(function() {
         var name = $('#username').val();
         var pwd = $('#passwd').val()
         if (!name) {
@@ -12,7 +12,8 @@
         $.post(loginApi, {
             username: name,
             password: pwd,
-        }, function (res) {
+        }, function(res) {
+            debugger;
             if (res.errno == '0') {
                 window.location = '/admin/index/index.html';
             } else {
