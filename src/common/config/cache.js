@@ -1,5 +1,5 @@
 export default {
-    type: 'redis', //缓存类型
+    type: 'file', //缓存类型
     timeout: 6 * 3600, //失效时间，单位：秒
     adapter: { //不同 adapter 下的配置
         file: {
