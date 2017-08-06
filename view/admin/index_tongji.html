@@ -14,26 +14,26 @@
         * {
             box-sizing: content-box;
         }
-        
+
         .table.with-check tr th:first-child,
         .table.with-check tr td:first-child {
             width: auto;
         }
-        
+
         table td.center {
             text-align: center;
         }
-        
+
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
         }
-        
+
         label {
             min-height: 35px;
             margin: 10px;
         }
-        
+
         label span {
             display: inline-block;
             height: 35px;
@@ -42,12 +42,12 @@
             min-width: 100px;
             text-align: center;
         }
-        
+
         label input {
             height: 35px!important;
             border-radius: 3px!important;
         }
-        
+
         .btn,
         .btn:hover {
             vertical-align: top;
@@ -61,7 +61,7 @@
             border-radius: 3px;
             margin-left: 15px;
         }
-        
+
         input {
             border: none!important;
             background: white!important;
@@ -78,7 +78,7 @@
     <%include inc/sidebar.html%>
         <div id="content">
             <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
                 <h1><a href="/admin/index/tongji">统计查询</a></h1>
             </div>
             <div class="container-fluid">
@@ -87,10 +87,9 @@
                     <input type="date" class="input-medium" placeholder="开始时间" name="startTime">
                     <input type="date" class="input-medium" placeholder="截止时间" name="endTime">
                     <button type="submit" class="btn">搜索</button>
-                    <div class="btn export">导出</div>
+                    <div class="btn export" onclick="exportExcel()">导出</div>
                 </form>
                 <div class="span12">
-                    <div><a href="/home/index/tongji?">导出</a></div>
                     <div class="widget-box">
                         <div class="widget-content nopadding">
                             <table class="table table-bordered table-striped with-check">
@@ -108,13 +107,21 @@
                                         var count = listData.length || 0; 
                                         for(var i = 0; i < count; i++){
                                     %>
-                                    <tr>
-                                        <td><%=listData[i]['userName']%></td>
-                                        <td><%=listData[i]['phone']%></td>
-                                        <td><%=listData[i]['nickName']%></td>
-                                        <td><%=listData[i]['joinTime']%></td>
-                                    </tr>
-                                    <%}%>
+                                        <tr>
+                                            <td>
+                                                <%=listData[i]['userName']%>
+                                            </td>
+                                            <td>
+                                                <%=listData[i]['phone']%>
+                                            </td>
+                                            <td>
+                                                <%=listData[i]['nickName']%>
+                                            </td>
+                                            <td>
+                                                <%=listData[i]['joinTime']%>
+                                            </td>
+                                        </tr>
+                                        <%}%>
                                 </tbody>
                             </table>
                         </div>
@@ -124,22 +131,22 @@
         </div>
         <script src="/static/js/bootstrap.min.js"></script>
         <script>
-            (function() {
+            (function () {
                 var lis = document.querySelectorAll('#sidebar>ul>li');
                 lis[1].className = 'active';
             })();
         </script>
         <script>
-            $('#checkall').on('click', function(e) {
+            $('#checkall').on('click', function (e) {
                 if (e.target.checked) {
                     $('table input[type="checkbox"]').attr('checked', true);
                 } else {
                     $('table input[type="checkbox"]').attr('checked', false);
                 }
             });
-            $('#remove').on('click', function(e) {
+            $('#remove').on('click', function (e) {
                 var ids = [];
-                $('table input[type="checkbox"]').each(function(i, o) {
+                $('table input[type="checkbox"]').each(function (i, o) {
                     if (o.id !== 'checkall' && o.checked) {
                         ids.push($(o).attr('data-id'));
                     }
@@ -148,7 +155,7 @@
             });
         </script>
         <script>
-            $('#addons').click(function() {
+            $('#addons').click(function () {
                 if ($(this).hasClass('open')) {
                     $('#addons > ul').slideUp();
                     $(this).removeClass('open');
@@ -157,6 +164,21 @@
                     $(this).addClass('open');
                 }
             });
+            function exportExcel() {
+                var activityId = $('input[name="activityId"]').val() || "";
+                var startTime = $('input[name="startTime"]').val() || "";
+                var endTime = $('input[name="endTime"]').val() || "";
+                var queryArrs = [
+                    'activityId=' + activityId,
+                    'startTime=' + startTime,
+                    'endTime=' + endTime,
+                ]
+                if (!activityId && !startTime && !endTime) {
+                    alert('搜索条件为空');
+                } else {
+                    window.location.href = '/admin/index/export_excel?' + queryArrs.join('');
+                }
+            }
         </script>
 </body>
 

@@ -319,26 +319,30 @@ export default class extends Base {
         // conf.stylesXmlFile = "styles.xml";
         conf.name = "mysheet";
         conf.cols = [{
-                caption: '姓名',
-                type: 'string',
-                // beforeCellWrite: function (row, cellData) {
-                //     return cellData;
-                // },
-                width: 300
-            },
-            {
-                caption: '微信昵称',
-                type: 'string',
-                width: 300
-            }, {
-                caption: '手机号',
-                type: 'string',
-                width: 300
-            }, {
-                caption: '日期',
-                type: 'string',
-                width: 300
-            }
+            caption: '姓名',
+            type: 'string',
+            // beforeCellWrite: function (row, cellData) {
+            //     return cellData;
+            // },
+            width: 300
+        },
+        {
+            caption: '微信昵称',
+            type: 'string',
+            width: 300
+        }, {
+            caption: '手机号',
+            type: 'string',
+            width: 300
+        }, {
+            caption: '是否购买',
+            type: 'string',
+            width: 300
+        }, {
+            caption: '日期',
+            type: 'string',
+            width: 300
+        }
         ];
         conf.rows = [
             // ['张三', '2017-08-20', '是', 2004],
@@ -368,6 +372,7 @@ export default class extends Base {
                 value.userName,
                 value.nickName,
                 value.phone,
+                value.status == 1 ? '已购买' : '未购买',
                 think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD'),
             ]);
             // value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
