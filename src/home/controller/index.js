@@ -119,9 +119,18 @@ export default class extends Base {
         });
     }
 
-    // 参加活动
+    /**
+     * 参加活动
+     * /home/index/join
+     */
     async joinAction() {
         let postData = this.post();
+        let phone = postData.phone;
+        let code = postData.code;
+        if (this.cache(phone) != code) {
+            this.fail('PHONE_CODE_ERROR');
+            return;
+        }
         let participatorModel = this.model('participator');
         let insertId = await participatorModel.addParticipator(postData);
         if (insertId) {
