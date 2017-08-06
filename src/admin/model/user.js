@@ -30,7 +30,7 @@ export default class extends think.model.base {
 
     getUserByOpenid(openid) {
         return this.where({
-            openid: openid
+            openId: openid
         }).find();
     }
 }

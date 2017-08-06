@@ -60,54 +60,54 @@ export default class extends Base {
 
         if (this.wechatCode !== code) {
             let token = await WechatOAuthApi.getAccessToken(code);
-            let openid = token.data.openid;
-            let cacheOpenid = await this.session('openid');
+            let openId = token.data.openid;
+            let cacheOpenid = await this.session('openId');
             if (!cacheOpenid) {
                 let userModel = this.model('admin/user');
-                let userInfo = await userModel.getUserByOpenid(openid);
+                let userInfo = await userModel.getUserByOpenid(openId);
                 if (!userInfo || !userInfo.openId) {
-                    userInfo = await WechatOAuthApi.getUser(openid);
+                    userInfo = await WechatOAuthApi.getUser(openId);
                     let insertId = await userModel.add({
-                        userId: userInfo.openid,
-                        openId: userInfo.openid,
+                        userId: userInfo.openId,
+                        openId: userInfo.openId,
                         uerPortrait: userInfo.headimgurl,
                         nickName: userInfo.nickname,
-                        parentId: parentId,
                         wechat: JSON.stringify(userInfo),
                     });
                 }
             }
         }
         this.wechatCode = code;
-        this.session('openid', openid);
-        this.cookie('openId', openid);
+        this.session('openId', openId);
+        this.cookie('openId', openId);
         this.redirect(`/home/index/detail?parentId=${parentId}&artivityId=${artivityId}`);
     }
 
     /**
      * 添加一条用户信息
      */
-    async addAction() {
-        let userModel = this.model('admin/user');
-        var userId = 'aa' + Date.now();
-        var userInfo = {
-            userId: userId,
-            openId: 'aa' + Date.now(),
-            userName: 'xx',
-            uerPortrait: '',
-            phone: '13955781781',
-            parentId: 'aa' + Date.now(),
-            signTime: Date.now()
-        }
-        let result = await userModel.thenAdd(userInfo, {
-            userId: userId
-        });
-        if (result.userId != undefined) {
-            this.json(result);
-        } else {
-            this.fail('ADD_USER_DB_ERROR');
-        }
-    }
+    // async addAction() {
+    //     let userModel = this.model('admin/user');
+    //     var openId = this.cookie('openId');
+    //     var postData = this.post();
+    //     var userInfo = {
+    //         userId: openId,
+    //         openId: openId,
+    //         userName: postData.userName,
+    //         uerPortrait: '',
+    //         phone: '13955781781',
+    //         parentId: 'aa' + Date.now(),
+    //         signTime: Date.now()
+    //     }
+    //     let result = await userModel.thenAdd(userInfo, {
+    //         userId: userId
+    //     });
+    //     if (result.userId != undefined) {
+    //         this.json(result);
+    //     } else {
+    //         this.fail('ADD_USER_DB_ERROR');
+    //     }
+    // }
 
     async listAction() {
         let userModel = this.model('admin/user');
