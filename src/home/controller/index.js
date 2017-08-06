@@ -38,13 +38,13 @@ export default class extends Base {
      */
     wechatAction() {
         let parentId = this.get('parentId') || "";
-        let artivityId = this.get('artivityId');
+        let activityId = this.get('activityId');
         let callbackUrl = `${this.config('url')}/home/index/callback?`;
         if (parentId) {
             callbackUrl += `parentId=` + parentId;
         }
-        if (artivityId) {
-            callbackUrl += `&artivityId=${artivityId}`;
+        if (activityId) {
+            callbackUrl += `&activityId=${activityId}`;
         }
         let oauthUrl = WechatOAuthApi.getAuthorizeURL(callbackUrl, '', 'snsapi_userinfo');
         this.redirect(oauthUrl);
@@ -56,7 +56,7 @@ export default class extends Base {
     async callbackAction() {
         let code = this.get('code');
         let parentId = this.get('parentId');
-        let artivityId = this.get('artivityId');
+        let activityId = this.get('activityId');
 
         if (this.wechatCode !== code) {
             let token = await WechatOAuthApi.getAccessToken(code);
@@ -80,7 +80,7 @@ export default class extends Base {
             this.cookie('openId', openId);
         }
         this.wechatCode = code;
-        this.redirect(`/home/index/detail?parentId=${parentId}&artivityId=${artivityId}`);
+        this.redirect(`/home/index/detail?parentId=${parentId}&activityId=${activityId}`);
     }
 
     /**
@@ -176,13 +176,13 @@ export default class extends Base {
             return this.display('detail');
         } else {
             let parentId = this.get('parentId') || "";
-            let artivityId = this.get('artivityId');
+            let activityId = this.get('activityId');
             let callbackUrl = `${this.config('url')}/home/index/callback?`;
             if (parentId) {
                 callbackUrl += `parentId=` + parentId;
             }
-            if (artivityId) {
-                callbackUrl += `&artivityId=${artivityId}`;
+            if (activityId) {
+                callbackUrl += `&activityId=${activityId}`;
             }
             let oauthUrl = WechatOAuthApi.getAuthorizeURL(callbackUrl, '', 'snsapi_userinfo');
             this.redirect(oauthUrl);
@@ -229,9 +229,9 @@ export default class extends Base {
 
     testweAction() {
         let parentId = this.get('parentId');
-        let artivityId = this.get('artivityId');
+        let activityId = this.get('activityId');
         this.cookie('openId', 'oXm4awBQJ0dn9tIxDA2_XdCbcis0');
-        this.redirect(`/home/index/detail?parentId=${parentId}&artivityId=${artivityId}`);
+        this.redirect(`/home/index/detail?parentId=${parentId}&activityId=${activityId}`);
     }
 
     /**
