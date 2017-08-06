@@ -76,10 +76,10 @@ export default class extends Base {
                     });
                 }
             }
+            this.session('openId', openId);
+            this.cookie('openId', openId);
         }
         this.wechatCode = code;
-        this.session('openId', openId);
-        this.cookie('openId', openId);
         this.redirect(`/home/index/detail?parentId=${parentId}&artivityId=${artivityId}`);
     }
 
