@@ -199,18 +199,40 @@ export default class extends Base {
         return this.display('test');
     }
 
+    /**
+     * 短信发送接口
+     * /home/index/sms
+     */
     smsAction() {
+        let cacheCode = this.cache(phone);
+        if (cacheCode) {
+            this.json({
+                errno: 0,
+                code: this.cache(cacheCode),
+                errmsg: '已发'
+            });
+            return;
+        }
+        if (this.cookie('openId')) {
+            this.fail('NOT_HAVE_OPENID_ERROR');
+            return;
+        }
+        let phone = this.post('phone');
         let SmsService = think.service('sms');
         let instance = new SmsService();
+        var code = Math.floor(Math.random() * (9999 - 999 + 1) + 999);
         instance.sendSMS({
-            PhoneNumbers: '18201059300',
+            PhoneNumbers: phone,
             TemplateParam: JSON.stringify({
-                code: '123456'
+                code: code
             }),
         }).then(BizId => {
+            think.cache(phone, code, 5 * 60);
             this.json({
-                BizId: BizId,
-                msg: '成功'
+                // BizId: BizId,
+                errno: 0,
+                msg: '成功',
+                code: code
             });
         });
     }

@@ -36,6 +36,23 @@ export default class extends think.logic.base {
     }
 
     /**
+     * 短信发送接口
+     * /home/index/sms
+     */
+    smsAction() {
+        this.allowMethods = 'post';
+        let rules = {
+            phone: {
+                required: true
+            }
+        };
+        let flag = this.validate(rules);
+        if (!flag) {
+            return this.fail('数据校验错误', this.errors());
+        }
+    }
+
+    /**
      * 获取当前用户的助力者
      */
     userSupportAction() {
