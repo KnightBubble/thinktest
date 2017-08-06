@@ -2,7 +2,7 @@
 
 export default {
     port: parseInt(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3000),
-    route_on: true,
+    // route_on: true,
     // route: [
     //     ['1.1/functions/_ops/metadatas', 'home/lean/index']
     // ],

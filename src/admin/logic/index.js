@@ -106,4 +106,22 @@ export default class extends think.logic.base {
         }
     }
 
+
+    /**
+     * 根据活动id，获取活动的参与者
+     * /admin/index/activity_user_list
+     */
+    async activityUserListAction() {
+        this.allowMethods = ['post', 'get'];
+        let rules = {
+            activityId: {
+                required: true
+            }
+        };
+        let flag = this.validate(rules);
+        if (!flag) {
+            this.fail('数据校验错误', this.errors());
+        }
+    }
+
 }

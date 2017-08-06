@@ -204,64 +204,132 @@ export default class extends Base {
     }
 
     /**
-     * 根据活动id，获取活动的参与者
+     * 根据活动id，开始时间，截止时间，获取活动的参与者
      * /admin/index/activity_user_list
+     * 
+     * request => {
+     *    activityId:
+     *    startTime?:'yyyy-mm-dd'
+     *    endTime?: 'yyyy-mm-dd'
+     * }
+     * 
+     * response => {
+                "errno": 0,
+                "errmsg": "查询成功",
+                "data": {
+                    "count": 2,
+                    "totalPages": 1,
+                    "numsPerPage": 10,
+                    "currentPage": 1,
+                    "data": [
+                        {
+                            "userId": "oXm4awBQJ0dn9tIxDA2_XdCbcis0",
+                            "status": 1,
+                            "nickName": "再见猪八戒",
+                            "userName": "园区呜呜",
+                            "joinTime": "2017-08-06",
+                            "phone": "18210022113"
+                        },
+                        {
+                            "userId": "oXm4awPHXv8PfhVjfzMj-aEuJ-Q8",
+                            "status": 1,
+                            "nickName": "士标",
+                            "userName": "哈哈吧",
+                            "joinTime": "2017-08-06",
+                            "phone": "18513622821"
+                        }
+                    ]
+                }
+     * }
      */
-    async activiyUserListAction() {
+    async activityUserListAction() {
+        let data = Object.assign({}, this.post(), this.get());
+        let activityId = data.activityId;
+        let activityModel = this.model('activity');
+        let isActivityValid = await activityModel.isHasActivity(activityId);
+        if (!isActivityValid) {
+            return this.json({
+                errno: 1,
+                errmsg: '此活动不存在',
+                data: {}
+            });
+        }
+        let pageSize = data.pageSize;
+        let pageNum = data.page;
+        let participatorModel = this.model('home/participator');
+        let participatorPageData = await participatorModel.getParticatorListByActivityId(activityId, pageNum, pageSize);
+        participatorPageData && participatorPageData.data && participatorPageData.data.forEach((value) => {
+            value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
+        });
         this.json({
-            anem:11
-        })
-        // let data = Object.assign({}, this.post(), this.get());
-        // let activityId = data.activityId;
-        // let activityModel = this.model('activity');
-        // let isActivityValid = await activityModel.isHasActivity(activityId);
-        // if (isActivityValid) {
-        //     return this.json({
-        //         errno: 1,
-        //         errmsg: '此活动不存在',
-        //         data: {}
-        //     });
-        // }
-        // let participatorModel = this.model('home/participator');
-        // let participatorPageData = await participatorModel.getParticatorListByActivityId(activityId);
-        // participatorPageData && participatorPageData.data && participatorPageData.data.forEach((value) => {
-        //     value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
-        // });
-        // this.json({
-        //     errno: 0,
-        //     errmsg: '查询成功',
-        //     data: participatorPageData
-        // });
+            errno: 0,
+            errmsg: '查询成功',
+            data: participatorPageData
+        });
     }
 
-    exportExcelAction() {
+    /**
+     * 根据活动id， 时间 导出 参与者excel
+     * /home/index/export_excel
+     */
+    async exportExcelAction() {
         var nodeExcel = require('excel-export');
         var conf = {};
         // conf.stylesXmlFile = "styles.xml";
         conf.name = "mysheet";
         conf.cols = [{
-            caption: '姓名',
-            type: 'string',
-            beforeCellWrite: function (row, cellData) {
-                return cellData;
+                caption: '姓名',
+                type: 'string',
+                // beforeCellWrite: function (row, cellData) {
+                //     return cellData;
+                // },
+                width: 50
             },
-            width: 28.7109375
-        }, {
-            caption: '日期',
-            type: 'string',
-        }, {
-            caption: '布尔',
-            type: 'string'
-        }, {
-            caption: '数字',
-            type: 'string'
-        }];
-        conf.rows = [
-            ['张三', '2017-08-20', '是', 2004],
-            ["张三-1", '2017-08-20', '是', 27182],
-            ["张三-2", '2017-08-20', '是', 161803],
-            ["张三-3", '2017-08-20', , '是', 1414]
+            {
+                caption: '微信昵称',
+                type: 'string',
+                width: 100
+            }, {
+                caption: '手机号',
+                type: 'string',
+                width: 150
+            }, {
+                caption: '日期',
+                type: 'string',
+                width: 200
+            }
         ];
+        conf.rows = [
+            // ['张三', '2017-08-20', '是', 2004],
+            // ["张三-1", '2017-08-20', '是', 27182],
+            // ["张三-2", '2017-08-20', '是', 161803],
+            // ["张三-3", '2017-08-20', , '是', 1414]
+        ];
+        let data = Object.assign({}, this.post(), this.get());
+        let activityId = data.activityId;
+        let activityModel = this.model('activity');
+        let isActivityValid = await activityModel.isHasActivity(activityId);
+        if (!isActivityValid) {
+            return this.json({
+                errno: 1,
+                errmsg: '此活动不存在',
+                data: {}
+            });
+        }
+        let pageSize = data.pageSize;
+        let pageNum = data.page;
+        let participatorModel = this.model('home/participator');
+        let participatorPageData = await participatorModel.getParticatorListByActivityId(activityId, pageNum, pageSize);
+        participatorPageData && participatorPageData.data && participatorPageData.data.forEach((value) => {
+            conf.rows.push([
+                value.userName,
+                value.nickName,
+                value.phone,
+                think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD'),
+            ]);
+            // value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
+        });
+
         var result = nodeExcel.execute(conf);
         var res = this.http.res;
         res.setHeader('Content-Type', 'application/vnd.openxmlformats');

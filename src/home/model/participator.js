@@ -47,15 +47,23 @@ export default class extends think.model.base {
      * 根据活动id获取参与者
      * @param {*string} activityId 
      */
-    async getParticatorListByActivityId(activityId) {
+    async getParticatorListByActivityId(activityId, pageNum = 1, pageSize = 10, startTime, endTime) {
+        startTime = startTime ? +new Date(startTime) : 0;
+        endTime = endTime ? +new Date(endTime) : +new Date();
         return await this.join({
             table: 'user',
             join: 'inner', //join 方式，有 left, right, inner 3 种方式
             as: 'userinfo', // 表别名
             on: ['userId', 'userId'] //ON 条件
         }).field('userinfo.userId,status,nickName,userName,joinTime,phone').where({
-            activityId: activityId
-        }).page(pageNum, 10).countSelect();
+            activityId: activityId,
+            joinTime: {
+                '>=': startTime
+            },
+            joinTime: {
+                '<': endTime
+            }
+        }).page(pageNum, pageSize).countSelect();
     }
 
     async userSupportors(userId, activityId) {
