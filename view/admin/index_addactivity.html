@@ -13,21 +13,22 @@
     <link rel="stylesheet" type="text/css" href="/static/lib/toast/jquery.toast.min.css">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/webuploader/webuploader.nolog.js"></script>
+    <script src="/static/lib/jscolor/jscolor.min.js"></script>
     <style>
         table td.center {
             text-align: center;
         }
-        
+
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
         }
-        
+
         label {
             min-height: 35px;
             margin: 10px;
         }
-        
+
         label span {
             display: inline-block;
             height: 35px;
@@ -36,25 +37,25 @@
             min-width: 100px;
             text-align: center;
         }
-        
+
         label input {
             height: 35px!important;
             border-radius: 3px!important;
         }
-        
+
         #uploader {
             display: inline-block!important;
         }
-        
+
         #uploader .btns {
             display: inline-block!important;
         }
-        
+
         #uploader #picker,
         #uploader #picker1 {
             display: inline-block!important;
         }
-        
+
         .btn,
         .btn:hover {
             vertical-align: top;
@@ -67,7 +68,7 @@
             border: none;
             border-radius: 3px;
         }
-        
+
         .creatActivity {
             box-sizing: content-box;
         }
@@ -81,11 +82,12 @@
     <%include inc/sidebar.html%>
         <div id="content">
             <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
                 <h1>创建活动</h1>
             </div>
             <div class="container-fluid">
                 <form>
+
                     <label for="title">
                       <span>活动名称</span>
                       <input type='text' name='title' class='title' required>
@@ -120,13 +122,19 @@
                           </div>
                       </div>
                   </label>
+                    <label>
+                        <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTextColor(this)'}">
+                            Pick text color
+                        </button>
+                     HEX value: <input id="chosen-value" value="000000">
+                    </label>
                     <div class='btn creatActivity'>创建活动</div>
                 </form>
             </div>
         </div>
         <script src="/static/js/bootstrap.min.js"></script>
         <script>
-            (function() {
+            (function () {
                 var lis = document.querySelectorAll('#sidebar>ul>li');
                 lis[3].className = 'active';
             })();
@@ -167,7 +175,7 @@
                 mimeTypes: 'image/*',
                 // sendAsBinary:true,
             });
-            uploader.on('uploadSuccess', function(file, result) {
+            uploader.on('uploadSuccess', function (file, result) {
                 var status = '';
                 if (file) {
                     activityUrl = result.url;
@@ -180,7 +188,7 @@
                     '<p class="state">' + status + '</p>' +
                     '</div>');
             });
-            uploader1.on('uploadSuccess', function(file, result) {
+            uploader1.on('uploadSuccess', function (file, result) {
                 var status = '';
                 if (file) {
                     status = '上传成功';
@@ -194,25 +202,25 @@
                     '</div>');
             });
             // 当有文件被添加进队列的时候
-            uploader.on('fileQueued', function(file) {
+            uploader.on('fileQueued', function (file) {
                 $list.html('<div id="' + file.id + '" class="item">' +
                     '<h4 class="info">' + file.name + '</h4>' +
                     '<p class="state">等待上传...</p>' +
                     '</div>');
             });
             // 当有文件被添加进队列的时候
-            uploader1.on('fileQueued', function(file) {
+            uploader1.on('fileQueued', function (file) {
                 $list1.html('<div id="' + file.id + '" class="item">' +
                     '<h4 class="info">' + file.name + '</h4>' +
                     '<p class="state">等待上传...</p>' +
                     '</div>');
             });
 
-            $('#ctlBtn').on('click', function() {
+            $('#ctlBtn').on('click', function () {
                 type = $(this).data('id');
                 uploader.upload();
             })
-            $('.creatActivity').click(function() {
+            $('.creatActivity').click(function () {
                 var title = $('.title').val();
                 var descption = $('.descption').val();
                 var shareTitle = $('.shareTitle').val();
@@ -234,7 +242,7 @@
                     picUrl: activityUrl,
                     shareTitle: shareTitle,
                     shareIcon: shareIcon
-                }, function(res) {
+                }, function (res) {
                     if (res.errno == '0') {
                         alert('活动创建成功');
                     } else {
