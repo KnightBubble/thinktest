@@ -51,10 +51,7 @@
             }
             $('.joined').show();
         } else {
-            $('.act-rules.list').hide();
-            $('.no-supporter').show();
-            $('.joined').show();
-            // $('.notJoin').show();
+            $('.notJoin').show();
         }
     }
 
