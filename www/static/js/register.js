@@ -4,18 +4,31 @@
     var codeBtn = $("#codeBtn");
     var submitBtn = $("#submitBtn");
 
+    var activityId = getUrlParameter('activityId');
+
+    function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return decodeURI(sParameterName[1]);
+            }
+        }
+    }
+
+    var sendCodeApi = '/home/index/sms';
+    var submitApi = '/home/index/join';
+
     var checkTel = function(tel) {
         return /^1[34578]\d{9}$/.test(tel);
     };
-
     /*
     输入手机号的过程中，时刻（400ms）检测手机号格式，
     正确则获取验证码按钮亮起且可用，
     错误则仅提示格式错误。
-
     验证码不能为空
     */
-
     var isTel = false;
     var checkTimer, countDownTimer, telVal, codeVal;
     var eventId; // 检验验证码的凭证
@@ -78,9 +91,9 @@
         } else {
             if (isTel) {
                 // TODO 获取验证码
-                $.post('{{dspGetCodeApi}}', { phone: telVal }, function(res) {
+                $.post(sendCodeApi, { phone: telVal }, function(res) {
                     if (res.data) {
-                        eventId = res.data.eventId;
+                        toast('短信发送成功');
                     } else {
                         toastError(res.errmsg);
                     }
@@ -99,13 +112,17 @@
         var name = $("#name").val();
         codeVal = code.val();
         if (name && isTel && !!codeVal) {
-            $.post('{{dspCheckCodeApi}}', { phone: telVal, eventId: eventId, code: codeVal }, function(res) {
+            $.post(submitApi, {
+                phone: telVal,
+                code: codeVal,
+                userName: name,
+                activityId: activityId
+            }, function(res) {
                 if (res.errno == "0") {
-                    var _eventId = res.data.eventId;
                     $("#tel").val(''); //置空手机号
                     $("#code").val(''); //置空验证码
-                    var prefix = location.protocol + '//' + location.host + '/h5app/partials/dsp';
-                    location.href = prefix + '/' + resultPage + '?eventId=' + _eventId + '&pageType=' + pageType + '&channel=' + channelFrom;
+                    toast('参与成功');
+                    window.location.href = 'detail.html';
                 } else {
                     toastError(res.errmsg);
                 }

@@ -15,6 +15,10 @@
             width: 100%;
             padding: 0 15px;
         }
+        
+        .btn-box input {
+            width: 80%;
+        }
     </style>
 </head>
 
@@ -25,24 +29,43 @@
                 <img src="http://p0.meituan.net/coupon/62f66038223742ebdcbe7071cda092f9238523.gif" alt="">
             </a>
         </div>
-        <div class="notJoin" hidden>
-            <p class="tip">您还未参与活动，请赶快参加吧！！！</p>
-            <div class="btn-box">
-                <div class="button go2join">立即参与</div>
+        <div class="content-bg margin-gap" style="display: block;">
+            <div class="notJoin" hidden>
+                <p class="tip" hidden>您还未参与活动，请赶快参加吧！！！</p>
+                <div class="btn-box">
+                    <input class="combtn borderradius-3 button go2join" type="button" value="立即参与" style="background: rgb(255, 63, 38);">
+                </div>
             </div>
-        </div>
-        <div class="joined content-bg margin-gap">
-            <div class='url-box'>
-                <span>你的<a href="" class='url'>专属链接</a>已经生成，快分享给你的好友吧。</span>
+            <div class="joined content-bg margin-gap" hidden>
+                <div class='url-box'>
+                    <span>你的<a href="" class='url'>专属链接</a>已经生成，快分享给你的好友吧。</span>
+                </div>
+                <section class="rule help-list">
+                    <h4 class="sec-sub-title">助力情况</h4>
+                    <ul class="act-rules list">
+                        <li>
+                            <span class='name'>好友</span>
+                            <span class='status'>是否购买</span>
+                            <span class='date'>日期</span>
+                        </li>
+                    </ul>
+                </section>
             </div>
-            <section class="rule help-list">
-                <h4 class="sec-sub-title">助力情况</h4>
-                <ul class="act-rules list">
-                    <li>
-                        <span class='name'>好友</span>
-                        <span class='status'>是否购买</span>
-                        <span class='date'>日期</span>
-                    </li>
+            <section class="rule">
+                <h4 class="sec-sub-title">活动规则</h4>
+                <ul class="act-rules">
+                    <li>1.下单即可分享红包给小伙伴</li>
+                    <li></li>
+                    <li>2.每个链接仅限20人领取</li>
+                    <li></li>
+                    <li>3.每个链接会按领取顺序随机发放一个大额红包</li>
+                    <li></li>
+                    <li>4.每人每天仅限领取5次</li>
+                    <li></li>
+                    <li>5.红包仅限在线支付使用，且收餐人手机号、领取红包时输入的手机号和账号中的手机号需为同一手机号</li>
+                    <li></li>
+                    <li>6.其他未尽事宜，请咨询客服</li>
+                    <li></li>
                 </ul>
             </section>
         </div>
