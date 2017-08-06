@@ -20,6 +20,56 @@
             font-size: 14px;
         }
     </style>
+    <style>
+        table td.center {
+            text-align: center;
+        }
+        
+        table td i.fa {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        
+        label {
+            min-height: 35px;
+            margin: 10px;
+        }
+        
+        label span {
+            display: inline-block;
+            height: 35px;
+            line-height: 35px;
+            vertical-align: top;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        label input {
+            height: 35px!important;
+            border-radius: 3px!important;
+        }
+        
+        .btn,
+        .btn:hover {
+            vertical-align: top;
+            width: 70px;
+            height: 26px;
+            line-height: 26px;
+            background: #00b7ee;
+            color: white;
+            outline: none;
+            border: none;
+            border-radius: 3px;
+            margin-left: 15px;
+        }
+        
+        input {
+            border: none!important;
+            background: white!important;
+            padding: 5px!important;
+            margin: 0 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,6 +82,13 @@
                 <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
                 <h1>参与者列表</h1>
             </div>
+            <label for="picUrl">
+              <span>参与者手机号</span>
+              <input type="text" maxlength='11' class='phone'>
+              <!-- <span>活动ID</span>
+              <input type="text"  class='activityId'> -->
+              <div class="btn search">查询</div>
+            </label>
             <div class="container-fluid">
                 <hr>
                 <div class="row-fluid">
@@ -123,6 +180,20 @@
                     $(this).addClass('open');
                 }
             });
+
+            $('.search').click(function() {
+                var phone = $('.phone').val();
+                // var activityId = $('.activityId').val();
+                if (!phone) {
+                    alert('请输入手机号')
+                    return;
+                }
+                if (!(/^1[34578]\d{9}$/.test(phone))) {
+                    alert("手机号码格式有误，请重填");
+                    return false;
+                }
+                window.location.href = '/admin/index/participator?phone=' + phone;
+            })
             var modifyUserStatusApi = "/admin/index/user_set_status";
 
             function modifyStatus(userId, status) {
