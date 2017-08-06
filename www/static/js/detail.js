@@ -1,5 +1,5 @@
 (function() {
-    var detailApi = "/home/index/user_support";
+    var detailApi = "/home/index/user_support_info";
     $('.section').hide();
     // $.fn.cookie('openId', '1KDJFKDJ4989DKFJK3D93KKLWL');
 
