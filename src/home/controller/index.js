@@ -13,13 +13,14 @@ const writeFileAsync = promisify(fs.writeFile);
 const wechatConf = think.config('wechat');
 const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async function (openid) {
     // 传入一个根据openid获取对应的全局token的方法
-    var txt = await readFileAsync(openid + ':access_token.txt', 'utf8');
-    return JSON.parse(txt);
+    //think.cache('name', 'value');
+    let token = await think.cache(openid);
+    return token;
 }, async function (openid, token) {
     // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
     // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
     // 持久化时请注意，每个openid都对应一个唯一的token!
-    await writeFileAsync(openid + ':access_token.txt', JSON.stringify(token));
+    await think.cache(openid, token);
 });
 
 export default class extends Base {
@@ -41,7 +42,6 @@ export default class extends Base {
         let callbackUrl = `${this.config('url')}/home/index/callback?`;
         if (parentId) {
             callbackUrl += `parentId=` + parentId;
-
         }
         if (artivityId) {
             callbackUrl += `&artivityId=${artivityId}`;
@@ -57,23 +57,25 @@ export default class extends Base {
         let code = this.get('code');
         let parentId = this.get('parentId') || '';
         let artivityId = this.get('artivityId');
-
         let token = await WechatOAuthApi.getAccessToken(code);
         let openid = token.data.openid;
-        let userModel = this.model('admin/user');
-        let userInfo = await userModel.getUserByOpenid(openid);
-
-        if (!userInfo || !userInfo.openId) {
-            userInfo = await WechatOAuthApi.getUser(openid);
-            let insertId = await userModel.add({
-                userId: userInfo.openid,
-                openId: userInfo.openid,
-                uerPortrait: userInfo.headimgurl,
-                nickName: userInfo.nickname,
-                parentId: parentId,
-                wechat: JSON.stringify(userInfo),
-            });
+        let cacheOpenid = await this.session('openid');
+        if (!cacheOpenid) {
+            let userModel = this.model('admin/user');
+            let userInfo = await userModel.getUserByOpenid(openid);
+            if (!userInfo || !userInfo.openId) {
+                userInfo = await WechatOAuthApi.getUser(openid);
+                let insertId = await userModel.add({
+                    userId: userInfo.openid,
+                    openId: userInfo.openid,
+                    uerPortrait: userInfo.headimgurl,
+                    nickName: userInfo.nickname,
+                    parentId: parentId,
+                    wechat: JSON.stringify(userInfo),
+                });
+            }
         }
+        this.session('openid', openid);
         this.cookie('openId', openid);
         this.redirect(`/home/index/detail?parentId=${parentId}&artivityId=${artivityId}`);
     }
