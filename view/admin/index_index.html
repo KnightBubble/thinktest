@@ -13,7 +13,7 @@
         table td.center {
             text-align: center;
         }
-
+        
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
@@ -28,7 +28,7 @@
     <%include inc/sidebar.html%>
         <div id="content">
             <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
                 <h1>活动列表</h1>
             </div>
             <div class="container-fluid">
@@ -41,11 +41,11 @@
                                     <thead>
                                         <tr>
                                             <th>活动标题</th>
-                                            <th>分享title</th>
+                                            <th>活动ID</th>
                                             <th>活动时间</th>
                                             <th>状态</th>
                                             <th>创建时间</th>
-                                            <th>活动链接</th>
+                                            <th>分享title</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
@@ -61,7 +61,7 @@
                                                         <%=activityDataList[i].title%>
                                                     </td>
                                                     <td>
-                                                        <%=activityDataList[i].shareTitle%>
+                                                        <%=activityDataList[i].id%>
                                                     </td>
                                                     <td>
                                                         <%=activityDataList[i].startTime%>
@@ -79,8 +79,7 @@
                                                         <%=activityDataList[i].createTime%>
                                                     </td>
                                                     <td>
-                                                        http://www.baidu.com?activityId=
-                                                        <%=activityDataList[i].id%>
+                                                        <%=activityDataList[i].shareTitle%>
                                                     </td>
                                                     <td class="center">
                                                         <% if(activityDataList[i].status == 1){%>
@@ -89,8 +88,7 @@
                                                             <%} else{%>
                                                                 <button type="button" onclick="modifyStatus('<%=activityDataList[i].id  %>', 1)">上线</button>
                                                                 <%}%>
-                                                                    <!-- <a href="/admin/slide/publish?id=19" title="publish"><i class="fa fa-lock"></i></a>
-                                                        <a href="/admin/slide/delete?id=19" title="delete"><i class="fa fa-trash"></i></a> -->
+                                                                    <button type="button" onclick="modifyInfo('<%=activityDataList[i].id  %>', 1)">修改</button>
                                                     </td>
                                                 </tr>
                                                 <% }%>
@@ -106,7 +104,7 @@
         </div>
         <script src="/static/js/bootstrap.min.js"></script>
         <script>
-            (function () {
+            (function() {
                 var lis = document.querySelectorAll('#sidebar>ul>li');
                 lis[0].className = 'active';
             })();
@@ -118,7 +116,7 @@
                 $.post(modifyStatusApi, {
                     id: activityId,
                     status: status
-                }, function (res) {
+                }, function(res) {
                     if (res.errno == '0') {
                         alert('成功');
                         window.location.reload();
@@ -126,6 +124,10 @@
                         alert(res.errmsg);
                     }
                 })
+            }
+
+            function modifyInfo(id) {
+                window.location.href = '/admin/index/addactivity?activityId=' + id;
             }
 
             function exportExcel(id) {

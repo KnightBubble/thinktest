@@ -5,18 +5,18 @@ var fs = require('fs');
 
 export default class extends Base {
     async __before() {
-        this.userInfo = await this.session('userInfo');
-        if (this.userInfo) {
-            this.assign('user', this.userInfo);
-            return Promise.resolve();
+            this.userInfo = await this.session('userInfo');
+            if (this.userInfo) {
+                this.assign('user', this.userInfo);
+                return Promise.resolve();
+            }
+            this.redirect('/admin/admin/index');
+            return Promise.reject('Required login --> redirecting.');
         }
-        this.redirect('/admin/admin/index');
-        return Promise.reject('Required login --> redirecting.');
-    }
-    /**
-     * index action
-     * @return {Promise} []
-     */
+        /**
+         * index action
+         * @return {Promise} []
+         */
     async indexAction() {
         let activityModel = this.model('activity');
         let data = think.extend({}, this.get(), this.post());
@@ -80,6 +80,20 @@ export default class extends Base {
 
     addactivityAction() {
         return this.display('addactivity');
+    }
+
+    /**
+     * 获取活动信息
+     */
+    async getActivityInfoAction() {
+        let activityId = this.post('id');
+        let activityModel = this.model('activity');
+        let result = await activityModel.getActivityInfo(activityId);
+        return this.json({
+            data: result,
+            errno: 0,
+            errmsg: "success"
+        });
     }
 
     /**
@@ -221,7 +235,7 @@ export default class extends Base {
         var data = think.extend({}, this.get(), this.post());
         console.log(data);
         let result = await model.getParticatorListByPage(data['page'] || 1);
-        result.data.forEach(function (element) {
+        result.data.forEach(function(element) {
             element.joinTime = think.datetime(new Date(element.joinTime * 1), 'YYYY-MM-DD');
         });
         this.assign({
@@ -235,13 +249,13 @@ export default class extends Base {
     /**
      * 根据活动id，开始时间，截止时间，获取活动的参与者
      * /admin/index/activity_user_list
-     * 
+     *
      * request => {
      *    activityId:
      *    startTime?:'yyyy-mm-dd'
      *    endTime?: 'yyyy-mm-dd'
      * }
-     * 
+     *
      * response => {
                 "errno": 0,
                 "errmsg": "查询成功",
