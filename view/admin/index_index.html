@@ -44,7 +44,8 @@
                                             <th>分享title</th>
                                             <th>活动时间</th>
                                             <th>状态</th>
-                                            <th>Create Time</th>
+                                            <th>创建时间</th>
+                                            <th>活动链接</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
@@ -76,6 +77,10 @@
                                                     </td>
                                                     <td class="center">
                                                         <%=activityDataList[i].createTime%>
+                                                    </td>
+                                                    <td>
+                                                        http://www.baidu.com?activityId=
+                                                        <%=activityDataList[i].id%>
                                                     </td>
                                                     <td class="center">
                                                         <% if(activityDataList[i].status == 1){%>

@@ -92,8 +92,8 @@
             if (isTel) {
                 // TODO 获取验证码
                 $.post(sendCodeApi, { phone: telVal }, function(res) {
-                    if (res.data) {
-                        toast('短信发送成功');
+                    if (res.errno == 0) {
+                        toast('短信验证码发送成功');
                     } else {
                         toastError(res.errmsg);
                     }
@@ -122,7 +122,9 @@
                     $("#tel").val(''); //置空手机号
                     $("#code").val(''); //置空验证码
                     toast('参与成功');
-                    window.location.href = 'detail.html';
+                    var url = 'detail.html?parentId=' + $.fn.cookie('openId') + "&activityId=" + activityId
+                    alert(url)
+                    window.location.href = url;
                 } else {
                     toastError(res.errmsg);
                 }

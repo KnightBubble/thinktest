@@ -11,10 +11,8 @@
     <link href="/static/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/js/webuploader/webuploader.css">
     <link rel="stylesheet" type="text/css" href="/static/lib/toast/jquery.toast.min.css">
-    <script src="https://fex.baidu.com/webuploader/js/jquery-1.10.2.min.js"></script>
-    <script src="/static/js/webuploader/webuploader.nolog.js"></script>
     <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/lib/toast/jquery.toast.min.js"></script>
+    <script src="/static/js/webuploader/webuploader.nolog.js"></script>
     <style>
         table td.center {
             text-align: center;
@@ -26,7 +24,7 @@
         }
         
         label {
-            height: 35px;
+            min-height: 35px;
             margin: 10px;
         }
         
@@ -52,7 +50,8 @@
             display: inline-block!important;
         }
         
-        #uploader #picker {
+        #uploader #picker,
+        #uploader #picker1 {
             display: inline-block!important;
         }
         
@@ -95,29 +94,29 @@
                       <span>活动描述</span>
                       <input type='text' name='descption' class='descption'  required>
                   </label>
+                    <label for="shareTitle">
+                      <span>二次分享描述</span>
+                      <input type='text' name='shareTitle' class='shareTitle'>
+                  </label>
                     <label for="picUrl">
                       <span>活动图片</span>
                       <div id="uploader" class="wu-example">
                           <!--用来存放文件信息-->
-                          <div id="thelist" class="uploader-list"></div>
+                          <div id="list" class="uploader-list"></div>
                           <div class="btns">
-                              <div id="picker">选择文件</div>
-                              <div id="ctlBtn" class="btn btn-default" data-id='1'>开始上传</div>
+                              <div id="picker">上传图片</div>
+                              <!-- <div id="ctlBtn" class="btn btn-default" data-id='1'>开始上传</div> -->
                           </div>
                       </div>
-                  </label>
-                    <label for="shareTitle">
-                      <span>二次分享描述</span>
-                      <input type='text' name='shareTitle' class='shareTitle'>
                   </label>
                     <label for="shareIcon">
                       <span>二次分享icon</span>
                       <div id="uploader" class="wu-example">
                           <!--用来存放文件信息-->
-                          <div id="thelist" class="uploader-list"></div>
+                          <div id="list1" class="uploader-list"></div>
                           <div class="btns">
-                              <div id="picker">选择文件</div>
-                              <div id="ctlBtn" class="btn btn-default" data-id='2'>开始上传</div>
+                              <div id="picker1">上传图片</div>
+                              <!-- <div id="ctlBtn" class="btn btn-default" data-id='2'>开始上传</div> -->
                           </div>
                       </div>
                   </label>
@@ -134,8 +133,12 @@
         </script>
         <script>
             var type = 1;
-            var activityUrl, shareIcon
+            var activityUrl, shareIcon;
+            var $list = $('#list');
+            var $list1 = $('#list1');
+
             var uploader = WebUploader.create({
+                auto: true,
                 // swf文件路径
                 swf: '/static/js/webuploader/Uploader.swf',
                 // 文件接收服务端。
@@ -149,18 +152,62 @@
                 mimeTypes: 'image/*',
                 // sendAsBinary:true,
             });
-            uploader.on('uploadSuccess', function(file, result) {
-                if (file) {
-                    alert('上传成功');
-                    if (type == 1) {
-                        activityUrl = result.url;
-                    } else {
-                        shareIcon = result.url;
-                    }
-                } else {
-                    alert('上传图片失败')
-                }
+            var uploader1 = WebUploader.create({
+                auto: true,
+                // swf文件路径
+                swf: '/static/js/webuploader/Uploader.swf',
+                // 文件接收服务端。
+                server: '/admin/index/upload_image',
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker1',
+                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                resize: false,
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*',
+                // sendAsBinary:true,
             });
+            uploader.on('uploadSuccess', function(file, result) {
+                var status = '';
+                if (file) {
+                    activityUrl = result.url;
+                    status = '上传成功';
+                } else {
+                    status = '上传失败';
+                }
+                $list.html('<div id="' + file.id + '" class="item">' +
+                    '<h4 class="info">' + file.name + '</h4>' +
+                    '<p class="state">' + status + '</p>' +
+                    '</div>');
+            });
+            uploader1.on('uploadSuccess', function(file, result) {
+                var status = '';
+                if (file) {
+                    status = '上传成功';
+                    shareIcon = result.url;
+                } else {
+                    status = '上传失败';
+                }
+                $list1.html('<div id="' + file.id + '" class="item">' +
+                    '<h4 class="info">' + file.name + '</h4>' +
+                    '<p class="state">' + status + '</p>' +
+                    '</div>');
+            });
+            // 当有文件被添加进队列的时候
+            uploader.on('fileQueued', function(file) {
+                $list.html('<div id="' + file.id + '" class="item">' +
+                    '<h4 class="info">' + file.name + '</h4>' +
+                    '<p class="state">等待上传...</p>' +
+                    '</div>');
+            });
+            // 当有文件被添加进队列的时候
+            uploader1.on('fileQueued', function(file) {
+                $list1.html('<div id="' + file.id + '" class="item">' +
+                    '<h4 class="info">' + file.name + '</h4>' +
+                    '<p class="state">等待上传...</p>' +
+                    '</div>');
+            });
+
             $('#ctlBtn').on('click', function() {
                 type = $(this).data('id');
                 uploader.upload();

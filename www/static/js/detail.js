@@ -2,6 +2,7 @@
     var detailApi = "/home/index/user_support_info";
     $('.section').hide();
     var activityId = getUrlParameter('activityId');
+    parentId = getUrlParameter('parentId') || null;
     $.post(detailApi, {
         activityId: activityId
     }, function(res) {
@@ -38,9 +39,9 @@
                 dom += li;
             }
             $('ul.list').append(dom);
-            openId = $.fn.cookie('openId');
-            var url = 'http://127.0.0.1:8360/home/index/register.html?openId=' + openId;
-            $('.url').attr('href', url);
+            // openId = $.fn.cookie('openId');
+            // var url = './register.html?activityId=' + activityId + "&parentId=" + parentId
+            // $('.url').attr('href', url);
             $('.joined').show();
         } else {
             $('.notJoin').show();
@@ -48,7 +49,7 @@
     }
 
     $('.go2join').click(function() {
-        window.location.href = './register.html?activityId=' + activityId;
+        window.location.href = './register.html?activityId=' + activityId + "&parentId=" + parentId;
     })
 
 })();
