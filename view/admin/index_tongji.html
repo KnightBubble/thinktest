@@ -96,25 +96,25 @@
                             <table class="table table-bordered table-striped with-check">
                                 <thead>
                                     <tr>
-                                        <th>活动标题</th>
-                                        <th>分享title</th>
-                                        <th>活动时间</th>
-                                        <th>状态</th>
-                                        <th>创建时间</th>
-                                        <th>活动链接</th>
-                                        <th>操作</th>
+                                        <th>用户名</th>
+                                        <th>手机号</th>
+                                        <th>昵称</th>
+                                        <th>参与时间</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <%
+                                        var listData = data.data || {};
+                                        var count = listData.length || 0; 
+                                        for(var i = 0; i < count; i++){
+                                    %>
                                     <tr>
-                                        <td>活动标题</td>
-                                        <td>分享title</td>
-                                        <td>活动时间</td>
-                                        <td>状态</td>
-                                        <td>创建时间</td>
-                                        <td>活动链接</td>
-                                        <td>操作</td>
+                                        <td><%=listData[i]['userName']%></td>
+                                        <td><%=listData[i]['phone']%></td>
+                                        <td><%=listData[i]['nickName']%></td>
+                                        <td><%=listData[i]['joinTime']%></td>
                                     </tr>
+                                    <%}%>
                                 </tbody>
                             </table>
                         </div>

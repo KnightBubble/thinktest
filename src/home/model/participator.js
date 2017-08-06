@@ -61,6 +61,7 @@ export default class extends think.model.base {
     async getParticatorListByActivityId(activityId, pageNum = 1, pageSize = 10, startTime, endTime) {
         startTime = startTime ? +new Date(startTime) : 0;
         endTime = endTime ? +new Date(endTime) : +new Date();
+        console.log('getParticatorListByActivityId startTime params=>' + startTime);
         return await this.join({
             table: 'user',
             join: 'inner', //join 方式，有 left, right, inner 3 种方式
@@ -69,10 +70,8 @@ export default class extends think.model.base {
         }).field('userinfo.userId,status,nickName,userName,joinTime,phone').where({
             activityId: activityId,
             joinTime: {
-                '>=': startTime
-            },
-            joinTime: {
-                '<': endTime
+                '>=': startTime,
+                '<=':endTime
             }
         }).page(pageNum, pageSize).countSelect();
     }

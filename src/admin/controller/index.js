@@ -41,22 +41,20 @@ export default class extends Base {
         let data = Object.assign({}, this.post(), this.get());
         let activityId = data.activityId;
         let activityModel = this.model('activity');
-
         let participatorPageData = {};
         try {
             if (activityId) {
                 let isActivityValid = await activityModel.isHasActivity(activityId);
                 if (!isActivityValid) {
-                    return this.json({
-                        errno: 1,
-                        errmsg: '此活动不存在',
-                        data: {}
-                    });
+                    this.assign('data', participatorPageData);
+                    return this.display('tongji');
                 }
                 let pageSize = data.pageSize;
                 let pageNum = data.page;
+                let startTime = data.startTime;
+                let endTime = data.endTime;
                 let participatorModel = this.model('home/participator');
-                participatorPageData = await participatorModel.getParticatorListByActivityId(activityId, pageNum, pageSize);
+                participatorPageData = await participatorModel.getParticatorListByActivityId(activityId, pageNum, pageSize, startTime, endTime);
                 participatorPageData && participatorPageData.data && participatorPageData.data.forEach((value) => {
                     value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
                 });
@@ -326,20 +324,20 @@ export default class extends Base {
                 // beforeCellWrite: function (row, cellData) {
                 //     return cellData;
                 // },
-                width: 50
+                width: 300
             },
             {
                 caption: '微信昵称',
                 type: 'string',
-                width: 100
+                width: 300
             }, {
                 caption: '手机号',
                 type: 'string',
-                width: 150
+                width: 300
             }, {
                 caption: '日期',
                 type: 'string',
-                width: 200
+                width: 300
             }
         ];
         conf.rows = [
@@ -350,6 +348,8 @@ export default class extends Base {
         ];
         let data = Object.assign({}, this.post(), this.get());
         let activityId = data.activityId;
+        let startTime = data.startTime;
+        let endTime = data.endTime;
         let activityModel = this.model('activity');
         let isActivityValid = await activityModel.isHasActivity(activityId);
         if (!isActivityValid) {
@@ -362,7 +362,7 @@ export default class extends Base {
         let pageSize = data.pageSize;
         let pageNum = data.page;
         let participatorModel = this.model('home/participator');
-        let participatorPageData = await participatorModel.getParticatorListByActivityId(activityId, pageNum, pageSize);
+        let participatorPageData = await participatorModel.getParticatorListByActivityId(activityId, pageNum, pageSize, startTime, endTime);
         participatorPageData && participatorPageData.data && participatorPageData.data.forEach((value) => {
             conf.rows.push([
                 value.userName,
