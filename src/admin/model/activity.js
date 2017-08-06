@@ -21,6 +21,11 @@ export default class extends think.model.base {
                 default: () => {
                     return 0;
                 }
+            },
+            createTime: {
+                default: () => {
+                    return Date.now();
+                }
             }
         }
         /**
