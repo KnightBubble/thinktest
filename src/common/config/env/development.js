@@ -10,5 +10,11 @@ export default {
     wechat: {
         appid: 'wxf12e6671463b1e0a',
         appsecret: 'e2b5b91556b2530eedf873eb7e1c3752'
+    },
+    sms: {
+        accessKeyId: 'LTAIRi3VHqrhqyWs',
+        secretAccessKey: 'tTvS4Oxn3XnKYzwUAriDb7VSvwhUsN',
+        SignName: '阿里云短信测试专用',
+        TemplateCode: 'SMS_80290504',
     }
 };
