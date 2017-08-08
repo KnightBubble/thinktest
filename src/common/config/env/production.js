@@ -6,7 +6,7 @@ export default {
         appid: 'wx580c5fee09078215',
         appsecret: 'ddc46a6eafa7fcbc075efd5a649d2205'
     },
-    url: 'http://www.xjzxtf.com',
+    url: 'http://www.bzxlkj.com',
     sms: {
         accessKeyId: 'LTAIRi3VHqrhqyWs',
         secretAccessKey: 'tTvS4Oxn3XnKYzwUAriDb7VSvwhUsN',
