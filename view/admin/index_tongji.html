@@ -83,7 +83,7 @@
             </div>
             <div class="container-fluid">
                 <form class="form-inline">
-                    <input type="text" class="input-medium" placeholder="活动id" name="activityId">
+                    <input type="text" class="input-medium" placeholder="活动id" name="activityId" required>
                     <input type="date" class="input-medium" placeholder="开始时间" name="startTime">
                     <input type="date" class="input-medium" placeholder="截止时间" name="endTime">
                     <button type="submit" class="btn">搜索</button>
@@ -105,16 +105,24 @@
                                 <tbody>
                                     <%
                                         var listData = data.data || {};
-                                        var count = listData.length || 0; 
+                                        var count = listData.length || 0;
                                         for(var i = 0; i < count; i++){
                                     %>
-                                    <tr>
-                                        <td><%=listData[i]['userName']%></td>
-                                        <td><%=listData[i]['phone']%></td>
-                                        <td><%=listData[i]['nickName']%></td>
-                                        <td><%=listData[i]['joinTime']%></td>
-                                    </tr>
-                                    <%}%>
+                                        <tr>
+                                            <td>
+                                                <%=listData[i]['userName']%>
+                                            </td>
+                                            <td>
+                                                <%=listData[i]['phone']%>
+                                            </td>
+                                            <td>
+                                                <%=listData[i]['nickName']%>
+                                            </td>
+                                            <td>
+                                                <%=listData[i]['joinTime']%>
+                                            </td>
+                                        </tr>
+                                        <%}%>
                                 </tbody>
                             </table>
                         </div>

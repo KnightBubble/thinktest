@@ -58,7 +58,7 @@
                                             <% for(var i = 0;i<count; i++){%>
                                                 <tr>
                                                     <td>
-                                                         <%=activityDataList[i].title%> 
+                                                        <%=activityDataList[i].title%>
                                                     </td>
                                                     <td>
                                                         <%=activityDataList[i].id%>
@@ -89,6 +89,7 @@
                                                                 <button type="button" onclick="modifyStatus('<%=activityDataList[i].id  %>', 1)">上线</button>
                                                                 <%}%>
                                                                     <button type="button" onclick="modifyInfo('<%=activityDataList[i].id  %>', 1)">修改</button>
+                                                                    <button type="button" onclick="window.location.href='/admin/index/tongji?activityId=<%=activityDataList[i].id%>'">统计</button>
                                                     </td>
                                                 </tr>
                                                 <% }%>
