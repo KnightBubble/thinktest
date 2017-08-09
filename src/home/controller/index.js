@@ -38,7 +38,7 @@ export default class extends Base {
         if (this.wechatCode !== code) {
             let token = await WechatOAuthApi.getAccessToken(code);
             let openId = token.data.openid;
-            let cacheOpenid = await this.session('openId');
+            let cacheOpenid = await this.cookie('openId');
             if (!cacheOpenid) {
                 let userModel = this.model('admin/user');
                 let userInfo = await userModel.getUserByOpenid(openId);
