@@ -33,6 +33,7 @@ export default class extends think.model.base {
          * @param {* Object} postData
          */
     async addOneActivity(postData) {
+        console.log('model activity addOneActivity =>  ' + postData);
         let data = {
             title: postData.title,
             descption: postData.descption,
@@ -43,7 +44,12 @@ export default class extends think.model.base {
             endTime: postData.endTime,
             status: 0,
         }
-        console.log('----->' + postData.activityId);
+        var id = postData.activityId;
+        if (id) {
+            let affectedRows = await this.where('1=1').update(data);
+            return affectedRows;
+        }
+        
         return await this.thenAdd(postData, {
             id: postData.activityId || 0
         });
