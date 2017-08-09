@@ -28,9 +28,38 @@ export default class extends Base {
      * index action
      * @return {Promise} []
      */
-    indexAction() {
+    async indexAction() {
+        let code = this.get('code');
+        let parentId = this.get('parentId');
+        let activityId = this.get('activityId');
+        if (!code || !activityId) {
+             return this.display();
+        } 
+        if (this.wechatCode !== code) {
+            let token = await WechatOAuthApi.getAccessToken(code);
+            let openId = token.data.openid;
+            let cacheOpenid = await this.session('openId');
+            if (!cacheOpenid) {
+                let userModel = this.model('admin/user');
+                let userInfo = await userModel.getUserByOpenid(openId);
+                if (!userInfo || !userInfo.openId) {
+                    userInfo = await WechatOAuthApi.getUser(openId);
+                    let insertId = await userModel.add({
+                        userId: userInfo.openId,
+                        openId: userInfo.openId,
+                        uerPortrait: userInfo.headimgurl,
+                        nickName: userInfo.nickname,
+                        wechat: JSON.stringify(userInfo),
+                    });
+                }
+            }
+            this.session('openId', openId);
+            this.cookie('openId', openId);
+        }
+        this.wechatCode = code;
+        this.redirect(`/home/index/detail?parentId=${parentId}&activityId=${activityId}`);
         //auto render template file index_index.html
-        return this.display();
+       
     }
 
     /**
