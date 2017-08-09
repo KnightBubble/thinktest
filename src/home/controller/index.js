@@ -43,10 +43,11 @@ export default class extends Base {
                 let userModel = this.model('admin/user');
                 let userInfo = await userModel.getUserByOpenid(openId);
                 if (!userInfo || !userInfo.openId) {
+                    // userInfo 这里就是WechatOAuthApi 接口返回的
                     userInfo = await WechatOAuthApi.getUser(openId);
                     let insertId = await userModel.add({
-                        userId: userInfo.openId,
-                        openId: userInfo.openId,
+                        userId: userInfo.openid,
+                        openId: userInfo.openid,
                         uerPortrait: userInfo.headimgurl,
                         nickName: userInfo.nickname,
                         wechat: JSON.stringify(userInfo),
