@@ -39,7 +39,7 @@ export default class extends Base {
     wechatAction() {
         let parentId = this.get('parentId') || "";
         let activityId = this.get('activityId');
-        let callbackUrl = `${this.config('url')}/home/index/callback?`;
+        let callbackUrl = `${this.config('url')}?`;
         if (parentId) {
             callbackUrl += `parentId=` + parentId;
         }
@@ -193,7 +193,7 @@ export default class extends Base {
         } else {
             let parentId = this.get('parentId') || "";
             let activityId = this.get('activityId');
-            let callbackUrl = `${this.config('url')}/home/index/callback?`;
+            let callbackUrl = `${this.config('url')}?`;
             if (parentId) {
                 callbackUrl += `parentId=` + parentId;
             }
