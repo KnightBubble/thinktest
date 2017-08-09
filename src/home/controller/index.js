@@ -11,12 +11,12 @@ const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
 const wechatConf = think.config('wechat');
-const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async function(openid) {
+const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async function (openid) {
     // 传入一个根据openid获取对应的全局token的方法
     //think.cache('name', 'value');
     let token = await think.cache(openid);
     return token;
-}, async function(openid, token) {
+}, async function (openid, token) {
     // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
     // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
     // 持久化时请注意，每个openid都对应一个唯一的token!
@@ -33,8 +33,8 @@ export default class extends Base {
         let parentId = this.get('parentId');
         let activityId = this.get('activityId');
         if (!code || !activityId) {
-             return this.display();
-        } 
+            return this.display();
+        }
         if (this.wechatCode !== code) {
             let token = await WechatOAuthApi.getAccessToken(code);
             let openId = token.data.openid;
@@ -60,7 +60,7 @@ export default class extends Base {
         this.wechatCode = code;
         this.redirect(`/home/index/detail?parentId=${parentId}&activityId=${activityId}`);
         //auto render template file index_index.html
-       
+
     }
 
     /**
@@ -325,6 +325,7 @@ export default class extends Base {
     async smsAction() {
         let phone = this.post('phone');
         let cacheCode = await this.cache(phone);
+        console.log('cacheCode=>' + cacheCode);
         if (cacheCode) {
             this.json({
                 errno: 0,
@@ -341,6 +342,7 @@ export default class extends Base {
         let SmsService = think.service('sms');
         let instance = new SmsService();
         var code = Math.floor(Math.random() * (9999 - 999 + 1) + 999);
+        console.log('code=>' + cacheCode);
         instance.sendSMS({
             PhoneNumbers: phone,
             TemplateParam: JSON.stringify({
