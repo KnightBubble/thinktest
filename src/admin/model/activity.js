@@ -42,7 +42,8 @@ export default class extends think.model.base {
             shareIcon: postData.shareIcon,
             startTime: postData.startTime,
             endTime: postData.endTime,
-            status: 0,
+            status: postData.status || 0,
+            bgColor: postData.bgColor
         }
         var id = postData.activityId;
         if (id) {
