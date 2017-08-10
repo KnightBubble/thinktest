@@ -18,17 +18,17 @@
         table td.center {
             text-align: center;
         }
-        
+
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
         }
-        
+
         label {
             min-height: 35px;
             margin: 10px;
         }
-        
+
         label span {
             display: inline-block;
             height: 35px;
@@ -37,26 +37,26 @@
             min-width: 100px;
             text-align: center;
         }
-        
+
         label input {
             height: 35px!important;
             border-radius: 3px!important;
         }
-        
+
         #uploader {
             display: inline-block!important;
         }
-        
+
         #uploader .btns {
             display: inline-block!important;
             margin: 0 10px!important;
         }
-        
+
         #uploader #picker,
         #uploader #picker1 {
             display: inline-block!important;
         }
-        
+
         .btn,
         .btn:hover {
             vertical-align: top;
@@ -70,17 +70,17 @@
             border-radius: 3px;
             margin-left: 15px;
         }
-        
+
         .creatActivity {
             box-sizing: content-box;
             margin-top: 30px;
         }
-        
+
         .jscolor {
             box-sizing: content-box;
             color: white!important;
         }
-        
+
         input {
             border: none!important;
             background: white!important;
@@ -97,7 +97,7 @@
     <%include inc/sidebar.html%>
         <div id="content">
             <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
                 <h1>创建活动</h1>
             </div>
             <div class="container-fluid">
@@ -150,13 +150,13 @@
         </div>
         <script src="/static/js/bootstrap.min.js"></script>
         <script>
-            (function() {
+            (function () {
                 var lis = document.querySelectorAll('#sidebar>ul>li');
                 lis[3].className = 'active';
             })();
         </script>
         <script>
-            $('.addDesc').click(function() {
+            $('.addDesc').click(function () {
                 $('<input type="text" name="descption" class="descption" required="">').insertBefore($(this));
             })
             var type = 1;
@@ -194,7 +194,7 @@
                 mimeTypes: 'image/*',
                 // sendAsBinary:true,
             });
-            uploader.on('uploadSuccess', function(file, result) {
+            uploader.on('uploadSuccess', function (file, result) {
                 var status = '';
                 if (file) {
                     activityUrl = result.url;
@@ -207,7 +207,7 @@
                     '<p class="state">' + status + '</p>' +
                     '</div>');
             });
-            uploader1.on('uploadSuccess', function(file, result) {
+            uploader1.on('uploadSuccess', function (file, result) {
                 var status = '';
                 if (file) {
                     status = '上传成功';
@@ -221,30 +221,30 @@
                     '</div>');
             });
             // 当有文件被添加进队列的时候
-            uploader.on('fileQueued', function(file) {
+            uploader.on('fileQueued', function (file) {
                 $list.html('<div id="' + file.id + '" class="item">' +
                     '<h4 class="info">' + file.name + '</h4>' +
                     '<p class="state">等待上传...</p>' +
                     '</div>');
             });
             // 当有文件被添加进队列的时候
-            uploader1.on('fileQueued', function(file) {
+            uploader1.on('fileQueued', function (file) {
                 $list1.html('<div id="' + file.id + '" class="item">' +
                     '<h4 class="info">' + file.name + '</h4>' +
                     '<p class="state">等待上传...</p>' +
                     '</div>');
             });
 
-            $('#ctlBtn').on('click', function() {
+            $('#ctlBtn').on('click', function () {
                 type = $(this).data('id');
                 uploader.upload();
             })
-            $('.creatActivity').click(function() {
+            $('.creatActivity').click(function () {
                 var title = $('.title').val();
                 var descption = [];
                 var shareTitle = $('.shareTitle').val();
                 var length = $('.descption').length;
-                var bgColor = $('#chosen-value').val() || '89502E';
+                var bgColor = '#' + ($('#chosen-value').val() || '89502E');
                 for (var i = 0; i < length; i++) {
                     var desc = $('.descption:eq(' + i + ')').val();
                     if (desc) {
@@ -271,7 +271,7 @@
                     shareTitle: shareTitle,
                     shareIcon: shareIcon,
                     bgColor: bgColor
-                }, function(res) {
+                }, function (res) {
                     if (res.errno == '0') {
                         alert('活动创建成功');
                     } else {
@@ -296,7 +296,7 @@
                 $.post(modifyStatusApi, {
                     id: activityId,
                     status: status
-                }, function(res) {
+                }, function (res) {
                     if (res.errno == '0') {
                         renderView(res.data);
                         $('.creatActivity').text('修改活动')
@@ -312,7 +312,8 @@
                         var descption = data[key].split('-----');
                         for (var i = 0; i < descption.length; i++) {
                             if (!$('.descption:eq(' + i + ')').length && descption[i]) {
-                                $('<input type="text" name="descption" class="descption" required="">').insertBefore($('.addDesc'));
+                                $('<input type="text" name="descption" class="descption" required="">').insertBefore($(
+                                    '.addDesc'));
                             }
                             $('.descption:eq(' + i + ')').val(descption[i]);
                         }
