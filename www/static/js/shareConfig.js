@@ -4,7 +4,7 @@ var shareConfig = function(option) {
      */
     var getSDKConfigApi = "/home/index/jsconfig";
     var option = option || {};
-    var wxurl = encodeURIComponent(location.href);
+    var wxurl = location.href;
     // 分享相关
     var shareOption = {
         title: option.title,
@@ -16,8 +16,6 @@ var shareConfig = function(option) {
         },
         cancel: function() {}
     }
-
-    cosole.log(shareOption);
 
     /**
      * js sdk 入参
