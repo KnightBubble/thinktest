@@ -2,7 +2,7 @@
     var detailApi = "/home/index/user_support_info";
     $('.section').hide();
     var activityId = getUrlParameter('activityId');
-    parentId = getUrlParameter('parentId') || null;
+    parentId = getUrlParameter('parentId') || $.fn.cookie('openId') || null;
     $.post(detailApi, {
         activityId: activityId
     }, function(res) {
@@ -24,6 +24,28 @@
         }
     }
 
+    function isWeiXin() {
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    if (!isWeiXin()) {
+        /**
+         * 初始化二次分享
+         */
+        var shareLink = window.location.origin + '/home/index/register.html?activityId=' + activityId + '&parentId=' + parentId;
+        var wxObj = {
+            desc: $('.shareTitle').data('title'),
+            title: '快来参与活动吧',
+            link: shareLink,
+            imgUrl: $('.shareIcon').data('icon')
+        };
+        shareConfig(wxObj);
+    }
+
     renderView = function(data) {
         //status 0====未参与    1===已经参与
         var map = {
@@ -39,9 +61,6 @@
                 dom += li;
             }
             $('ul.list').append(dom);
-            // openId = $.fn.cookie('openId');
-            // var url = './register.html?activityId=' + activityId + "&parentId=" + parentId
-            // $('.url').attr('href', url);
             if (data.length == 0) {
                 $('.act-rules.list').hide();
                 $('.no-supporter').show();
