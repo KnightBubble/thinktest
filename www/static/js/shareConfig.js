@@ -4,7 +4,7 @@ var shareConfig = function(option) {
      */
     var getSDKConfigApi = "/home/index/jsconfig";
     var option = option || {};
-    // var wxurl = encodeURIComponent(location.href);
+    var wxurl = encodeURIComponent(location.href);
     // 分享相关
     var shareOption = {
         title: option.title,
@@ -16,6 +16,8 @@ var shareConfig = function(option) {
         },
         cancel: function() {}
     }
+
+    cosole.log(shareOption);
 
     /**
      * js sdk 入参
@@ -29,13 +31,16 @@ var shareConfig = function(option) {
             'onMenuShareTimeline',
             'onMenuShareAppMessage'
         ],
-        url: "http://www.bzxlkj.com"
+        url: wxurl
     }
 
     $.post(getSDKConfigApi, params, function(res) {
         if (res.errno == '0') {
-            debugger;
             var data = res.data;
+            data.jsApiList = [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage'
+            ];
             wx.config(data);
 
             wx.ready(function() {
