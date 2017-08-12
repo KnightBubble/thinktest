@@ -32,7 +32,7 @@
             return false;
         }
     }
-    if (!isWeiXin()) {
+    if (isWeiXin()) {
         /**
          * 初始化二次分享
          */
