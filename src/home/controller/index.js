@@ -359,7 +359,7 @@ export default class extends Base {
     async jsconfigAction() {
         let params = this.post();
         try {
-            let res = WechatJSApi.getJsConfig(params);
+            let res = await WechatJSApi.getJsConfig(params);
             return this.json({
                 errno: 0,
                 msg: '成功',
