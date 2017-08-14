@@ -11,9 +11,9 @@ export default class extends think.model.base {
             status: 0,
             joinTime: Date.now()
         }, {
-            userId: participatorInfo.openId,
-            activityId: participatorInfo.activityId,
-        });
+                userId: participatorInfo.openId,
+                activityId: participatorInfo.activityId,
+            });
         return insertId;
     }
 
@@ -60,7 +60,10 @@ export default class extends think.model.base {
      */
     async getParticatorListByActivityId(activityId, pageNum = 1, pageSize = 10, startTime, endTime) {
         startTime = startTime ? +new Date(startTime) : 0;
+        console.log('getParticatorListByActivityId nowTime params=>' + (new Date() * 1));
         endTime = endTime ? +new Date(endTime) : +new Date();
+        console.log('getParticatorListByActivityId endTime params=>' + endTime);
+        endTime += 1 * 24 * 3600 * 1000;
         console.log('getParticatorListByActivityId startTime params=>' + startTime);
         return await this.join({
             table: 'user',
@@ -71,7 +74,7 @@ export default class extends think.model.base {
             activityId: activityId,
             joinTime: {
                 '>=': startTime,
-                '<=':endTime
+                '<=': endTime
             }
         }).page(pageNum, pageSize).countSelect();
     }
