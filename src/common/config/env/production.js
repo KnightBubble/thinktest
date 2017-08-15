@@ -9,7 +9,7 @@ export default {
     sms: {
         accessKeyId: 'LTAIRi3VHqrhqyWs',
         secretAccessKey: 'tTvS4Oxn3XnKYzwUAriDb7VSvwhUsN',
-        SignName: '阿里云短信测试专用',
-        TemplateCode: 'SMS_80290504',
+        SignName: '众享同发',
+        TemplateCode: 'SMS_85635058',
     }
 };
