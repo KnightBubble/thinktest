@@ -369,12 +369,14 @@ export default class extends Base {
         let instance = new SmsService();
         var code = Math.floor(Math.random() * (9999 - 999 + 1) + 999);
         console.log('code=>' + cacheCode);
+        console.log('now to send code is =>' + code);
         instance.sendSMS({
             PhoneNumbers: phone,
             TemplateParam: JSON.stringify({
                 code: code
             }),
         }).then(BizId => {
+            console.log('after send sms ,then cache code => ' + 'phone=>' + phone + ' => ' + code);
             think.cache(phone, code, 5 * 60);
             this.json({
                 // BizId: BizId,
