@@ -279,6 +279,8 @@ export default class extends Base {
                     value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
                 });
             }
+            console.log('userSupportInfoAction result format => ');
+            console.log(result);
             this.json({
                 errno: 0,
                 errmsg: '查询成功',
