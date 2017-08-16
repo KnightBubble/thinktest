@@ -235,12 +235,13 @@ export default class extends Base {
         let openId = this.cookie('openId');
         let activityId = this.get('activityId');
 
-        let activityModel = this.model('admin/activity');
-        let result = await activityModel.getActivityInfo(activityId);
-        this.assign({
-            data: result
-        });
+
         if (openId) {
+            let activityModel = this.model('admin/activity');
+            let result = await activityModel.getActivityInfo(activityId);
+            this.assign({
+                data: result
+            });
             return this.display('detail');
         } else {
             let parentId = this.get('parentId') || "";
