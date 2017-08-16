@@ -86,7 +86,8 @@ export default class extends think.model.base {
             as: 'userinfo', // 表别名
             on: ['userId', 'userId'] //ON 条件
         }).where({
-            parentId: ['=', userId]
+            parentId: ['=', userId],
+            activityId: ['=', activityId]
         }).field('userinfo.userId,userinfo.uerPortrait,status,nickName,userName,joinTime').select();
     }
 

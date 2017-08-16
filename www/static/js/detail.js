@@ -36,7 +36,7 @@
         /**
          * 初始化二次分享
          */
-        var shareLink = window.location.origin + '/home/index/detail.html?activityId=' + activityId + '&parentId=' + parentId;
+        var shareLink = window.location.origin + '/home/index/detail.html?activityId=' + activityId + '&parentId=' + (parentId || $.fn.cookie('parentId'));
         var wxObj = {
             desc: $('.shareTitle').data('title'),
             title: '快来参与活动吧',
