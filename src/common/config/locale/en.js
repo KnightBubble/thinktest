@@ -12,5 +12,7 @@ export default {
     UPLOAD_IAMGE_ERROR: ['100006', '上传图片错误'],
     NOT_HAVE_OPENID_ERROR: ['100007', '请在微信内打开'],
     PHONE_CODE_ERROR: ['100008', '短信验证码错误'],
-    ACTIVITY_UNVALID_ERROR: ['100009', '活动无效']
+    ACTIVITY_UNVALID_ERROR: ['100009', '活动无效'],
+    JOIN_ACTIVITY_UPDATE_USER_ERROR: ['100010', '更新用户数据失败'],
+    JOIN_ACTIVITY_MULTIPLE: ['100011', '以参与此活动'],
 };

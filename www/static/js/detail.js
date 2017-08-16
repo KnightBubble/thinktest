@@ -2,7 +2,7 @@
     var detailApi = "/home/index/user_support_info";
     $('.section').hide();
     var activityId = getUrlParameter('activityId');
-    parentId = getUrlParameter('parentId') || $.fn.cookie('openId') || null;
+    parentId = getUrlParameter('parentId') || "";
     $.post(detailApi, {
         activityId: activityId
     }, function(res) {
@@ -36,7 +36,7 @@
         /**
          * 初始化二次分享
          */
-        var shareLink = window.location.origin + '/home/index/register.html?activityId=' + activityId + '&parentId=' + parentId;
+        var shareLink = window.location.origin + '/home/index/index.html?activityId=' + activityId + '&parentId=' + parentId;
         var wxObj = {
             desc: $('.shareTitle').data('title'),
             title: '快来参与活动吧',
@@ -57,7 +57,7 @@
             var data = data.list;
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
-                var li = "<li><span class = 'name'>" + item.nickName + "</span><span class = 'status'>" + map[item.status] + "</span ><span class='date'>" + item.joinTime + "</span> </li>";
+                var li = "<li><span class = 'name'>" + item.userName || item.nickName + "</span><span class = 'status'>" + map[item.status] + "</span ><span class='date'>" + item.joinTime + "</span> </li>";
                 dom += li;
             }
             $('ul.list').append(dom);

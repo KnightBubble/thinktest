@@ -124,4 +124,18 @@ export default class extends think.logic.base {
         }
     }
 
+    
+    async userInfoAction() {
+        this.allowMethods = ['post', 'get'];
+        let rules = {
+            userId: {
+                required: true
+            }
+        };
+        let flag = this.validate(rules);
+        if (!flag) {
+            this.fail('数据校验错误', this.errors());
+        }
+    }
+
 }

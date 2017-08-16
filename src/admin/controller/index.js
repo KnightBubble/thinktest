@@ -245,6 +245,31 @@ export default class extends Base {
     }
 
     /**
+     * 根据id 获取用户相关信息
+     */
+
+    async userInfoAction() {
+        let model = this.model('user');
+        let postData = this.post();
+        let userId = postData.userId;
+        let userInfo = await model.getUserByOpenid(userId);
+        if (userInfo) {
+            return this.json({
+                "errno": 0,
+                "errmsg": "查询成功",
+                data: userInfo
+            });
+        }
+        else {
+            return this.json({
+                "errno": 1,
+                "errmsg": "无推荐者信息",
+                data: {}
+            });
+        }
+    }
+
+    /**
      * 根据活动id，开始时间，截止时间，获取活动的参与者
      * /admin/index/activity_user_list
      *

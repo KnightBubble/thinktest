@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="/static/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="/static/css/matrix-style.css">
     <link rel="stylesheet" href="/static/css/matrix-media.css">
+    <link rel="stylesheet" href="/static/lib/sweet/sweetalert.css">
     <link href="/static/css/font-awesome.min.css" rel="stylesheet">
     <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/lib/sweet/sweetalert.min.js"></script>
     <style>
         table td.center {
             text-align: center;
         }
-        
+
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
@@ -24,17 +26,17 @@
         table td.center {
             text-align: center;
         }
-        
+
         table td i.fa {
             margin-right: 8px;
             font-size: 14px;
         }
-        
+
         label {
             min-height: 35px;
             margin: 10px;
         }
-        
+
         label span {
             display: inline-block;
             height: 35px;
@@ -43,12 +45,12 @@
             min-width: 100px;
             text-align: center;
         }
-        
+
         label input {
             height: 35px!important;
             border-radius: 3px!important;
         }
-        
+
         .btn,
         .btn:hover {
             vertical-align: top;
@@ -62,7 +64,7 @@
             border-radius: 3px;
             margin-left: 15px;
         }
-        
+
         input {
             border: none!important;
             background: white!important;
@@ -79,7 +81,7 @@
     <%include inc/sidebar.html%>
         <div id="content">
             <div id="content-header">
-                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a> </div>
+                <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>管理后台</a> <a href="#" class="current">活动配置</a>                    </div>
                 <h1>参与者列表</h1>
             </div>
             <label for="picUrl">
@@ -98,6 +100,7 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>活动id</th>
                                             <th>用户名</th>
                                             <th>用户状态</th>
                                             <th>用户手机号</th>
@@ -112,6 +115,9 @@
                                         for(var i = 0; i < len; i++ ) {
                                             %>
                                             <tr>
+                                                <td>
+                                                    <%=userDataList[i]['activityId']%>
+                                                </td>
                                                 <td>
                                                     <%=userDataList[i]['userName']%>
                                                 </td>
@@ -132,6 +138,7 @@
                                                     <%=userDataList[i]['joinTime']%>
                                                 </td>
                                                 <td class="center">
+                                                    <button type="button" onclick="seeRecommender('<%=userDataList[i]['parentId']%>')">查看推荐者</button>
                                                     <button type="button" onclick="modifyStatus('<%=userDataList[i]['userId']%>',1)">设置购买</button>
                                                     <button type="button" onclick="modifyStatus('<%=userDataList[i]['userId']%>',0)">重置状态</button>
                                                 </td>
@@ -147,22 +154,22 @@
         </div>
         <script src="/static/js/bootstrap.min.js"></script>
         <script>
-            (function() {
+            (function () {
                 var lis = document.querySelectorAll('#sidebar>ul>li');
                 lis[2].className = 'active';
             })();
         </script>
         <script>
-            $('#checkall').on('click', function(e) {
+            $('#checkall').on('click', function (e) {
                 if (e.target.checked) {
                     $('table input[type="checkbox"]').attr('checked', true);
                 } else {
                     $('table input[type="checkbox"]').attr('checked', false);
                 }
             });
-            $('#remove').on('click', function(e) {
+            $('#remove').on('click', function (e) {
                 var ids = [];
-                $('table input[type="checkbox"]').each(function(i, o) {
+                $('table input[type="checkbox"]').each(function (i, o) {
                     if (o.id !== 'checkall' && o.checked) {
                         ids.push($(o).attr('data-id'));
                     }
@@ -171,7 +178,7 @@
             });
         </script>
         <script>
-            $('#addons').click(function() {
+            $('#addons').click(function () {
                 if ($(this).hasClass('open')) {
                     $('#addons > ul').slideUp();
                     $(this).removeClass('open');
@@ -181,7 +188,7 @@
                 }
             });
 
-            $('.search').click(function() {
+            $('.search').click(function () {
                 var phone = $('.phone').val();
                 // var activityId = $('.activityId').val();
                 if (!phone) {
@@ -200,7 +207,7 @@
                 $.post(modifyUserStatusApi, {
                     userId: userId,
                     status: status,
-                }, function(res) {
+                }, function (res) {
                     if (res.errno == '0') {
                         alert('成功');
                         window.location.reload();
@@ -208,6 +215,27 @@
                         alert(res.errmsg);
                     }
                 });
+            }
+
+            function seeRecommender(parentId) {
+                if (parentId) {
+                    $.post('/admin/index/user_info', {
+                        userId: parentId
+                    }, function (res) {
+                        if (res.errno == '0') {
+                            var data = res.data || {};
+                            swal(data.userName || data.nickName || '空', data.phone, "success");
+                        } else {
+                            swal("Sorry!", "无推荐者信息", "error");
+                        }
+                    })
+
+                }
+                else {
+                    swal("OMG!", "弹出了一个错误提示框", "error");
+                }
+                // swal("OMG!", "弹出了一个错误提示框", "error"); 
+                // swal("Good!", "弹出了一个操作成功的提示框", "success");
             }
         </script>
 </body>

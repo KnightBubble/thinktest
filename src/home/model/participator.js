@@ -6,7 +6,7 @@ export default class extends think.model.base {
     async addParticipator(participatorInfo) {
         let insertId = await this.thenAdd({
             userId: participatorInfo.openId,
-            parentId: participatorInfo.parentId,
+            parentId: participatorInfo.parentId == participatorInfo.openId ? '' : participatorInfo.parentId,
             activityId: participatorInfo.activityId,
             status: 0,
             joinTime: Date.now()
@@ -42,7 +42,7 @@ export default class extends think.model.base {
                 join: 'inner', //join 方式，有 left, right, inner 3 种方式
                 as: 'userinfo', // 表别名
                 on: ['userId', 'userId'] //ON 条件
-            }).field('userinfo.userId,status,nickName,activityId,userName,joinTime,phone').where({
+            }).field('userinfo.userId,status,nickName,activityId,userName,joinTime,parentId,phone').where({
                 phone: phone
             }).page(pageNum, 10).countSelect();
         }
@@ -51,7 +51,7 @@ export default class extends think.model.base {
             join: 'inner', //join 方式，有 left, right, inner 3 种方式
             as: 'userinfo', // 表别名
             on: ['userId', 'userId'] //ON 条件
-        }).field('userinfo.userId,status,nickName,activityId,userName,joinTime,phone').page(pageNum, 10).countSelect();
+        }).field('userinfo.userId,status,nickName,activityId,userName,joinTime,parentId,phone').page(pageNum, 10).countSelect();
     }
 
     /**
@@ -87,7 +87,7 @@ export default class extends think.model.base {
             on: ['userId', 'userId'] //ON 条件
         }).where({
             parentId: ['=', userId]
-        }).field('userinfo.userId,userinfo.uerPortrait,status,nickName,joinTime').select();
+        }).field('userinfo.userId,userinfo.uerPortrait,status,nickName,userName,joinTime').select();
     }
 
     /**

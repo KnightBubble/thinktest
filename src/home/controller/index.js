@@ -7,14 +7,14 @@ import API from 'co-wechat-api';
 import Base from './base.js';
 
 const wechatConf = think.config('wechat');
-const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async(openid) => {
+const WechatOAuthApi = new OAuth(wechatConf.appid, wechatConf.appsecret, async (openid) => {
     return await think.cache(openid);
-}, async(openid, token) => {
+}, async (openid, token) => {
     await think.cache(openid, token);
 });
-const WechatJSApi = new API(wechatConf.appid, wechatConf.appsecret, async() => {
+const WechatJSApi = new API(wechatConf.appid, wechatConf.appsecret, async () => {
     return await think.cache('access_token');
-}, async(token) => {
+}, async (token) => {
     await think.cache('access_token', token);
 });
 
@@ -33,7 +33,7 @@ export default class extends Base {
         if (this.wechatCode !== code) {
             let token = await WechatOAuthApi.getAccessToken(code);
             let openId = token.data.openid;
-            let cacheOpenid = await this.cookie('openId');
+            let cacheOpenid = this.cookie('openId');
             if (!cacheOpenid) {
                 let userModel = this.model('admin/user');
                 let userInfo = await userModel.getUserByOpenid(openId);
@@ -156,29 +156,56 @@ export default class extends Base {
         let activityId = postData.activityId;
         let cacheCode = await this.cache(phone);
         if (cacheCode != code) {
-            this.fail('PHONE_CODE_ERROR');
-            return;
+            // this.fail('PHONE_CODE_ERROR');
+            return this.json({
+                errno: 100008,
+                errmsg: '手机验证码错误'
+            })
+
         }
         let activityModel = this.model('admin/activity');
         let isActivityValid = await activityModel.isActivityValid(activityId)
 
         if (!isActivityValid) {
-            return this.fail('ACTIVITY_UNVALID_ERROR');
+            // return this.fail('ACTIVITY_UNVALID_ERROR');
+            return this.json({
+                errno: 100009,
+                errmsg: '活动已下线，无法参与'
+            })
         }
 
         let participatorModel = this.model('participator');
         let userModel = this.model('admin/user');
 
-        let effectRow = userModel.updateNamePhone(openId, postData.userName, postData.phone);
+
         let insertId = await participatorModel.addParticipator(postData);
-        if (insertId && effectRow) {
-            this.json({
-                errno: 0,
-                errmsg: '参与活动成功'
-            });
+        if (insertId.type == 'add') {
+            let effectRow = userModel.updateNamePhone(openId, postData.userName, postData.phone);
+            if (effectRow) {
+                this.json({
+                    errno: 0,
+                    errmsg: '参与活动成功'
+                });
+            } else {
+                this.json({
+                    errno: 100010,
+                    errmsg: '更新数据失败'
+                });
+            }
         } else {
-            this.fail('ADDA_ACTIVITY_DB_ERROR');
+            this.json({
+                errno: 100011,
+                errmsg: '已经参与活动'
+            });
         }
+        // if (insertId && effectRow) {
+        //     this.json({
+        //         errno: 0,
+        //         errmsg: '参与活动成功'
+        //     });
+        // } else {
+        //     this.fail('ADDA_ACTIVITY_DB_ERROR');
+        // }
     }
 
     /**
@@ -321,17 +348,20 @@ export default class extends Base {
         let phone = this.post('phone');
         let cacheCode = await this.cache(phone);
         console.log('cacheCode=>' + cacheCode);
-        if (cacheCode) {
-            this.json({
-                errno: 0,
-                code: cacheCode,
-                errmsg: '已发'
-            });
-            return;
-        }
+        // if (cacheCode) {
+        //     this.json({
+        //         errno: 0,
+        //         code: cacheCode,
+        //         errmsg: '已发'
+        //     });
+        //     return;
+        // }
         if (!this.cookie('openId')) {
-            this.fail('NOT_HAVE_OPENID_ERROR');
-            return;
+            // this.fail('NOT_HAVE_OPENID_ERROR');
+            return this.json({
+                errno: 100007,
+                errmsg: '请在微信内打开此页面'
+            });
         }
 
         let SmsService = think.service('sms');
