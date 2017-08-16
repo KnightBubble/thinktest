@@ -57,7 +57,7 @@
             var data = data.list;
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
-                var li = "<li><span class = 'name'>" + item.userName || item.nickName + "</span><span class = 'status'>" + map[item.status] + "</span ><span class='date'>" + item.joinTime + "</span> </li>";
+                var li = "<li><span class = 'name'>" + (item.userName) + "</span><span class = 'status'>" + map[item.status] + "</span ><span class='date'>" + item.joinTime + "</span> </li>";
                 dom += li;
             }
             $('ul.list').append(dom);
