@@ -268,17 +268,19 @@ export default class extends Base {
             let data = this.post();
             let openId = this.cookie('openId');
             let activityId = data.activityId;
+            let parentId = data.parentId;
             let model = this.model('participator');
             let isJoin = await model.isJoin(openId, activityId);
-            let result = {};
-            if (isJoin) {
-                result = await model.userSupportors(openId, activityId);
-                console.log('userSupportInfoAction model userSupportors=>');
-                console.log(result);
-                result.forEach(function (value) {
-                    value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
-                });
+            let result = [];
+            if (!parentId) {
+                parentId = openId;
             }
+            result = await model.userSupportors(parentId, activityId);
+            console.log('userSupportInfoAction model userSupportors=>');
+            console.log(result);
+            result.forEach(function (value) {
+                value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
+            });
             console.log('userSupportInfoAction result format => ');
             console.log(result);
             this.json({

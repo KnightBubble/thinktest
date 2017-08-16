@@ -1,11 +1,12 @@
-(function() {
+(function () {
     var detailApi = "/home/index/user_support_info";
     $('.section').hide();
     var activityId = getUrlParameter('activityId');
     parentId = getUrlParameter('parentId') || "";
     $.post(detailApi, {
-        activityId: activityId
-    }, function(res) {
+        activityId: activityId,
+        parentId: parentId
+    }, function (res) {
         if (res.errno == '0') {
             renderView(res.data);
         } else {
@@ -46,7 +47,7 @@
         shareConfig(wxObj);
     }
 
-    renderView = function(data) {
+    renderView = function (data) {
         //status 0====未参与    1===已经参与
         var map = {
             0: "否",
@@ -74,7 +75,7 @@
         }
     }
 
-    $('.go2join').click(function() {
+    $('.go2join').click(function () {
         window.location.href = './register.html?activityId=' + activityId + "&parentId=" + parentId;
     })
 
