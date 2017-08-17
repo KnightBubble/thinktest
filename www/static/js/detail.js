@@ -1,12 +1,11 @@
-(function () {
+(function() {
     var detailApi = "/home/index/user_support_info";
     $('.section').hide();
     var activityId = getUrlParameter('activityId');
     parentId = getUrlParameter('parentId') || "";
     $.post(detailApi, {
-        activityId: activityId,
-        parentId: parentId
-    }, function (res) {
+        activityId: activityId
+    }, function(res) {
         if (res.errno == '0') {
             renderView(res.data);
         } else {
@@ -35,9 +34,9 @@
     }
     if (isWeiXin()) {
         /**
-         * 初始化二次分享
+         * 初始化二次分享    谁分享 parentId 是谁 不管怎么进入详情页面
          */
-        var shareLink = window.location.origin + '/home/index/detail.html?activityId=' + activityId + '&parentId=' + (parentId || $.fn.cookie('openId'));
+        var shareLink = window.location.origin + '/home/index/detail.html?activityId=' + activityId + '&parentId=' + $.fn.cookie('openId');
         var wxObj = {
             desc: $('.shareTitle').data('title'),
             title: '快来参与活动吧',
@@ -47,13 +46,14 @@
         shareConfig(wxObj);
     }
 
-    renderView = function (data) {
+    renderView = function(data) {
         //status 0====未参与    1===已经参与
         var map = {
             0: "否",
             1: "是"
         }
         if (data.status == true) {
+            toast('您已经参与过本次活动！');
             var dom = '';
             var data = data.list;
             for (var i = 0; i < data.length; i++) {
@@ -75,7 +75,7 @@
         }
     }
 
-    $('.go2join').click(function () {
+    $('.go2join').click(function() {
         window.location.href = './register.html?activityId=' + activityId + "&parentId=" + parentId;
     })
 
