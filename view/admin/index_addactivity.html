@@ -113,9 +113,20 @@
                       <div class='btn addDesc'>增加描述</div>
                       </div>
                   </label>
+                    <label for="registerDescption">
+                      <span>注册页面规则描述</span>
+                      <div style='display:inline-block'>
+                      <input type='text' name='registerDescption' class='registerDescption'  required>
+                      <div class='btn addDescRegister'>增加描述</div>
+                      </div>
+                  </label>
                     <label for="shareTitle">
-                      <span>二次分享描述</span>
+                      <span>二次分享title</span>
                       <input type='text' name='shareTitle' class='shareTitle'>
+                  </label>
+                     <label for="shareDescption">
+                      <span>二次分享描述</span>
+                      <input type='text' name='shareDescption' class='shareDescption'>
                   </label>
                     <label for="picUrl">
                       <span>活动图片</span>
@@ -158,7 +169,10 @@
         <script>
             $('.addDesc').click(function () {
                 $('<input type="text" name="descption" class="descption" required="">').insertBefore($(this));
-            })
+            });
+            $('.addDescRegister').click(function () {
+                $('<input type="text" name="registerDescption" class="registerDescption" required="">').insertBefore($(this));
+            });
             var type = 1;
             var id, activityUrl, shareIcon;
             var $list = $('#list');
@@ -242,7 +256,9 @@
             $('.creatActivity').click(function () {
                 var title = $('.title').val();
                 var descption = [];
+                var registerDescption = [];
                 var shareTitle = $('.shareTitle').val();
+                var shareDescption = $('.shareDescption').val();
                 var length = $('.descption').length;
                 var bgColor = '#' + ($('#chosen-value').val() || '89502E');
                 for (var i = 0; i < length; i++) {
@@ -251,6 +267,9 @@
                         descption.push(desc)
                     }
                 }
+                $('.registerDescption').each(function (index,value) {
+                    registerDescption.push($(value).val());
+                });
                 if (!title) {
                     alert('请填写活动名称');
                     return;
@@ -267,10 +286,12 @@
                     activityId: id,
                     title: title,
                     descption: descption.join('-----'),
+                    registerDescption: registerDescption.join('-----'),
                     picUrl: activityUrl,
                     shareTitle: shareTitle,
                     shareIcon: shareIcon,
-                    bgColor: bgColor
+                    bgColor: bgColor,
+                    shareDescption:shareDescption
                 }, function (res) {
                     if (res.errno == '0') {
                         alert('活动创建成功');
@@ -317,7 +338,18 @@
                             }
                             $('.descption:eq(' + i + ')').val(descption[i]);
                         }
-                    } else {
+                    }
+                    else if (key == 'registerDescption') {
+                        var registerDescption = data[key] && data[key].split('-----') || [];
+                        for (var i = 0; i < registerDescption.length; i++) {
+                            if (!$('.registerDescption:eq(' + i + ')').length && registerDescption[i]) {
+                                $('<input type="text" name="registerDescption" class="registerDescption" required="">').insertBefore($(
+                                    '.addDescRegister'));
+                            }
+                            $('.registerDescption:eq(' + i + ')').val(registerDescption[i]);
+                        }
+                    }
+                    else {
                         $('.' + key).val(data[key]);
                         shareIcon = data.shareIcon
                         activityUrl = data.picUrl;

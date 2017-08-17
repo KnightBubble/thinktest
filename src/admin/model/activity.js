@@ -47,13 +47,17 @@ export default class extends think.model.base {
         }
         var id = postData.activityId;
         if (id) {
-            let affectedRows = await this.where('1=1').update({
+            let affectedRows = await this.where({
+                id: id
+            }).update({
                 title: postData.title,
                 descption: postData.descption,
                 picUrl: postData.picUrl,
                 shareIcon: postData.shareIcon,
                 shareTitle: postData.shareTitle,
-                bgColor: postData.bgColor
+                bgColor: postData.bgColor,
+                registerDescption: postData.registerDescption,
+                shareDescption: postData.shareDescption
             });
             return affectedRows;
         }
