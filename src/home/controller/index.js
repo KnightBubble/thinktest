@@ -272,17 +272,23 @@ export default class extends Base {
             let model = this.model('participator');
             let isJoin = await model.isJoin(openId, activityId);
             let result = [];
-            if (!parentId) {
+
+            if (isJoin) {
+                //  如果已经参与活动，则显示自己的助力者列表
                 parentId = openId;
+            } else {
+                parentId = parentId;
             }
-            result = await model.userSupportors(parentId, activityId);
-            console.log('userSupportInfoAction model userSupportors=>');
-            console.log(result);
-            result.forEach(function (value) {
-                value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
-            });
-            console.log('userSupportInfoAction result format => ');
-            console.log(result);
+            if (parentId) {
+                result = await model.userSupportors(parentId, activityId);
+                console.log('userSupportInfoAction model userSupportors=>');
+                console.log(result);
+                result.forEach(function (value) {
+                    value.joinTime = think.datetime(new Date(value.joinTime * 1), 'YYYY-MM-DD');
+                });
+                console.log('userSupportInfoAction result format => ');
+                console.log(result);
+            }
             this.json({
                 errno: 0,
                 errmsg: '查询成功',
