@@ -38,11 +38,12 @@
          */
         var shareLink = window.location.origin + '/home/index/detail.html?activityId=' + activityId + '&parentId=' + $.fn.cookie('openId');
         var wxObj = {
-            desc: $('.shareTitle').data('title'),
-            title: '快来参与活动吧',
-            link: shareLink,
-            imgUrl: $('.shareIcon').data('icon')
+          desc: $('.shareDescption').data('desc'),
+          title: $('.shareTitle').data('title'),
+          link: shareLink,
+          imgUrl: $('.shareIcon').data('icon')
         };
+        alert(JSON.stringify(wxObj));
         shareConfig(wxObj);
     }
 
