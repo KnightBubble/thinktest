@@ -41,9 +41,8 @@
           desc: $('.shareDescption').data('desc'),
           title: $('.shareTitle').data('title'),
           link: shareLink,
-          imgUrl: $('.shareIcon').data('icon')
+          imgUrl: window.location.origin + $('.shareIcon').data('icon')
         };
-        // alert(JSON.stringify(wxObj));
         shareConfig(wxObj);
     }
 
