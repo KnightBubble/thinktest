@@ -43,7 +43,7 @@
           link: shareLink,
           imgUrl: $('.shareIcon').data('icon')
         };
-        alert(JSON.stringify(wxObj));
+        // alert(JSON.stringify(wxObj));
         shareConfig(wxObj);
     }
 
