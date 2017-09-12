@@ -34,7 +34,7 @@
             height: 35px;
             line-height: 35px;
             vertical-align: top;
-            min-width: 100px;
+            min-width: 140px;
             text-align: center;
         }
 
@@ -106,18 +106,41 @@
                       <span>活动名称</span>
                       <input type='text' name='title' class='title' required>
                   </label>
+                  <label for="background">
+                      <span>活动背景色</span>
+                        <input id="chosen-value" value="00b7ee" name='background' readonly>
+                        <button class="jscolor {valueElement:'chosen-value'} btn">选择背景色</button>
+                  </label>
                     <label for="descption">
-                      <span>活动描述</span>
+                      <span>活动描述—详情页面</span>
                       <div style='display:inline-block'>
                       <input type='text' name='descption' class='descption'  required>
                       <div class='btn addDesc'>增加描述</div>
                       </div>
                   </label>
+                  <label for="picUrl">
+                      <span>活动图片—详情页面</span>
+                      <div id="uploader" class="wu-example">
+                          <div id="list" class="uploader-list"></div>
+                          <div class="btns">
+                              <div id="picker">上传图片</div>
+                          </div>
+                      </div>
+                  </label>
                     <label for="registerDescption">
-                      <span>注册页面规则描述</span>
+                      <span>活动描述—注册页面</span>
                       <div style='display:inline-block'>
                       <input type='text' name='registerDescption' class='registerDescption'  required>
                       <div class='btn addDescRegister'>增加描述</div>
+                      </div>
+                  </label>
+                  <label for="picUrl">
+                      <span>活动图片—注册页面</span>
+                      <div id="uploader" class="wu-example">
+                          <div id="list2" class="uploader-list"></div>
+                          <div class="btns">
+                              <div id="picker2">上传图片</div>
+                          </div>
                       </div>
                   </label>
                     <label for="shareTitle">
@@ -128,32 +151,14 @@
                       <span>二次分享描述</span>
                       <input type='text' name='shareDescption' class='shareDescption'>
                   </label>
-                    <label for="picUrl">
-                      <span>活动图片</span>
-                      <div id="uploader" class="wu-example">
-                          <!--用来存放文件信息-->
-                          <div id="list" class="uploader-list"></div>
-                          <div class="btns">
-                              <div id="picker">上传图片</div>
-                              <!-- <div id="ctlBtn" class="btn btn-default" data-id='1'>开始上传</div> -->
-                          </div>
-                      </div>
-                  </label>
                     <label for="shareIcon">
                       <span>二次分享icon</span>
                       <div id="uploader" class="wu-example">
-                          <!--用来存放文件信息-->
                           <div id="list1" class="uploader-list"></div>
                           <div class="btns">
                               <div id="picker1">上传图片</div>
-                              <!-- <div id="ctlBtn" class="btn btn-default" data-id='2'>开始上传</div> -->
                           </div>
                       </div>
-                  </label>
-                    <label for="descption">
-                      <span>活动背景色</span>
-                        <input id="chosen-value" value="00b7ee" name='background' readonly>
-                        <button class="jscolor {valueElement:'chosen-value'} btn">选择背景色</button>
                   </label>
                     <div class='btn creatActivity'>创建活动</div>
                 </form>
@@ -174,9 +179,10 @@
                 $('<input type="text" name="registerDescption" class="registerDescption" required="">').insertBefore($(this));
             });
             var type = 1;
-            var id, activityUrl, shareIcon;
+            var id, activityUrl, shareIcon,registerPicUrl;
             var $list = $('#list');
             var $list1 = $('#list1');
+            var $list2 = $('#list2');
 
             var uploader = WebUploader.create({
                 auto: true,
@@ -208,6 +214,21 @@
                 mimeTypes: 'image/*',
                 // sendAsBinary:true,
             });
+            var uploader2 = WebUploader.create({
+                auto: true,
+                // swf文件路径
+                swf: '/static/js/webuploader/Uploader.swf',
+                // 文件接收服务端。
+                server: '/admin/index/upload_image',
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker2',
+                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                resize: false,
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*',
+                // sendAsBinary:true,
+              });
             uploader.on('uploadSuccess', function (file, result) {
                 var status = '';
                 if (file) {
@@ -234,6 +255,19 @@
                     '<p class="state">' + status + '</p>' +
                     '</div>');
             });
+            uploader2.on('uploadSuccess', function (file, result) {
+                var status = '';
+                if (file) {
+                  status = '上传成功';
+                  registerPicUrl = result.url;
+                } else {
+                  status = '上传失败';
+                }
+                $list2.html('<div id="' + file.id + '" class="item">' +
+                  '<h4 class="info">' + file.name + '</h4>' +
+                  '<p class="state">' + status + '</p>' +
+                  '</div>');
+              });
             // 当有文件被添加进队列的时候
             uploader.on('fileQueued', function (file) {
                 $list.html('<div id="' + file.id + '" class="item">' +
@@ -248,11 +282,14 @@
                     '<p class="state">等待上传...</p>' +
                     '</div>');
             });
+            // 当有文件被添加进队列的时候
+            uploader2.on('fileQueued', function (file) {
+              $list2.html('<div id="' + file.id + '" class="item">' +
+                '<h4 class="info">' + file.name + '</h4>' +
+                '<p class="state">等待上传...</p>' +
+                '</div>');
+            });
 
-            $('#ctlBtn').on('click', function () {
-                type = $(this).data('id');
-                uploader.upload();
-            })
             $('.creatActivity').click(function () {
                 var title = $('.title').val();
                 var descption = [];
@@ -274,10 +311,10 @@
                     alert('请填写活动名称');
                     return;
                 }
-                if (descption.length == 0) {
-                    alert('请填写活动描述');
-                    return;
-                }
+                // if (descption.length == 0) {
+                //     alert('请填写活动描述');
+                //     return;
+                // }
                 if (!activityUrl) {
                     alert('请上传活动图片！！！');
                     return;
@@ -285,9 +322,10 @@
                 $.post('/admin/index/activity_add', {
                     activityId: id,
                     title: title,
-                    descption: descption.join('-----'),
-                    registerDescption: registerDescption.join('-----'),
+                    descption: descption.join('-----') || '',
+                    registerDescption: registerDescption.join('-----') || '',
                     picUrl: activityUrl,
+                    registerPicUrl: registerPicUrl,
                     shareTitle: shareTitle,
                     shareIcon: shareIcon,
                     bgColor: bgColor,

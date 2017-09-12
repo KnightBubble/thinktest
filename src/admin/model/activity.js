@@ -57,7 +57,8 @@ export default class extends think.model.base {
                 shareTitle: postData.shareTitle,
                 bgColor: postData.bgColor,
                 registerDescption: postData.registerDescption,
-                shareDescption: postData.shareDescption
+                shareDescption: postData.shareDescption,
+                registerPicUrl: postData.registerPicUrl
             });
             return affectedRows;
         }

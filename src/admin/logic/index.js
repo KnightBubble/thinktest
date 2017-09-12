@@ -23,10 +23,6 @@ export default class extends think.logic.base {
                 required: true,
                 string: true
             },
-            descption: {
-                required: true,
-                string: true
-            },
             picUrl: {
                 required: true,
                 string: true
@@ -42,7 +38,7 @@ export default class extends think.logic.base {
 
     /**
      * /admin/index/modify_activity_status
-     * 
+     *
      */
 
     modifyActivityStatusAction() {
@@ -124,7 +120,7 @@ export default class extends think.logic.base {
         }
     }
 
-    
+
     async userInfoAction() {
         this.allowMethods = ['post', 'get'];
         let rules = {
