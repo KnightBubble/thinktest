@@ -3,14 +3,14 @@
       font-size: 1em;
       -webkit-text-size-adjust: none;
   }
-  
+
   input,
   textarea,
   select {
       font-size: 100%;
       font-family: inherit;
   }
-  
+
   html,
   body,
   h1,
@@ -37,83 +37,83 @@
       padding: 0;
       margin: 0;
   }
-  
+
   h4,
   h5,
   h6 {
       font-size: 1em;
   }
-  
+
   ul,
   ol {
       padding-left: 0;
       list-style-type: none;
   }
-  
+
   img {
       border: 0;
   }
-  
+
   a {
       text-decoration: none;
       outline: none;
   }
-  
+
   input,
   textarea {
       outline: none;
       -webkit-appearance: none;
       border-radius: 0;
   }
-  
+
   i {
       font-style: normal;
   }
-  
+
   button {
       outline: none;
       border: none;
       background: none;
   }
-  
+
   html {
       height: 100%;
   }
-  
+
   input,
   textarea {
       border: 1px solid #C6C6C6;
       padding: 3px;
   }
-  
+
   input {
       box-sizing: border-box;
   }
-  
+
    ::-webkit-input-placeholder {
       color: #bfbfbf;
   }
-  
+
   .fr {
       float: right;
   }
-  
+
   .fl {
       float: left;
   }
-  
+
   .hidden {
       display: none;
   }
-  
+
   .unvisialbe {
       visibility: hidden;
   }
-  
+
   .clear {
       clear: both;
   }
-  
+
   .clearfix:after {
       visibility: hidden;
       display: block;
@@ -122,11 +122,11 @@
       clear: both;
       height: 0;
   }
-  
+
   .clearfix {
       zoom: 1
   }
-  
+
   .mask {
       position: absolute;
       position: fixed;
@@ -137,7 +137,7 @@
       right: 0;
       background: rgba(0, 0, 0, 0.5);
   }
-  
+
   .simpledialog {
       position: absolute;
       z-index: 10001;
@@ -148,7 +148,7 @@
       -webkit-border-radius: 3px;
       -ms-boder-radius: 3px;
   }
-  
+
   .tipdialog {
       position: absolute;
       z-index: 10001;
@@ -158,7 +158,7 @@
       text-align: center;
       opacity: 0;
   }
-  
+
   .tipdialog-content {
       padding: 10px 12px;
       font-size: 17px;
@@ -172,17 +172,17 @@
       -webkit-border-radius: 3px;
       -ms-boder-radius: 3px;
   }
-  
+
   .tipdialog-content .icon-tick {
       color: #53c123;
       vertical-align: -1px;
   }
-  
+
   .tipdialog-content .icon-cross {
       color: red;
       vertical-align: -1px;
   }
-  
+
   .borderradius-3 {
       border-radius: 3px;
       -moz-border-radius: 3px;
@@ -190,7 +190,7 @@
       -ms-boder-radius: 3px;
       -o-boder-radius: 3px;
   }
-  
+
   .combtn {
       border: 0;
       text-align: center;
@@ -204,40 +204,40 @@
       -o-boder-radius: 3px;
       border-radius: 3px;
   }
-  
+
   .btn-invalid {
       color: #ddd !important;
       background-color: #898989 !important;
   }
-  
+
   body {
       width: 100%;
       overflow-x: hidden;
       background: #fadf75;
       color: #341e00;
   }
-  
+
   .wrapper {
       max-width: 12rem;
       overflow: hidden;
       margin: 0 auto;
       padding-bottom: 1rem;
   }
-  
+
   .t-banner {
       position: relative;
   }
-  
+
   .t-banner img {
       display: block;
       width: 100%;
   }
-  
+
   .content1 {
       width: 90%;
       margin: 0 auto;
   }
-  
+
   input[type='text'],
   input[type='tel'],
   input[type='number'] {
@@ -250,11 +250,11 @@
       padding-left: 10px;
       border-radius: 4px;
   }
-  
+
   input[type='number'] {
       width: 60%;
   }
-  
+
   #codeBtn {
       font-size: 45%;
       height: 1.5rem;
@@ -269,13 +269,13 @@
       line-height: 1.5rem;
       border-radius: 5px;
   }
-  
+
   input[type='text']::-webkit-input-placeholder,
   input[type='tel']::-webkit-input-placeholder {
       color: #a9a9a9;
       text-align: left;
   }
-  
+
   .combtn {
       display: block;
       background-color: #fe4d3d;
@@ -283,29 +283,29 @@
       font-size: .6rem;
       height: 1.5rem;
       width: 100%;
-      margin: .5rem auto 0;
+      margin: .0rem auto 0;
       border-radius: 4px;
   }
-  
+
   a.combtn:link,
   a.combtn:visited {
       color: #fff;
   }
-  
+
   a.combtn:hover {
       color: #fff;
   }
-  
+
   .combtn-hover {
       background: #fb2613;
   }
-  
+
   .capture-tip {
       color: #fff;
       font-size: .6rem;
       margin-top: .2rem;
   }
-  
+
   .sec-sub-title {
       line-height: 1rem;
       background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgkAAAABAQMAAABuYK//AAAABlBMVEVdQDUAAACKcfI8AAAAAnRSTlMzAIL4qAgAAAAVSURBVAjXY2hgQAfy/3GDAwwYoAEAySocxUiGKqkAAAAASUVORK5CYII=) no-repeat;
@@ -319,16 +319,16 @@
       margin-top: 0.25rem;
       width: 93%;
   }
-  
+
   .rule {
       margin: 0 auto;
   }
-  
+
   .rule ul {
       width: 90%;
       margin: 0 auto;
   }
-  
+
   .rule li {
       font-size: .45rem;
       line-height: .58rem;
@@ -336,12 +336,12 @@
       margin-top: .28rem;
       color: #333333;
   }
-  
+
   .rule li .toggle-help {
       color: #CB120E;
       font-weight: normal;
   }
-  
+
   .result .result-inner {
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
@@ -354,13 +354,13 @@
       padding: 0.36rem 0.4rem 0;
       position: relative;
   }
-  
+
   .result-title {
       font-size: .53rem;
       text-align: left;
       margin-bottom: 0.1rem;
   }
-  
+
   .result-sub-title {
       font-size: .45rem;
       color: #666;
@@ -368,90 +368,90 @@
       float: left;
       line-height: .6rem;
   }
-  
+
   .result .success,
   .result .success a {
       color: #ef361e;
       position: relative;
   }
-  
+
   .result .success a {
       display: block;
   }
-  
+
   .result .number .rmb {
       font-size: .86rem;
       font-style: normal;
       font-weight: bold;
   }
-  
+
   .result .number {
       line-height: 1.8rem;
       height: 1.6rem;
       margin-bottom: .23rem;
   }
-  
+
   .couponname {
       height: 1.6rem;
       margin-top: 0.14rem;
   }
-  
+
   .result .number i {
       font-size: 1.57rem;
       font-style: normal;
       margin-left: -0.3rem;
       white-space: nowrap;
   }
-  
+
   .success .result-sub-title i {
       font-size: .6rem;
   }
-  
+
   .result .result-inner-usepri i {
       font-size: 2.1rem;
       font-style: normal;
       font-weight: bold;
   }
-  
+
   .result-inner-usepri .number {
       margin-top: -0.1rem;
   }
-  
+
   .info {
       text-align: center;
       width: 90%;
       margin: 0 auto;
   }
-  
+
   .info .modification {
       color: #e31830;
   }
-  
+
   .info .goupd {
       color: #e01933;
       margin-left: .1rem;
   }
-  
+
   .downloadbtn,
   .gotobtn {
       width: 93%;
   }
-  
+
   .downloadbtn {
       margin: 0px auto;
   }
-  
+
   .dlbtn {
       background-color: #fff;
       color: #333;
       line-height: 1.5rem;
   }
-  
+
   .gotobtn {
       line-height: 1.5rem;
       color: #333333;
   }
-  
+
   .result .fail-over,
   .result .fail-expire,
   .result .result-gray,
@@ -461,72 +461,72 @@
       color: #ccc;
       font-size: 0.78rem;
   }
-  
+
   .info {
       font-size: .45rem;
       margin-bottom: .3rem;
   }
-  
+
   .user-phone {
       color: #ef361e;
   }
-  
+
   .result-gray .info,
   .result-red .info {
       font-size: 0.41rem;
       line-height: 0.6rem;
       color: #ccc;
   }
-  
+
   .result-red .info {
       line-height: 1rem;
   }
-  
+
   .result-red {
       padding-top: 0.8rem;
       font-weight: bold;
       font-size: 0.8rem;
       color: #ef361e;
   }
-  
+
   .help-main {
       margin-top: .93rem;
   }
-  
+
   .friends {
       margin-top: .7rem;
   }
-  
+
   .friends-list {
       width: 90%;
       margin: .19rem auto 0;
   }
-  
+
   .friend {
       border-top: 1px solid rgba(93, 64, 53, 0.2);
       padding: .386rem 0;
   }
-  
+
   .friend:first-child {
       border-top: none;
   }
-  
+
   .phoneverifier em {
       font-style: normal;
   }
-  
+
   .phoneverifier-title {
       text-align: center;
       font-size: 17px;
   }
-  
+
   .phoneverifier-desc {
       font-size: 12px;
       color: #aaaaaa;
       text-align: center;
       margin-top: 5px;
   }
-  
+
   .phoneverifier-tel {
       font-size: 14px;
       color: #656565;
@@ -536,24 +536,24 @@
       margin-top: 10px;
       margin-left: 7px;
   }
-  
+
   .phoneverifier-codewrap {
       margin-top: 12px;
       position: relative;
   }
-  
+
   .phoneverifier-codewrap .icon {
       font-size: 17px;
       position: absolute;
       top: 8px;
       left: 137px;
   }
-  
+
   .phoneverifier-codewrap-inline .icon {
       top: 11px;
       left: 60%;
   }
-  
+
   .phoneverifier-codeinput {
       height: 1.5rem;
       width: 162px;
@@ -563,7 +563,7 @@
       vertical-align: top;
       border-radius: 4px;
   }
-  
+
   .phoneverifier-codesend {
       width: 30%;
       height: 1.5rem;
@@ -576,7 +576,7 @@
       color: #6b450a;
       border-radius: 4px;
   }
-  
+
   .phoneverifier-btn {
       display: block;
       width: 100%;
@@ -586,32 +586,32 @@
       background-color: #ffd603;
       color: #6b450a;
   }
-  
+
   .phoneverifier-codesend-red,
   .phoneverifier-btn-red {
       background-color: #fe4d3d;
       color: #fff;
   }
-  
+
   .phoneverifier-sub {
       margin-top: 15px;
       font-size: 12px;
       color: #898989;
   }
-  
+
   .phoneverifier-voice {
       color: #ffd603;
       text-decoration: underline;
   }
-  
+
   .phoneverifier-voice-red {
       color: #ef361e;
   }
-  
+
   .phoneverifier-voice-disable {
       color: inherit;
   }
-  
+
   .phoneverifier-dialingtip {
       font-size: 11px;
       color: #898989;
@@ -620,26 +620,26 @@
       margin: 0 auto;
       margin-top: 8px;
   }
-  
+
   .phoneverifier-informtip {
       font-size: 12px;
       margin-top: 5px;
   }
-  
+
   .phoneverifier-informtip a {
       color: #ff6900;
   }
-  
+
   .phoneverifier-protocol {
       font-size: 12px;
       color: #898989;
   }
-  
+
   .phoneverifier-protocol a {
       color: #898989;
       text-decoration: underline;
   }
-  
+
   .phoneverifier-protocol i {
       display: block;
       float: left;
@@ -651,12 +651,12 @@
       position: relative;
       top: 3px;
   }
-  
+
   .phoneverifier-protocol-inline i {
       float: none;
       display: inline-block;
   }
-  
+
   .phoneverifier-protocol i em {
       display: block;
       width: 7px;
@@ -669,7 +669,7 @@
       margin-top: 3px;
       margin-left: 2px;
   }
-  
+
   .wx-tip {
       position: absolute;
       position: fixed;
@@ -683,41 +683,41 @@
       -moz-background-size: 100% auto;
       background-size: 100% auto;
   }
-  
+
   .mask {
       background: rgba(0, 0, 0, 0.7);
   }
-  
+
   .content-bg {
-      width: 95%;
+      width: 100%;
       margin: 0px auto;
       background: rgba(255, 255, 255, 0.6);
       border-radius: 5px;
       padding: .3rem 0px;
   }
-  
+
   .margin-gap {
       margin-top: .3rem;
   }
-  
+
   .padding-no-gap {
       padding-top: 0;
   }
-  
+
   .picyzm-title {
       font-size: 18px;
       text-align: center;
       margin-top: 10px;
       font-weight: bold;
   }
-  
+
   .picyzm-tip {
       color: #d4d4d4;
       font-size: 13px;
       margin: 10px 0px;
       text-align: center;
   }
-  
+
   .picyzm-pic {
       width: 90px;
       height: 30px;
@@ -727,12 +727,12 @@
       background-repeat: no-repeat;
       background-size: 90px 30px;
   }
-  
+
   .picyzm {
       width: 85%;
       margin: 0px auto;
   }
-  
+
   .picyzm .picyzm-contect {
       width: 90px;
       height: 30px;
@@ -742,7 +742,7 @@
       color: #333;
       font-size: 16px;
   }
-  
+
   .picyzm-submit {
       width: 80%;
       height: 35px;
@@ -754,7 +754,7 @@
       text-align: center;
       line-height: 35px;
   }
-  
+
   .picyzm-close {
       color: #a4a4a4;
       font-size: 26px;
@@ -764,7 +764,7 @@
       width: 30px;
       text-align: right;
   }
-  
+
   .picyzm-error {
       width: 80%;
       margin: 0px auto;
@@ -772,13 +772,13 @@
       font-size: 12px;
       color: #ff0000;
   }
-  
+
   .phoneverifier-animateShow {
       transition: .6s;
       -webkit-transition: .6s;
       opacity: 0;
   }
-  
+
   .result-bottom {
       clear: both;
       border-top: 1px dashed #eaeaea;
@@ -788,7 +788,7 @@
       padding: 0.2rem 0;
       text-align: left;
   }
-  
+
   .result-meituan {
       background: #fad100;
       color: #733e04;
@@ -800,11 +800,11 @@
       padding: 0 5px;
       margin-right: 0.13rem;
   }
-  
+
   .result i.coupon-price-float {
       font-size: 0.86rem;
   }
-  
+
   .result .info {
       color: #a9a9a9!important;
       font-size: .3rem!important;
@@ -812,16 +812,16 @@
       text-align: center;
       width: 100%;
   }
-  
+
   .result .result-red {
       color: #ef361e;
       font-size: 0.51rem;
   }
-  
+
   .result .result-inner-nobottom {
       padding-top: 0.7rem;
   }
-  
+
   .result .coupons-more {
       margin: .21rem 0.4rem 0;
       background-color: white;
@@ -832,14 +832,14 @@
       line-height: 1rem;
       min-height: 1rem;
   }
-  
+
   .result .recommand-logo {
       width: 0.45rem;
       height: 0.45rem;
       object-fit: cover;
       vertical-align: middle;
   }
-  
+
   .result .recommand-msg {
       overflow: hidden;
       white-space: nowrap;
@@ -848,13 +848,13 @@
       vertical-align: middle;
       display: inline-block;
   }
-  
+
   .result .coupons-condition {
       display: table-cell;
       vertical-align: middle;
       width: 7.7rem;
   }
-  
+
   .result .coupons-link {
       display: table-cell;
       vertical-align: middle;
@@ -862,23 +862,23 @@
       width: 1.8rem;
       color: #ef361e;
   }
-  
+
   .result .poi-coupons,
   .normal-coupons {
       cursor: pointer;
   }
-  
+
   .coupons-more-arrow {
       position: relative;
       top: 0.2rem;
       left: -0.1rem;
       height: 0.6rem;
   }
-  
+
   .result-inner-nobottom .couponname {
       line-height: 0.8rem
   }
-  
+
   .err-msg {
       position: absolute;
       top: 50%;
@@ -888,11 +888,11 @@
       text-align: center;
       width: 100%;
   }
-  
+
   .err-short-msg {
       font-size: 1.1rem;
   }
-  
+
   .err-short-msg:before {
       display: block;
       content: '';
@@ -903,7 +903,7 @@
       left: 2rem;
       position: absolute;
   }
-  
+
   .err-short-msg:after {
       display: block;
       content: '';
@@ -914,46 +914,46 @@
       right: 2rem;
       position: absolute;
   }
-  
+
   .comment_ul {
       padding: 0 5%;
   }
-  
+
   .comment_li {
       border-bottom: 1px solid rgba(93, 64, 53, 0.2);
       padding: 0.3125rem 0;
       color: #45322b;
   }
-  
+
   .comment_usr_pic {
       width: 1.125rem;
       float: left;
       border-radius: 50%;
       margin-right: 0.28125rem;
   }
-  
+
   .comment_usr_name {
       font-size: .45rem;
       line-height: 0.625rem;
   }
-  
+
   .comment_usr_status {
       font-size: 0.38rem;
       line-height: 0.525rem;
       color: #65544e;
   }
-  
+
   .comment_amount {
       font-size: 0.5rem;
       color: #45322b;
       text-align: right;
       line-height: 0.84375rem;
   }
-  
+
   .comment_best .comment_amount {
       line-height: 0.625rem;
   }
-  
+
   .comment_amount_best {
       font-size: 0.37rem;
       color: #ef361e;
@@ -962,7 +962,7 @@
       overflow: hidden;
       padding-left: 15px;
   }
-  
+
   .comment_amount_best:after {
       content: "";
       float: left;
@@ -973,15 +973,15 @@
       background-position: 0px;
       margin-right: 5px;
   }
-  
+
   .comment_li:last-child {
       border: none;
   }
-  
+
   .red {
       color: #ef361e;
   }
-  
+
   .data-img,
   .data-img img {
       width: 1.5rem;
@@ -991,7 +991,7 @@
       float: left;
       object-fit: cover;
   }
-  
+
   .zhe {
       font-style: normal;
       display: block;
@@ -999,81 +999,81 @@
       margin-top: -0.3rem;
       font-size: 0.6rem!important;
   }
-  
+
   .other-title {
       font-size: .2rem;
   }
-  
+
   .jin {
       height: 1.6rem;
       padding-top: .1rem;
   }
-  
+
   .jiner {
       padding-left: .3rem;
   }
-  
+
   .shenlue {
       max-width: 4.5rem;
       margin-left: 0.3rem;
   }
-  
+
   .shenlue .result-title {
       max-width: 5rem;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
   }
-  
+
   .noshenlue {
       max-width: 5.9rem;
   }
-  
+
   .noshenlue .result-title {
       max-width: 4.5rem;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
   }
-  
+
   .result i.mm {
       font-size: 1.57rem;
   }
-  
+
   .youhui {
       font-size: .45rem;
       color: #666;
   }
-  
+
   .geo-location {
       padding-top: 1.6rem;
       font-size: 0.4rem;
   }
-  
+
   .ad-flag {
       background-color: #000000;
       opacity: 0.4;
       position: absolute;
   }
-  
+
   .ad-flag-text {
       bottom: 0.38rem;
       right: 2.5%;
   }
-  
+
   .ad-text {
       font-size: 13px;
       color: #ffffff;
       transform: scale(0.8, 0.8);
   }
-  
+
   .ad-video-duration {
       bottom: 0.38rem;
       left: 2.5%;
       border: 1px white solid;
       padding: 2px 1px;
   }
-  
+
   .ad-video-text {
       position: absolute;
       right: 0.5rem;
@@ -1086,7 +1086,7 @@
       z-index: 110;
       cursor: pointer;
   }
-  
+
   .ad-video-play {
       width: inherit !important;
       position: absolute;
@@ -1096,7 +1096,7 @@
       margin-top: -26px;
       cursor: pointer;
   }
-  
+
   .ad-video {
       left: 0;
       display: none;
@@ -1104,7 +1104,7 @@
       z-index: 101;
       margin-bottom: 20px;
   }
-  
+
   .toast-base {
       position: fixed;
       top: 50%;
@@ -1113,7 +1113,7 @@
       overflow: hidden;
       z-index: 998
   }
-  
+
   .toast-base .toast-background {
       position: absolute;
       top: 0;
@@ -1123,11 +1123,11 @@
       background: rgba(0, 0, 0, .6);
       z-index: -1
   }
-  
+
   .toast-base .toast-content {
       padding: 15px 20px;
   }
-  
+
   .toast-base .toast-icon {
       display: block;
       margin: 0 auto 14px;
@@ -1137,7 +1137,7 @@
       background-size: 50px auto;
       background-position-x: center
   }
-  
+
   .toast-base .toast-text {
       margin: 0;
       line-height: 20px;
@@ -1146,21 +1146,21 @@
       color: #fff;
       max-width: 200px
   }
-  
+
   .toast-success .toast-icon {
       background-position-y: 0
   }
-  
+
   .toast-error .toast-icon,
   .toast-warn .toast-icon {
       background-position-y: -73px
   }
-  
+
   .toast-fade {
       -webkit-animation: fade .5s linear;
       animation: fade .5s linear
   }
-  
+
   @-webkit-keyframes fade {
       0% {
           opacity: 1
@@ -1169,7 +1169,7 @@
           opacity: 0
       }
   }
-  
+
   @keyframes opacity {
       0% {
           opacity: 1
@@ -1178,21 +1178,21 @@
           opacity: 0
       }
   }
-  
+
   .help-list ul li span {
       text-align: center;
       display: inline-block;
   }
-  
+
   .help-list ul li span.name {
       width: 40%;
       text-align: left;
   }
-  
+
   .help-list ul li span.status {
       width: 20%;
   }
-  
+
   .help-list ul li span.date {
       width: 35%;
       text-align: right;
